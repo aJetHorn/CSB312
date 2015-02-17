@@ -55,7 +55,7 @@ There are many technologies used in developing a web application. Fortunately, m
 		* [Sitepoint](http://www.sitepoint.com/twitter-bootstrap-tutorial-handling-complex-designs/)
 		* [W3 Schools](http://www.w3schools.com/bootstrap/)
 
-* [Foundation]
+* //We might not end up using this//[Foundation]
 	* Ease of use: Moderately Easy, with background in HTML, CSS, and Javascript
 	* Used for: Responsive design, rapid mobile-first development and front-end design
 	* Useful resources:
