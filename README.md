@@ -1,6 +1,8 @@
 # CSB312
 =======
 
+###Google Docs
+
 ##Introduction
 
 There are many technologies used in developing a web application. Fortunately, many of them are easy to use and aren't that hard to pick up given our rigorous curriculum. While each of us will surely have a specialty, it is necessary that we all have a level of understanding of various technologies that will allow each of us to make meaningful contributions to the project. 
