@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Tabs - Sortable</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script>
+  $(function() {
+    var tabs = $( "#tabs" ).tabs();
+    tabs.find( ".ui-tabs-nav" ).sortable({
+      axis: "x",
+      stop: function() {
+        tabs.tabs( "refresh" );
+      }
+    });
+  });
+  </script>
+ <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Investment', 'Cash Invested'],
+          ['Cash & Equivalent',     100000000],
+          ['Equity',      200400100],
+          ['Bonds',  5000000]
+        ]);
+
+        var options = {
+          title: 'Portfolio 1',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+
+
+</head>
+<body>
+ 
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+<div class="g-hangout" data-render="createhangout"></div>
+    
+    
+    
+    
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Pie Chart</a></li>
+    <li><a href="#tabs-2">Proin dolor</a></li>
+    <li><a href="#tabs-3">Aenean lacinia</a></li>
+  </ul>
+  <div id="tabs-1">
+      <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+  </div>
+  <div id="tabs-2">
+    
+  </div>
+  <div id="tabs-3">
+
+  </div>
+</div>
+ 
+ 
+</body>
+</html>
+

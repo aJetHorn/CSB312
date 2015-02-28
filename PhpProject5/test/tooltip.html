@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Fixations'],
+          ['2015',  80],
+          ['2016',  90],
+          ['2017',  100],
+          ['2018',  90],
+          ['2019',  80],
+        ]);
+
+        var options = {
+          tooltip: { isHtml: true },    // CSS styling affects only HTML tooltips.
+          legend: { position: 'none' },
+          bar: { groupWidth: "90%" },
+          colors: ['#A61D4C']
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('tooltip_rotated'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <!-- The next line rotates HTML tooltips by 30 degrees clockwise. -->
+    <style>div.google-visualization-tooltip { transform: rotate(30deg); }</style>
+    <div id="tooltip_rotated" style="width: 400px; height: 400px;"></div>
+  </body>
+</html>
