@@ -9,48 +9,108 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-             <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-      <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+
+        <!-- CSS -->
+
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+        
+        <!-- JS -->
+        
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+        <script src="js/tech.js"></script>
+        
+        
     </head>
     <body>
-        
+
         <div id="leftmenu">
-        <a href="hub.html">Hub Page</a></br>
-         <a href="strategy.html">Strategy View</a> </br>
-         <a href="portfolio.html">Portfolio View</a> </br>
-         <a href="">Settings</a> </br>
-        
-    </div>
-        
-        
+            <a href="hub.html">Hub Page</a></br>
+            <a href="strategy.html">Strategy View</a> </br>
+            <a href="portfolio.html">Portfolio View</a> </br>
+            <a href="">Settings</a> </br>
+
+        </div>
+
+
         <div id='main'>
             <h2>Technology Strategy</h2>
-       <table class="table table-striped table-responsive table-hover">
-        
-          <thead>
-        <tr>
-            <th data-field="id">Asset ID</th>
-            <th data-field="id">Asset Type</th>
-            <th data-field="id">% Weight</th>
-            
-        </tr>
-        
-        
-    </thead>
-    <tbody>
-        <tr><td>IBM</td><td>Stock</td><td>15%</td></tr>
-        <tr><td>MSFT</td><td>Stock</td><td>30%</td></tr>
-        <tr><td>GOOG</td><td>Stock</td><td>15%</td></tr>
-        <tr><td>Cash</td><td>Cash</td><td>40%</td></tr>
-        
-    </tbody>
-    
-</table>
-            
+            <input type="text">
+            <input type="button" value="add">
+            <table class="table table-striped table-responsive table-hover">
+
+                <thead>
+                    <tr>
+                        <th data-field="id">Asset ID</th>
+                        <th data-field="id">Asset Type</th>
+                        <th data-field="id">% Weight</th>
+
+                    </tr>
+
+
+                </thead>
+                <tbody id='stratview'>
+                    <tr id='IBM' class='stock node'>
+                        <td>IBM</td>
+                        <td>Stock</td>
+                        <td class='weight'>
+                            <input type='button' class='plus' value='+'>
+                            <div class='percentvalue'>25</div> 
+                            <div class='percent'> %</div>
+                            <input type='button' class='minus' value='-'>
+                        </td>
+
+                    </tr>
+                    <tr id='MSFT' class='stock node'>
+                        <td>MSFT</td>
+                        <td>Stock</td>
+                        <td class='weight'>
+                            <input type='button' class='plus' value='+'>
+                            <div class='percentvalue'>25</div> 
+                            <div class='percent'> %</div>
+                            <input type='button' class='minus' value='-'>
+                        </td>
+                    </tr>
+                    <tr id='GOOG' class='stock node'>
+                        <td>GOOG</td>
+                        <td>Stock</td>
+                        <td class='weight'>
+                            <input type='button' class='plus' value='+'>
+                            <div class='percentvalue'>25</div> 
+                            <div class='percent'> %</div>
+                            <input type='button' class='minus' value='-'>
+                        </td>
+                    </tr>
+
+                    <tr id='Cash' class='cash node'>
+                        <td>Cash</td>
+                        <td>Cash</td>
+                        
+                        <td class='weight'>
+                            <input type='button' class='plus' value='+'>
+                            <div class='percentvalue'>25</div> 
+                            <div class='percent'> %</div>
+                            <input type='button' class='minus' value='-'>
+                        </td>
+                    </tr>
+
+                    <tr id='Total'>
+                        <td>Total</td>
+                        <td></td>
+                        <td>100%</td>
+                    </tr>
+
+
+
+
+
+                </tbody>
+
+            </table>
+            <input type="button" id='stratSubmit' value="Add new strategy">
         </div>
     </body>
 </html>
