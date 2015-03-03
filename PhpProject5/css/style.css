@@ -1,12 +1,11 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
     Created on : Feb 27, 2015, 9:33:48 PM
     Author     : Wellesley
 */
+body{
+    margin: 0;
+    padding: 0;
+}
 
 #leftmenu{
     width:19%;
@@ -34,9 +33,62 @@ and open the template in the editor.
     float:left;
 }
 
+/*#topHeader h1{
+    width: 200px;
+}*/
+#topHeader{
+    padding: 20px;
+    height: 60px;
+    color: #eee;
+    background-color: #2980b9;
+}
 
+#topHeader .h1{
+    line-height: 20px;
+    font-size: 3em;
+}
 
+#topHeader #leftLinks{
+    background-color: #2980b9;
+    float: right;
+}
 
+#topHeader #leftLinks a{
+    color: #eee;
+}
+
+#secondaryHeader{
+    width: 100%;
+}
+
+#secondaryHeader #links{
+    padding: 3px;
+    width: 100%;
+    text-align: right;
+    background-color: #3498db;
+    color: #111;
+}
+
+#secondaryHeader #links a{
+    color: #eee;
+}
+#leftmenu .menuItem{
+    text-align: center;
+    padding: 30px;
+    border: 1px solid #bdc3c7;
+    font-size: 2em;
+}
+#leftmenu .menuItem:hover{
+    opacity: .7;
+    background-color: #95a5a6;
+}
+#leftmenu a{
+    text-decoration: none;
+}
+
+#main{
+    padding: 10px;
+}
 
 
 

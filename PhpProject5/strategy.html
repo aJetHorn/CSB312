@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -22,22 +17,72 @@ and open the template in the editor.
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
         <script src="js/tech.js"></script>
+           <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         
+        <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Investment', 'Cash Invested'],
+          ['GOOG',     5000000],
+          ['MSFT',      5000000],
+          ['IBM',  5000000],
+          ['Cash', 5000000],
+
+        ]);
+
+        var options = {
+          title: 'Technology',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
         
     </head>
     <body>
-
+        <div id="topHeader">
+        <!--h1-->
+            <span class="h1">Strategy View</span><!--/h1-->
+            <div id="leftLinks">
+                <a href="/">Hello, Yifei Gao</a> | <a href="/">Log Out</a> | <a href="/"> Help </a>
+            </div>
+        </div>
+        <div id="secondaryHeader">
+            <div id="links"> 
+                <a href="/">Wednesday</a> | <a href="/">March 4th 2015</a> | <a href="/"> 3:12PM </a> | <a href="/"> 22°F </a>
+            </div>
+        </div>
         <div id="leftmenu">
-            <a href="hub.html">Hub Page</a></br>
-            <a href="strategy.html">Strategy View</a> </br>
-            <a href="portfolio.html">Portfolio View</a> </br>
-            <a href="">Settings</a> </br>
-
+            <div class="menuItem">
+                <a href="hub.html">Hub Page</a>
+            </div>
+            <div class="menuItem">
+                <a href="strategy.html">Strategy View</a>
+             </div>
+            <div class="menuItem">
+                <a href="portfolio.html">Portfolio View</a>
+            </div>
+            <div class="menuItem">
+                <a href="">Settings</a>
+            </div>
+            <div class="menuItem">
+                <a href="">Extra</a>
+            </div>  
+            <div class="menuItem">
+                <a href="">Extra 2</a>
+            </div>     
         </div>
 
-
         <div id='main'>
+
             <h2>Technology Strategy</h2>
+                      <!-- More graphs to be added -->
+            <div id="piechart_3d" style="width: 400px; height: 400px;"></div>
+            <!-- Add more graphs -->
             <input type="text">
             <input type="button" value="add">
             <table class="table table-striped table-responsive table-hover">
@@ -49,8 +94,6 @@ and open the template in the editor.
                         <th data-field="id">% Weight</th>
 
                     </tr>
-
-
                 </thead>
                 <tbody id='stratview'>
                     <tr id='IBM' class='stock node'>
