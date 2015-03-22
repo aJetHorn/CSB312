@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Wellesley Arreza</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+
+
+        <!-- JS -->
+
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+        <script src='js/dialog.js'></script>
+        <script src='js/tech2.js'></script>
+        <!-- Bootstrap JS for Popups -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="js/tooltip.js"></script>
+
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+        <link href="css/tree.css" rel="stylesheet">
+        <link rel="stylesheet" href="./css/style.css">
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        
+        
+        <style>
+            
+            label, input { display:block; }
+            input.text { margin-bottom:12px; width:95%; padding: .4em; }
+            fieldset { padding:0; border:0; margin-top:25px; }
+            h1 { font-size: 1.2em; margin: .6em 0; }
+            div#users-contain { width: 350px; margin: 20px 0; }
+            div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+            div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+            .ui-dialog .ui-state-error { padding: .3em; }
+            .validateTips { border: 1px solid transparent; padding: 0.3em; }
+        </style>
+        
+
+    </head>
+    <body>
+
+        <!-- Dialogs -->
+        <div id="dialog-form" title="Create new instrument">
+            <p class="validateTips">All form fields are required.</p>
+
+            <form>
+                <fieldset>
+                    <label for="name">Node Name</label>
+                    <input type="text" name="formName" id="formName" value="Cash" class="text ui-widget-content ui-corner-all">
+
+                    <label for="allocation">%Allocation</label>
+                    <input type="text" name="formAllocation" id="formAllocation" value="0" class="text ui-widget-content ui-corner-all">
+                    
+                    <label for="parent">Parent Node</label>
+                    <input type="text" name="formParent" id="formParent" value="Strategy" class="text ui-widget-content ui-corner-all">
+
+                    <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                </fieldset>
+            </form>
+        </div>
+
+
+        <div id="dialog-node-info" title="View Instrument">
+            
+        </div>
+
+        
+        
+        <!--End of Dialogs-->
+        
+        
+
+        <div id="leftmenu">
+            <h2>Main Menu</h2>
+        <a href="hub.html">Hub Page</a></br>
+         <a href="newstrategy.html">Design a Strategy</a> </br>
+         <a href="portfolio.html">View your Portfolio</a> </br>
+         <a href="">Settings</a> </br>
+        
+    </div>
+
+        <div id='main'>
+            <h1>Technology Strategy</h1>
+
+            <button id="add">Add an Instrument</button>
+
+            
+            <button type="button" class="btn btn-default popbutton" 
+                    data-container="body" data-toggle="popover" 
+                    data-placement="left" data-html='true' 
+                    data-content='<div class="pslider" style="width:200px; margin:15px;"></div> '   >
+  IBM 10%
+</button>
+            
+            <div class="pslider" style="width:100px; margin:15px;"></div>
+            <!-- Tree -->
+            
+            <div class="tree">
+                <ul> <!-- Unordered List of Tree -->
+                    <li id="Strategy">
+                        
+                            <a href="#" class="node">
+                                <div class="name">Strategy</div>
+                                <div class="allocation hideVal">100</div>
+                                <div class="percent hideVal">%</div>
+                            </a>
+                            
+                        
+                        
+                        <ul> <!-- Unordered List of Strategy -->
+                            <li id="Equity">
+                                
+                                <a href="#" class="node">
+                                <div class="name">Equity</div>
+                                <div class="allocation hideVal">60</div>
+                                <div class="percent hideVal">%</div>
+                                </a>
+                                
+                                
+                                <ul>
+                                    <li id="Stocks">
+                                <a href="#" class="node">
+                                <div class="name">Stocks</div>
+                                <div class="allocation hideVal">60</div>
+                                <div class="percent hideVal">%</div>
+                                </a>
+                                <ul>
+                                    <li id="IBM">
+                                        
+                                        <a href="#" class="node">
+                                            <div class="name">IBM</div>
+                                            <div class="allocation showVal">10</div>
+                                            <div class="percent showVal">%</div>
+                                        </a>
+                                    
+                                    </li>
+                                    <li id="TSLA">
+                                        
+                                        <a href="#" class="node">
+                                            <div class="name">TSLA</div>
+                                            <div class="allocation showVal" style=''>20</div>
+                                            <div class="percent showVal">%</div>
+                                        </a>
+                                    
+                                    </li>
+                                    
+                                    <li id="GOOG">
+                                        
+                                        <a href="#" class="node">
+                                            <div class="name">GOOG</div>
+                                            <div class="allocation showVal" style=''>30</div>
+                                            <div class="percent showVal">%</div>
+                                        </a>
+                                    
+                                    </li>
+                                </ul>
+                            </li>
+                                </ul>
+                            </li>
+                            
+                            
+                            <li id="Fixed_Income">
+                                
+                                <a href="#" class="node">
+                                <div class="name">Fixed_Income</div>
+                                <div class="allocation showVal">10</div>
+                                <div class="percent showVal" >%</div>
+                                </a>
+                                
+                                <ul>
+                                    
+                                </ul>
+                                
+                            </li>
+                            
+                            <li id="Cash">
+                                
+                                <a href="#" class="node">
+                                <div class="name">Cash</div>
+                                <div class="allocation showVal" >30</div>
+                                <div class="percent showVal" >%</div>
+                                </a>
+                                
+                                <ul>
+                                    
+                                </ul>
+                                
+                            </li>
+                            
+                            
+                            
+                        </ul>
+                    </li>
+                    
+                    
+                </ul> <!-- End Tag of Unordered List of Tree -->
+            </div>
+
+
+            <!-- END OF TREE -->
+            
+        </div>
+        </br>
+        <button id="balanceCheck">Check</button></br>
+        <button id="StratSave">Save</button>
+        </br>Apply to: <select>
+            <option value="Portfolio A">Portfolio A</option>
+            <option value="Portfolio A">Portfolio B</option>
+            <option value="Portfolio A">Portfolio C</option>
+            <option value="Portfolio A">Portfolio D</option>
+            <option value="Portfolio A">Portfolio E</option>
+
+
+
+        </select> 
+        
+        <br/>
+        <br/>
+        <br/>
+        
+        
+     
+
+            
+            <button type="button" class="btn btn-default popbutton" 
+                    data-container="body" data-toggle="popover" 
+                    data-placement="bottom" data-html='true' 
+                    data-content='<div class="pslider" style="width:200px; margin:15px;"></div> '   >
+  IBM <br/>10%
+</button>
+    </body>
+</html>
