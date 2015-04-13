@@ -85,3 +85,54 @@ body{
 #main{
     padding: 10px;
 }
+
+#treeContainer{
+    width: 4000px;
+}
+
+.tree{
+    /*Need to figure out how to control overflow resizing
+    /*width: 100%;*/
+    width: 100%;
+    /*height: 400px;*/
+    overflow: scroll;
+}
+
+#zoomControl{
+    z-index: 9999;
+    position: absolute;
+    top: 60px;
+    /* causes issues with float. right: 300px;*/
+}
+
+#zoomControl h1{
+    color: #333;
+    font-size: 2.2em;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    opacity: .8;
+}
+
+#zoomButtons ul li{
+    font-size: 2em;
+    float: left;
+    padding: 5px;
+    color: #CCC;
+    background-color: #333;
+    opacity: .8;
+    cursor: pointer;
+}
+
+#zoomButtons ul li:hover{
+    opacity: .7;
+    background-color: #777;
+}
+
+#zoomButtons{
+    width: 100%;
+}
+
+#zoomButtons ul{
+    margin-top: -12px;
+    list-style: none;
+}

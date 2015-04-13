@@ -1,0 +1,21 @@
+<html>
+<?php
+$servername = "192.186.225.167";
+$username = "tjo216";
+$password = "csb312";
+
+// Create connection
+$conn = new mysql_connect($servername, $username, $password);
+//mysqli($servername, $username, $password);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+echo "Connected successfully\n";
+
+$selected = mysql_select_db("CSB312",$conn) 
+  or die("Could not select examples\n");
+echo "Conneted to Database\n";
+?>
+</html>

@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>Portfolio</title>
@@ -18,6 +13,7 @@ and open the template in the editor.
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
         <script src='js/dialog.js'></script>
+        <script src="js/script.js"></script>
 
 
 
@@ -103,11 +99,11 @@ and open the template in the editor.
             
             
             <!-- Tree -->
-            
-            <div class="tree" style="overflow: scroll; width: 2000px; height: 1000px;">
+            <!-- TJ: took out style="overflow: scroll; width: 2000px; height: 1000px;" -->
+            <div id="treeContainer">
+            <div class="tree">
                 <ul> <!-- Unordered List of Tree -->
-                    <li id="Portfolio">
-                        
+                    <li id="Portfolio">      
                             <a href="#" class="node">
                                 <div class="name">Portfolio</div>
                                 <div class="allocation hideVal">100</div>
@@ -164,15 +160,7 @@ and open the template in the editor.
                                 <div class="percent showVal" >%</div>
                                 </a>
                                 
-                                <ul>
-                                    
-                                  
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
+                                <ul>       
                                     
                                     <li id="Stocks">
                                 <a href="#" class="node">
@@ -215,9 +203,7 @@ and open the template in the editor.
                             </ul>
                                 
                             </li>      
-                                  
-                            
-                            
+                                                 
                                 </ul>
                             </li>
                             
@@ -271,14 +257,7 @@ and open the template in the editor.
                                 
                                 <ul>
                                     
-                                  
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
+                                              
                                     <li id="Stocks">
                                 <a href="#" class="node">
                                 <div class="name">Stocks</div>
@@ -374,15 +353,7 @@ and open the template in the editor.
                                 <div class="percent showVal" >%</div>
                                 </a>
                                 
-                                <ul>
-                                    
-                                  
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
+                                <ul>             
                                     
                                     <li id="Stocks">
                                 <a href="#" class="node">
@@ -425,25 +396,32 @@ and open the template in the editor.
                             </ul>
                                 
                             </li>      
-                                  
-                            
-                            
+               
                                 </ul>
-                            </li>
-                            
-                           
-                            
-                            
-                            
+                            </li>   
                         </ul>
                     </li>
                     
                     
                 </ul> <!-- End Tag of Unordered List of Tree -->
-            </div>
-
-
+            </div> <!--End of tree class-->
+        </div> <!--End of tree container-->
             <!-- END OF TREE -->
+            <div id="zoomControl" draggable="true">
+                <h1> View Controls </h1>
+                <div id="zoomButtons">
+                    <ul>
+                        <li id="leftArrow">&#8592;</li>
+                        <li id="upArrow">&#8593;</li>
+                        <li id="downArrow">&#8595;</li>
+                        <li id="rightArrow">&#8594;</li>
+                        <!-- snap to default -->
+                        <li id="refreshArrow">&#8635;</li>
+                        <li id="plusButton">+</li>
+                        <li id="minusButton">-</li>
+                    </ul>
+                </div>
+            </div>
 
         </div>
     </body>

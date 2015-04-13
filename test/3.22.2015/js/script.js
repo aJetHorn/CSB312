@@ -1,8 +1,13 @@
+//TJ's notes: I'm going to use script.js for general interactivity
+//until we decide on how to split up files
+
     google.load("visualization", "1", {packages: ["orgchart"]});
 $(document).ready(function() {
   var data;
     // we want to place our graph in the specific HTML div.
-var chart;  
+    var chart; 
+
+    $("#zoomControl").draggable(); 
 
     data = new google.visualization.DataTable();
     chart = new google.visualization.OrgChart(document.getElementById('mydiv'));
@@ -20,6 +25,40 @@ var chart;
         //add("MS","Portfolio");
     });
 
+    //button event listeners for view controls
+    $("#leftArrow").on("click", function(){
+
+    });
+    $("#upArrow").on("click", function(){
+
+    });
+    $("#downArrow").on("click", function(){
+
+    });
+    $("#rightArrow").on("click", function(){
+
+    });
+    //Just refreshes window, should restore "default" position of viewport
+    $("#refreshArrow").on("click", function(){
+        location.reload();
+    });
+    $("#plusButton").on("click", function(){
+        $(".tree *").each(function( index ){
+            console.log("Test element: " + index);
+            $(this).css("width", "+=15%");
+            $(this).css("height", "+=15%");
+            $(this).css("font-size", "+=3%");
+            //$(this).css("padding", "+=10%");
+        })
+    });
+    $("#minusButton").on("click", function(){
+        $(".tree *").each(function( index ){
+            $(this).css("width", "-=15%");
+            $(this).css("height", "-=15%");
+            $(this).css("font-size", "-=3%");
+            $(this).css("padding", "-=10%");
+        })
+    });
 
 
 
