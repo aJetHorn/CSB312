@@ -7,6 +7,15 @@
 
 There are many technologies used in developing a web application. Fortunately, many of them are easy to use and aren't that hard to pick up given our rigorous curriculum. While each of us will surely have a specialty, it is necessary that we all have a level of understanding of various technologies that will allow each of us to make meaningful contributions to the project. 
 
+##Project Organization
+
+In addition to this repository, we are using Zoho and Google Drive to host some documents, with the intention to eventually merge our Google Drive with GitHub as the team gains familiarity with the protocol/website
+
+* [Archive](https://trello.com/)
+* [Main](https://github.com/aJetHorn/CSB312/tree/master/Main)
+* [Resources](https://github.com/aJetHorn/CSB312/tree/master/Resources)
+* [Test](https://github.com/aJetHorn/CSB312/tree/master/Test)
+
 ##Tools and technologies
 
 * [Trello](https://trello.com/)
