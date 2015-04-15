@@ -18,23 +18,18 @@ function checkSum(){
         else{
             sum+=val;
         }
-    });
-    
+    });   
     if(sum==100){
-    return true;
-}
-else{
-    return false;
-}
-    
-    
-    
-    
+        return true;
+    }
+    else{
+        return false;
+    }  
 }
 
+//TODO?
 function checkBound(){
     // if x<0 or x>100
-    
 }
 
 function increase(){
@@ -104,49 +99,6 @@ $(document).ready(function() {
              alert("Invalid total");
          }
     });
-
-    
-    
     increase();
     decrease();
-    
-    
-    
-    });
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // Wellesley Arreza
+});

@@ -21,20 +21,15 @@ function checkSum(){
     });
     
     if(sum==100){
-    return true;
-}
-else{
-    return false;
-}
-    
-    
-    
-    
+        return true;
+    }
+    else{
+        return false;
+    }   
 }
 
 function checkBound(){
     // if x<0 or x>100
-    
 }
 
 function increase(){
@@ -78,8 +73,6 @@ function decrease(){
         temp--;
         htmlnode.html(temp);
         
-        
-        
         to = setTimeout(function () {
             int = setInterval(function () {
                 temp--;
@@ -90,8 +83,6 @@ function decrease(){
         clearTimeout(to);
         clearInterval(int);
     });
-
-
 }
 
 
@@ -105,50 +96,6 @@ $(document).ready(function() {
              alert("Invalid total");
          }
     });
-
-    
-    
     increase();
     decrease();
-    
-    
-    
-    });
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // Wellesley Arreza
-
+});

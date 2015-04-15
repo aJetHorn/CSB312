@@ -1,12 +1,13 @@
 //TJ's notes: I'm going to use script.js for general interactivity
 //until we decide on how to split up files
 
-    google.load("visualization", "1", {packages: ["orgchart"]});
-$(document).ready(function() {
-  var data;
-    // we want to place our graph in the specific HTML div.
-    var chart; 
+google.load("visualization", "1", {packages: ["orgchart"]});
 
+$(document).ready(function() {
+    var data; //Explain please
+    var chart; //use?
+
+    //TJ's zoom hack, draggable is a jquery UI feature
     $("#zoomControl").draggable(); 
 
     data = new google.visualization.DataTable();
@@ -14,8 +15,6 @@ $(document).ready(function() {
     google.setOnLoadCallback(drawChart);
     //drawChart();
     // we want to call the drawChart method to draw the actual chart.
-
-
 
     $("#add").on("click", function() {
         console.log("add");
@@ -26,6 +25,7 @@ $(document).ready(function() {
     });
 
     //button event listeners for view controls
+    //Probably going to remove these: TJ
     $("#leftArrow").on("click", function(){
 
     });
@@ -60,17 +60,10 @@ $(document).ready(function() {
         })
     });
 
-
-
-
 function drawChart() {
-
-
-
-
     data.addColumn('string', 'ID');
     data.addColumn('string', 'title');
-     data.addColumn({'type': 'string', 'role': 'tooltip'});
+    data.addColumn({'type': 'string', 'role': 'tooltip'});
    
     data.addRows([
         // column 0 is te node ID.
@@ -86,13 +79,9 @@ function drawChart() {
         ['MSFT', 'Stocks', '<p></p>'],
         ['IBM', 'Stocks', '<p></p>']
     ]);
-    
-    
-    
+
     /*
      *   data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
-    
-    
     data.addRows([
         // column 0 is te node ID.
         // column 1 is the PARENT NODE
@@ -110,41 +99,22 @@ function drawChart() {
     * 
      * 
      */
-    
-    
-
-
     // draw method from API.
     chart.draw(data, {allowHtml: true, allowCollapse: true, focusTarget: "category"});
-
 }
-
-
-
-
-
-
-function add(parent, child) {
-
-    data.addRows([
+    function add(parent, child) {
+        data.addRows([
         // column 0 is te node ID.
         // column 1 is the PARENT NODE
         // column 2 is etc. information.
-        [parent, child, '']
-    ]);
-    draw();
-    console.log("done drawing");
-
-
-
-
-
-}
-function draw() {
-    // we want to place our graph in the specific HTML div.
-
-    // draw method from API.
-    chart.draw(data, {allowHtml: true, allowCollapse: true, tooltip:{}});
-}
-
+            [parent, child, '']
+        ]);
+        draw();
+        console.log("done drawing");
+    }
+    function draw() {
+        // we want to place our graph in the specific HTML div.
+        // draw method from API.
+        chart.draw(data, {allowHtml: true, allowCollapse: true, tooltip:{}});
+    }
 });
