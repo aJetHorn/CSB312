@@ -3,13 +3,6 @@ body{
     padding: 0;
 }
 
-#leftmenu{
-    width:19%;
-    height:600px;
-    background-color: rgb(240, 240, 240);
-
-    float:left;
-}
 #main{
     float:left;
     width:81%;
@@ -42,9 +35,11 @@ body{
 #topHeader .h1{
     line-height: 20px;
     font-size: 3em;
+    font-family: 'Anonymous Pro';
 }
 
 #topHeader #leftLinks{
+    font-size: 1.2em;
     background-color: #2980b9;
     float: right;
 }
@@ -54,7 +49,10 @@ body{
 }
 
 #secondaryHeader{
+    height: 10px;
     width: 100%;
+    background-color: #3498db;
+    background-image: url(http://www.transparenttextures.com/patterns/45-degree-fabric-light.png);
 }
 
 #secondaryHeader #links{
@@ -68,17 +66,28 @@ body{
 #secondaryHeader #links a{
     color: #eee;
 }
+
+#leftmenu{
+    /*19%*/
+    width:180px;
+    height: 100%;
+    background-color: rgb(240, 240, 240);
+    float:left;
+}
+
 #leftmenu .menuItem{
     text-align: center;
-    padding: 30px;
+    padding: 15px;
     border: 1px solid #bdc3c7;
-    font-size: 2em;
+    font-size: 1.25em;
+    color: #2980b9;
 }
 #leftmenu .menuItem:hover{
-    opacity: .7;
+    cursor: pointer;
+    opacity: .8;
     background-color: #95a5a6;
 }
-#leftmenu a{
+#leftmenu .menuItem a{
     text-decoration: none;
 }
 
@@ -102,19 +111,20 @@ body{
     z-index: 9999;
     position: absolute;
     top: 60px;
-    /* causes issues with float. right: 300px;*/
+    left: 280px;
+    width: 300px;
 }
 
 #zoomControl h1{
     color: #333;
-    font-size: 2.2em;
+    font-size: 2.8em;
     margin-bottom: 0px;
     padding-bottom: 0px;
     opacity: .8;
 }
 
 #zoomButtons ul li{
-    font-size: 2em;
+    font-size: 3em;
     float: left;
     padding: 5px;
     color: #CCC;
@@ -135,4 +145,26 @@ body{
 #zoomButtons ul{
     margin-top: -12px;
     list-style: none;
+}
+
+#footer{
+    font-family: 'Anonymous Pro';
+    /*border-top: 2px solid #2980b9;*/
+    font-size: 1.5em;
+    color: #3498db;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: #34495e;
+}
+
+#footerBorder{
+    background-image: url(http://www.transparenttextures.com/patterns/45-degree-fabric-light.png);
+    width: 100%;
+    height: 4px;
+    background-color: #2980b9;
+    margin-bottom: 4px;
 }

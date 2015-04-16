@@ -26,6 +26,9 @@ $(document).ready(function() {
 
     //button event listeners for view controls
     //Probably going to remove these: TJ
+    $("#toggleController").on("click", function(){
+        $("#zoomControl").toggle();
+    });
     $("#leftArrow").on("click", function(){
 
     });

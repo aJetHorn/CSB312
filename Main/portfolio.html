@@ -4,6 +4,7 @@
         <title>Portfolio</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
+        <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -34,14 +35,13 @@
     <body>
          <div id="topHeader">
     <!--h1-->
-    <span class="h1">Portfolio Page</span><!--/h1-->
+    <span class="h1">Portfolio</span><!--/h1-->
     <div id="leftLinks">
-      <a href="/">Hello, Yifei Gao</a> | <a href="/">Log Out</a> | <a href="/"> Help </a>
+      <a href="/">Hello, Yifei Gao</a> | <a href="/">Log Out</a> <!--| <a href="/"> Help </a-->
     </div>
   </div>
   <div id="secondaryHeader">
-    <div id="links"> <a href="/">Wednesday</a> | <a href="/">April 1st 2015</a> | <a href="/"> 3:12PM </a> | <a href="/"> 32°F </a>
-    </div>
+    <!--<div id="links"> <a href="/">Wednesday</a> | <a href="/">April 1st 2015</a> | <a href="/"> 3:12PM </a> | <a href="/"> 32°F </a>></div-->
   </div>
         <!-- Dialogs -->
         <div id="dialog-form" title="Create new instrument">
@@ -78,12 +78,18 @@
             <a href="newstrategy.html">Design a Strategy</a> </br>
           </div>
           <div class="menuItem">
-            <a href="portfolio.html">View your Portfolio</a> </br>
+            <a href="portfolio.html">Portfolio View</a> </br>
           </div>
           <div class="menuItem">
-         <a href="">Settings</a> </br>
-       </div>  
-    </div>
+            <a href="">Settings</a> </br>
+          </div>  
+          <div class="menuItem">
+            <a href="">Help</a> </br>
+          </div>  
+          <div class="menuItem">
+            <span id="toggleController" >Toggle Controller</span> </br>
+          </div>  
+        </div>
 
         <div id='main'>
             <h1>Portfolio A</h1>
@@ -98,9 +104,7 @@
                                 <div class="allocation hideVal">100</div>
                                 <div class="percent hideVal">%</div>
                             </a>
-                            
-                        
-                        
+
                         <ul> <!-- Unordered List of Strategy -->
                             <li id="StrategyA">
                                 
@@ -397,21 +401,24 @@
         </div> <!--End of tree container-->
             <!-- END OF TREE -->
             <div id="zoomControl" draggable="true">
-                <h1> View Controls </h1>
+                <h1> Zoom </h1>
                 <div id="zoomButtons">
                     <ul>
-                        <li id="leftArrow">&#8592;</li>
+                        <!--li id="leftArrow">&#8592;</li>
                         <li id="upArrow">&#8593;</li>
                         <li id="downArrow">&#8595;</li>
-                        <li id="rightArrow">&#8594;</li>
+                        <li id="rightArrow">&#8594;</li-->
                         <!-- snap to default -->
-                        <li id="refreshArrow">&#8635;</li>
                         <li id="plusButton">+</li>
                         <li id="minusButton">-</li>
+                        <li id="refreshArrow">&#8635;</li>
                     </ul>
                 </div>
             </div>
-
+            <div id="footer">
+                <div id="footerBorder"> </div>
+                SEI Investments
+            </div>
         </div>
     </body>
 </html>
