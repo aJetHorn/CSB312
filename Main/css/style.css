@@ -168,3 +168,35 @@ body{
     background-color: #2980b9;
     margin-bottom: 4px;
 }
+
+/*Dialog Styling*/
+/*Some jQueryUI overrides*/
+.plus, .minus{
+    font-size: 3em;
+    padding: 5px;
+}
+.percentvalue{
+    font-size: 2em;
+    padding: 5px;
+}
+.ui-widget-header{
+    background: transparent;
+    color: #ecf0f1;
+    background-color: #2980b9;
+}
+
+#dialog-node-info h1{
+    margin-top: 0px;
+    font-family: 'Anonymous Pro';
+    text-align: center;
+    font-size: 2.5em;
+    padding: 2px;
+}
+
+#changecontainer{
+    padding-left: 20px;
+}
+.ui-dialog .ui-dialog-content{
+    padding: 0px;
+}
+

@@ -1,11 +1,6 @@
 $(document).ready(function() {
     var dialog, form;
  
-     
- 
-    
- 
- 
     function addInstrument() {
 
       
@@ -47,12 +42,7 @@ $(document).ready(function() {
       setClickHandler(); // i added this because of a stupid jquery glitch.. need to set onclick again after append.
       return true;
     }
- 
- 
- 
- 
- 
- 
+
     // instantiate dialog.
     dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
@@ -79,38 +69,29 @@ $(document).ready(function() {
     
     
     });
- 
- 
- 
- 
+
    // Add button onclick
- 
- 
     $( "#add" ).button().on( "click", function() {
       dialog.dialog( "open" );
     });
     
 
     
-    
-    function setHandler(){
-    
+    function setHandler(){  
     // node onclick. To View
-    $(".node").on( "click", function() {
+      $(".node").on( "click", function() {
         var nodeobj=$(this);
         
-        $( "#dialog-node-info" ).dialog({
-      autoOpen: false,
-      height: 300,
-      width: 350,
-      modal: true,
-      buttons: {
-        "Save Changes": function(){
-           
+      $( "#dialog-node-info" ).dialog({
+        autoOpen: false,
+        height: 300,
+        width: 350,
+        modal: true,
+        buttons: {
+          "Save Changes": function(){  
         }, 
         Cancel: function() {
           $( "#dialog-node-info" ).dialog( "close" );
-          
         }
       },
       close: function() {
