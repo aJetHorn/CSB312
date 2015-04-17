@@ -1,16 +1,10 @@
-/* 
-	Where is this being used? Possibly deprecated - TJ
-    Created on : Mar 3, 2015, 2:44:13 PM
-    Author     : Wellesley
-*/
-
-
+/*Styling for tree*/
 * {
 	margin: 0; 
 	padding: 0;
 }
 .tree{
-    padding-left:200px;
+    
 }
 .tree ul {
 	padding-top: 20px; 
@@ -21,7 +15,8 @@
 }
 
 .tree li {
-	float: left; text-align: center;
+	float: left; 
+	text-align: center;
 	list-style-type: none;
 	position: relative;
 	padding: 20px 5px 0 5px;
@@ -34,12 +29,14 @@
 
 .tree li::before, .tree li::after{
 	content: '';
-	position: absolute; top: 0; right: 50%;
+	position: absolute; 
+	top: 0; right: 50%;
 	border-top: 1px solid #ccc;
 	width: 50%; height: 20px;
 }
 .tree li::after{
-	right: auto; left: 50%;
+	right: auto; 
+	left: 50%;
 	border-left: 1px solid #ccc;
 }
 

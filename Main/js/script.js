@@ -7,6 +7,9 @@ $(document).ready(function() {
     var data; //Explain please
     var chart; //use?
 
+    var collapseNext = false;
+    var highlightNext = false;
+
     //TJ's zoom hack, draggable is a jquery UI feature
     $("#zoomControl").draggable(); 
 
@@ -22,6 +25,33 @@ $(document).ready(function() {
         console.log($("#parent").val());
         add($("#node").val(), $("#parent").val());
         //add("MS","Portfolio");
+    });
+
+    $("#highlight").on("click", function(){
+        highlightNext = !highlightNext;
+    });
+
+    //toggles collapsing of subtree under next node clicked
+    $("#collapseTree").on("click", function(){
+        collapseNext = !collapseNext;
+    });
+
+    $(".node").on("click",function(){
+         if (highlightNext){
+            $(this).css("background-color", "#f1c40f");
+            highlightNext = false;
+        }
+    });
+
+    $("li").on("click", function(){
+        //if the subtree is to be collapsed
+        console.log(collapseNext);
+        if (collapseNext){
+            //$(this).toggle();
+            //$(this).children().toggle();
+            //console.log($(this).find(".node"));
+            $(this).find("li").toggle();
+        }
     });
 
     //button event listeners for view controls
@@ -46,20 +76,24 @@ $(document).ready(function() {
         location.reload();
     });
     $("#plusButton").on("click", function(){
-        $(".tree *").each(function( index ){
+        $(".tree .node").each(function( index ){
             console.log("Test element: " + index);
+            //console.log("Font-size:" + $(this).css("font-size"));
             $(this).css("width", "+=15%");
             $(this).css("height", "+=15%");
-            $(this).css("font-size", "+=3%");
-            //$(this).css("padding", "+=10%");
+            $(this).css("font-size", "+=2%");
+            $(this).css("text-align", "center");
+            $(this).css("margin-top", "auto");
         })
     });
     $("#minusButton").on("click", function(){
-        $(".tree *").each(function( index ){
+        $(".tree .node").each(function( index ){
             $(this).css("width", "-=15%");
             $(this).css("height", "-=15%");
-            $(this).css("font-size", "-=3%");
-            $(this).css("padding", "-=10%");
+            $(this).css("font-size", "-=2%");
+            $(this).css("text-align", "center");
+            $(this).css("margin-top", "auto");
+            //$(this).css("padding", "-=10%");
         })
     });
 
