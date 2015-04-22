@@ -43,16 +43,28 @@ $(document).ready(function() {
         }
     });
 
-    $("li").on("click", function(){
-        //if the subtree is to be collapsed
-        console.log(collapseNext);
-        if (collapseNext){
-            //$(this).toggle();
-            //$(this).children().toggle();
-            //console.log($(this).find(".node"));
-            $(this).find("li").toggle();
-        }
-    });
+    // $("li").on("click", function(){
+    //     //if the subtree is to be collapsed
+    //     console.log(collapseNext);
+    //     if (collapseNext){
+    //         //$(this).toggle();
+    //         //$(this).children().toggle();
+    //         //console.log($(this).find(".node"));
+    //         $(this).find("li").toggle();
+    //     }
+
+    //     // //$("a").on("click"), function(){
+    //     //     $(this).parent().children("ul").toggle();
+    //     //     console.log("click");
+    //     //     //}
+    // });
+
+    // $("a").on("click", function(){
+    //     if (collapseNext){
+    //         $(this).parent().children("ul").toggle();
+            
+    //     }
+    // });
 
     //button event listeners for view controls
     //Probably going to remove these: TJ

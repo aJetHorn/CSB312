@@ -49,7 +49,7 @@ body{
 }
 
 #secondaryHeader{
-    height: 10px;
+    height: 25px;
     width: 100%;
     background-color: #3498db;
     background-image: url(http://www.transparenttextures.com/patterns/45-degree-fabric-light.png);
@@ -57,14 +57,23 @@ body{
 
 #secondaryHeader #links{
     padding: 3px;
+    /*padding-left: 20px;*/
     width: 100%;
-    text-align: right;
-    background-color: #3498db;
-    color: #111;
+    text-align: center;
+    /* interferes with parent bg background-color: #3498db;*/
+    /*color: #111;*/
+    color: #ecf0f1;
 }
 
 #secondaryHeader #links a{
     color: #eee;
+    margin-left: 90px;
+}
+
+#secondaryHeader #links a:hover{
+    cursor: pointer;
+    text-decoration: none;
+    opacity: .75;
 }
 
 #leftmenu{
