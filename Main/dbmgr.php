@@ -8,11 +8,11 @@ class Dbmgr {
     private $_mysqli;
 
     public function __construct() {
-        echo 'The class "', __CLASS__, '" was initiated!<br />';
+       // echo 'The class "', __CLASS__, '" was initiated!<br />';
     }
 
     public function __destruct() {
-        echo 'The class "', __CLASS__, '" was ended. Destructor called. This is a good thing.<br />';
+       // echo 'The class "', __CLASS__, '" was ended. Destructor called. This is a good thing.<br />';
     }
 
     public function getDBConnection() {
@@ -27,17 +27,28 @@ class Dbmgr {
         return $_mysqli;
     }
 
+    
+    
+    /*
+     * 
+     * Node_ID,Node_Name,Parent_Node_ID,Strategy_ID,Target_Pct
+     * 
+     */
+    
+    
     public function getAllNodes() {
         $lst = array();
         $con = $this->getDBConnection();
-        $queryString = "SELECT node_id, node_name, strategy_id, asset_id, target_pct,parent_node_id FROM node WHERE strategy_id='1';";
+        $queryString = "SELECT Node_ID,Node_Name,Parent_Node_ID,Strategy_ID,Target_Pct FROM Node WHERE Strategy_ID='18';";
         $result = $con->query($queryString);
         $con->close();
-
-        while ($row = $result->fetch_row()) {
+        //echo "\r\n";
         $i = 0;
-
-            $rec = new Item($row[0], $row[1], $row[2], $row[3]);
+        while ($row = $result->fetch_row()) {
+            
+            $rec = new Node($row[0], $row[1], $row[2], $row[3], $row[4]);
+            //echo $row[0] . " ". $row[1] . " ". $row[2] . " ". $row[3] . " ".$row[4];
+            //echo "\r\n";
             $lst[$i++] = $rec;
         }
 
@@ -79,8 +90,8 @@ class Dbmgr {
         
         
         $i = 0;
-        // iteration 0 is the name of the strategy. Skipp this.
-        for ($i = 1; $i < sizeof($array); $i++) {
+        // iteration 0 is the tree root.
+        for ($i = 0; $i < sizeof($array); $i++) {
             /*
              * nodeHolder.asset_type="null";
               nodeHolder.strategy_id=$(strategy).attr("id");

@@ -8,6 +8,5 @@
 include 'dbmgr.php';
 
 $db= new Dbmgr();
-$db->getDBConnection();
 $db->storeStrategy();
-//$db->createStrategyID();
+
