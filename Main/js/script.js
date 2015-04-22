@@ -12,6 +12,7 @@ $(document).ready(function() {
 
     //TJ's zoom hack, draggable is a jquery UI feature
     $("#zoomControl").draggable(); 
+    $("#zoomControl").toggle();
 
     data = new google.visualization.DataTable();
     chart = new google.visualization.OrgChart(document.getElementById('mydiv'));
@@ -62,7 +63,7 @@ $(document).ready(function() {
     // $("a").on("click", function(){
     //     if (collapseNext){
     //         $(this).parent().children("ul").toggle();
-            
+
     //     }
     // });
 

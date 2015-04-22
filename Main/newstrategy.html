@@ -12,6 +12,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+        <script src='js/script.js'></script>
         <script src='js/dialog.js'></script>
          <script src='js/tech2.js'></script>
 
@@ -98,6 +99,15 @@
           <div class="menuItem">
          <a href="">Settings</a> </br>
             </div-->  
+            <div class="menuItem">
+            <span id="toggleController" >Zoom Controller</span> </br>
+          </div> 
+          <div class="menuItem">
+            <span id="highlight" >Highlight</span> </br>
+          </div>   
+           <div class="menuItem">
+            <span id="collapseTree" >Collapse Subtree</span> </br>
+          </div>  
         </div>
 
         <div id='main'>
@@ -135,6 +145,21 @@
             <option value="Portfolio A">Portfolio D</option>
             <option value="Portfolio A">Portfolio E</option>
          </select> 
+         <div id="zoomControl" draggable="true">
+                <h1> Zoom </h1>
+                <div id="zoomButtons">
+                    <ul>
+                        <!--li id="leftArrow">&#8592;</li>
+                        <li id="upArrow">&#8593;</li>
+                        <li id="downArrow">&#8595;</li>
+                        <li id="rightArrow">&#8594;</li-->
+                        <!-- snap to default -->
+                        <li id="plusButton">+</li>
+                        <li id="minusButton">-</li>
+                        <li id="refreshArrow">&#8635;</li>
+                    </ul>
+                </div>
+            </div>
          <div id="footer">
         <div id="footerBorder"> </div>
           SEI Investments
