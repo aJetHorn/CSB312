@@ -1,0 +1,20 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 23, 2015, 3:10:23 PM
+    Author     : Wellesley
+*/
+
+#leftmenu{
+    width:19%;
+    height:500px;
+    /*border: 2px solid #a1a1a1;
+    background-color:rgb(242, 242, 242);*/
+    color: rgb(31, 52, 131);
+    float:left;
+    margin-left: 6px;
+    opacity:.3;
+}

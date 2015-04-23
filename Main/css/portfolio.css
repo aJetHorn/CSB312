@@ -1,0 +1,86 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 28, 2015, 10:47:22 AM
+    Author     : Wellesley
+*/
+
+
+// Jquery UI Resizable CSS
+#resizable { width: 150px; height: 150px; padding: 0.5em; }
+  #resizable h3 { text-align: center; margin: 0; }
+
+
+html, body { height: 100%; width: 100%; margin: 0; }
+
+#treeDiv{
+    height:50%;
+    
+}
+
+#tableDiv{
+    height:50%
+}
+
+.btn{
+      margin-left: 80px;
+      margin-top: 30px;
+}
+#leftmenu{
+    width:19%;
+    height:500px;
+    border: 2px solid #a1a1a1;
+    background-color:rgb(242, 242, 242);
+    color: rgb(31, 52, 131);
+    float:left;
+    margin-left: 6px;
+}
+#main{
+    float:left;
+      width: 97%;
+  margin-left: 20px;
+  margin-right: 20px;
+ 
+}
+
+.rightRegion{
+    float:left;
+    width:21%;
+     
+    border: 2px solid #a1a1a1;
+    background-color:rgb(242, 242, 242);
+    color: rgb(31, 52, 131);
+   
+ 
+}
+
+.plus{
+    float:left;
+}
+.minus{
+    float:left;
+}
+.percentvalue{
+    float:left;
+}
+.percent{
+    float:left;
+}
+
+.allocation{
+    float:left;
+    margin: 0 auto;
+}
+
+.current{
+      float: left;
+  margin: 0 auto;
+}
+
+.drift{
+      float: left;
+  margin: 0 auto;
+}

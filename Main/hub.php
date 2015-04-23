@@ -50,26 +50,7 @@ for($i=0; $i<sizeof($lst); $i++){
     });
   });
   </script>
- <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Investment', 'Cash Invested'],
-          ['Cash & Equivalent',     100000000],
-          ['Equity',      200400100],
-          ['Bonds',  5000000]
-        ]);
 
-        var options = {
-          title: 'Portfolio 1',
-          is3D: true,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(data, options);
-      }
-    </script>
 </head>
 <body>
 <div id="topHeader">
@@ -88,7 +69,7 @@ for($i=0; $i<sizeof($lst); $i++){
     </div>
     <!--div id="links"> <a href="/">Wednesday</a> | <a href="/">April 1st 2015</a> | <a href="/"> 3:12PM </a> | <a href="/"> 32°F </a-->
     </div>
-  </div>
+
 
     <div id="leftmenu">
           <!--div class="menuItem">
@@ -125,17 +106,30 @@ for($i=0; $i<sizeof($lst); $i++){
             <tbody>
                 <?php
                 // php code to print out the list of strategies.
-                
+
                 for ($i = 0; $i < sizeof($lst); $i++) {
                     echo "<tr><td>";
                     echo $lst[$i]->name;
                     echo "</td></tr>";
                 }
-                ?>
 
+                ?>
+                
 
             </tbody>   
           </table>
+            <?php
+          echo '<form action="viewStrategy.php" method="post">';
+          echo "<select name='list'>";
+          for ($i = 0; $i < sizeof($lst); $i++) {
+                echo "<option value='" . $lst[$i]->id . "'>" . $lst[$i]->name . "</option>" ;
+                
+            }
+            echo "</select>";
+            echo ' <input type="submit" value="Submit">';
+          echo '</form>';    
+          
+          ?>
         </div>
 
         <div id="tabs-2">

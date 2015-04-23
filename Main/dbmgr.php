@@ -53,7 +53,7 @@ class Dbmgr {
     public function getAllNodes() {
         $lst = array();
         $con = $this->getDBConnection();
-        $queryString = "SELECT Node_ID,Node_Name,Parent_Node_ID,Strategy_ID,Target_Pct FROM Node WHERE Strategy_ID='18';";
+        $queryString = "SELECT Node_ID,Node_Name,Parent_Node_ID,Strategy_ID,Target_Pct FROM Node WHERE Strategy_ID='". $_GET['strategyID'] ."';";
         $result = $con->query($queryString);
         $con->close();
         //echo "\r\n";

@@ -4,7 +4,8 @@
 	padding: 0;
 }
 .tree{
-    
+     width: 50%;
+    margin: 0 auto;
 }
 .tree ul {
 	padding-top: 20px; 
@@ -114,3 +115,10 @@ right connector from last child*/
     display:none;
 }
 
+#treeDiv{
+    height:1000px;
+}
+
+#main{
+    height:1000px;
+}

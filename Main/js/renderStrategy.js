@@ -4,21 +4,16 @@
  * and open the template in the editor.
  */
 
-Array.prototype.remove = function(from, to) {
-    var rest = this.slice((to || from) + 1 || this.length);
-    this.length = from < 0 ? this.length + from : from;
-    return this.push.apply(this, rest);
-};
 
 
 $(document).ready(function() {
 
-
+    console.log($("#selection").val());
     $.ajax({
         datatype: 'json',
         url: 'renderStrategy.php',
         type: 'get',
-        data: {'strategyID': "18"},
+        data: {'strategyID': $("#selection").val()},
         success: function(data, status) {
 
             //console.log("Successful ajax call data . Status : " + status);
@@ -97,7 +92,7 @@ $(document).ready(function() {
                         "<div class='name'>" +
                         array[x].name +
                         "</div>" +
-                        "<div class = 'allocation hideVal' >" + array[x].targetpct + "</div>" +
+                        "<div class = 'allocation showVal' >" + array[x].targetpct + "</div>" +
                         "<div class = 'percent showVal' > % </div>" +
                         "</a>" +
                         "<ul class='showParent'>" +
