@@ -25,12 +25,12 @@ and open the template in the editor.
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
         <!--<script src='js/saveStrategy.js'></script> -->
-
+        <script src="js/jquery.ui.touch-punch.min.js"></script>
          <script src="js/scroll.js"></script>
          <script src="js/strategyMenu.js"></script>
          <script src="js/tree.js"></script>
          <script src="js/dragdrop.js"></script>
-         
+         <script src="js/customAdd.js"></script>
          
 
 
@@ -99,7 +99,15 @@ and open the template in the editor.
             <br/>
             <br/>
             
-            <button type="button" class="btn btn-info"><i class="fa fa-plus-circle fa-2x fa-fw margin-bottom"></i> Add Custom Node</button>
+            <button type="button" id="customAdd" class="btn btn-info"><i class="fa fa-plus-circle fa-2x fa-fw margin-bottom"></i> Add Custom Node</button>
+            <br/>
+            <br/>
+            Parent : 
+            <select id="parentList">
+           
+          </select>
+            <input type="text" id="inputName" value="name">
+            <input type="text" id="inputAlloc" value="0">%
             <br/>
             <br/>
             <button type="button" class="btn btn-success"><i class="fa fa-minus-circle fa-2x fa-fw margin-bottom"></i> Delete Node </button>
@@ -138,7 +146,7 @@ and open the template in the editor.
                                 <ul class="showParent"> <!-- Unordered List of Strategy -->
 
                                     <!-- C -->
-                                    <li id="Asia123" >
+                                    <li id="Asia123" class="root" >
 
                                         <a href="#" class="node drop" id='3'>
                                             <div class="name">Strategy Name</div>

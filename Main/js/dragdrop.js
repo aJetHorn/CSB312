@@ -6,6 +6,9 @@
 
 $(document).ready(function() {
 
+            var time = Math.floor( new Date().getMilliseconds());
+            var id = "StrategyName" + time;
+            $(".root").attr("id",id);
 
 
 
@@ -31,7 +34,7 @@ $(document).ready(function() {
         drop: function(event, ui) {
             console.log("YAY");
             //ui.draggable.children("dragtext").text().appendTo( $(this). parent().children("ul")) ;
-            var time = Math.floor(Date.now() / 1000000000);
+            var time = Math.floor( new Date().getMilliseconds());
             var id = ui.draggable.children(".dragtext").text().replace(/\s+/g, '') + time; // remove white space
             var htmltext = "<li id='" +
                     id +
@@ -50,6 +53,8 @@ $(document).ready(function() {
 
 
             $(this).parent().children("ul").append(htmltext);
+            console.log("parentList");
+            $("#parentList").append("<option value='"+ui.draggable.children(".dragtext").text()+"' nodeID='"+id+"'>"+ui.draggable.children(".dragtext").text()+"</option>");
             //console.log(event);
             //console.log("id"+ "#"+id);
 
@@ -81,7 +86,7 @@ $(document).ready(function() {
             drop: function(event, ui) {
                 console.log("YAY");
                 //ui.draggable.children("dragtext").text().appendTo( $(this). parent().children("ul")) ;
-                var time = Math.floor(Date.now() / 1000000000);
+               var time = Math.floor( new Date().getMilliseconds());
                 var id = ui.draggable.children(".dragtext").text().replace(/\s+/g, '') + time; // remove white space
                 var htmltext = "<li id='" +
                         id +
@@ -100,6 +105,9 @@ $(document).ready(function() {
 
 
                 $(this).parent().children("ul").append(htmltext);
+                          
+            $("#parentList").append("<option value='"+ui.draggable.children(".dragtext").text()+"' nodeID='"+id+"'>"+ui.draggable.children(".dragtext").text()+"</option>");
+
                 //console.log(event);
                 //console.log("id"+ "#"+id);
 
