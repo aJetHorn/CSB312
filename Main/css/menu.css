@@ -16,5 +16,6 @@ and open the template in the editor.
     color: rgb(31, 52, 131);
     float:left;
     margin-left: 6px;
-    opacity:.3;
+    //opacity:.3;
+    float:left; 
 }

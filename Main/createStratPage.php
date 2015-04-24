@@ -13,6 +13,13 @@ and open the template in the editor.
 
         <!-- JS -->
 
+        <!--http://stackoverflow.com/questions/21024681/javascript-how-can-you-pass-global-variables-between-js-files -->
+        <script type='text/javascript' > 
+            var nodeSelected = "";
+
+        </script>
+
+        
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -27,17 +34,12 @@ and open the template in the editor.
          
 
 
-        <script>
-            $(function() {
-                var tabs = $("#tabs").tabs();
-                tabs.find(".ui-tabs-nav").sortable({
-                    axis: "x",
-                    stop: function() {
-                        tabs.tabs("refresh");
-                    }
-                });
-            });
-        </script>
+         <script src="js/slider.js"> </script>
+        
+        <style>
+            #red .ui-slider-range { background: #ef2929; }
+  #red .ui-slider-handle { border-color: #ef2929; }
+            </style>
 
         <!-- CSS -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
@@ -63,11 +65,35 @@ and open the template in the editor.
             <br/>
             <br/>
             
+            <div id="red"></div>
+            <br/>
+            <br/>
+            
             <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle fa-2x fa-fw margin-bottom"></i> Add Quick Node</button> 
             <br/>
             <br/>
             <div class='drag'>
-            <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> Equity
+                <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>Equity</span>
+            </div>
+            
+            <div class='drag'>
+                <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>Cash</span>
+            </div>
+
+            <div class='drag'>
+                <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>Fixed Income</span>
+            </div>
+            
+            <div class='drag'>
+                <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>IBM</span>
+            </div>
+            
+            <div class='drag'>
+                <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>TSLA</span>
+            </div>
+            
+            <div class='drag'>
+                <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>JPM</span>
             </div>
 
             <br/>
@@ -101,8 +127,8 @@ and open the template in the editor.
         <div id='main' style="">
 
 
-            <div id="resizable" class="ui-widget-content">
-                <div id="treeDiv" style="overflow: scroll; position:relative;">
+            
+                <div id="treeDiv">
                     
                     
                     
@@ -139,7 +165,7 @@ and open the template in the editor.
 
 
 
-        </div>
+        
 
     </body>
 </html>

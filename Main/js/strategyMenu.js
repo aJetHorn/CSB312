@@ -6,10 +6,11 @@
 
 
 $(document).ready(function() {
+    /*
    $('#leftmenu').on('mouseover',function(){
        $(this).css("opacity","1.0");
    });
    $('#leftmenu').on('mouseleave',function(){
        $(this).css("opacity",".2");
-   }); 
+   });*/ 
 });

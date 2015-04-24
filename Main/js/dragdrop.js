@@ -5,18 +5,114 @@
  */
 
 $(document).ready(function() {
-$( ".drag" ).draggable({
-      appendTo: "body",
-      helper: "clone"
+
+
+
+
+    $(".node").on("click", function() {
+        
+        if(nodeSelected!== ""){
+                $(nodeSelected).removeClass('colored');
+            }
+        nodeSelected = $(this);
+        $(nodeSelected).addClass('colored');
+        console.log("new node selected " + nodeSelected);
     });
-    
-      
-      
-    $( ".drop" ).droppable({
-      drop: function( event, ui ) {
-          console.log("YAY");
-         ui.draggable.parent().appendTo( $(this). parent().children("ul")) ;
-        //console.log(ui.draggable.text());
-      }
+
+
+    $(".drag").draggable({
+        appendTo: "body",
+        helper: "clone"
     });
+
+
+
+    $(".drop").droppable({
+        drop: function(event, ui) {
+            console.log("YAY");
+            //ui.draggable.children("dragtext").text().appendTo( $(this). parent().children("ul")) ;
+            var time = Math.floor(Date.now() / 1000000000);
+            var id = ui.draggable.children(".dragtext").text().replace(/\s+/g, '') + time; // remove white space
+            var htmltext = "<li id='" +
+                    id +
+                    "'>" +
+                    "<a href='#' class='node drop ui-droppable'>" +
+                    "<div class='name'>" +
+                    ui.draggable.children(".dragtext").text() +
+                    "</div>" +
+                    "<div class = 'allocation showVal' >" + "0" + "</div>" +
+                    "<div class = 'percent showVal' > % </div>" +
+                    "</a>" +
+                    "<ul class='showParent'>" +
+                    "</ul>" +
+                    "</li>";
+
+
+
+            $(this).parent().children("ul").append(htmltext);
+            //console.log(event);
+            //console.log("id"+ "#"+id);
+
+            // set the handler to change the currently selected node.
+            $("#" + id).on("click", function() {
+                //console.log("clickity click");
+                nodeSelected = $(this).children('.node');
+                //console.log("new node selected "+ nodeSelected );
+            });
+            //console.log(ui.draggable.text());
+        }
     });
+
+
+    setInterval(function() {
+        
+            $(".node").on("click", function() {
+        
+        if(nodeSelected!== ""){
+                $(nodeSelected).removeClass('colored');
+            }
+        nodeSelected = $(this);
+        $(nodeSelected).addClass('colored');
+        console.log("new node selected " + nodeSelected);
+    });
+        
+        
+        $(".drop").droppable({
+            drop: function(event, ui) {
+                console.log("YAY");
+                //ui.draggable.children("dragtext").text().appendTo( $(this). parent().children("ul")) ;
+                var time = Math.floor(Date.now() / 1000000000);
+                var id = ui.draggable.children(".dragtext").text().replace(/\s+/g, '') + time; // remove white space
+                var htmltext = "<li id='" +
+                        id +
+                        "'>" +
+                        "<a href='#' class='node drop ui-droppable'>" +
+                        "<div class='name'>" +
+                        ui.draggable.children(".dragtext").text() +
+                        "</div>" +
+                        "<div class = 'allocation showVal' >" + "0" + "</div>" +
+                        "<div class = 'percent showVal' > % </div>" +
+                        "</a>" +
+                        "<ul class='showParent'>" +
+                        "</ul>" +
+                        "</li>";
+
+
+
+                $(this).parent().children("ul").append(htmltext);
+                //console.log(event);
+                //console.log("id"+ "#"+id);
+
+                // set the handler to change the currently selected node.
+                $("#" + id).on("click", function() {
+                    //console.log("clickity click");
+                    nodeSelected = $(this).children('.node');
+                    //console.log("new node selected "+ nodeSelected );
+                });
+                //console.log(ui.draggable.text());
+            }
+        });
+    }, 1000);
+
+
+});
