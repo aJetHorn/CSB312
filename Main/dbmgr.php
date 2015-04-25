@@ -92,13 +92,13 @@ class Dbmgr {
         $con = $this->getDBConnection();
         $array = $_POST['tree'];
         //echo var_dump($array);
-        $name = $_POST['name']; // strategy name
+        $stratName = $_POST['Stratname']; // strategy name
         // query for creating strategy
         // node_id, asset_type, strategy_id, asset_id, target_pct
         // for each object
         //INSERT INTO `strategy`(`strategy_owner`, `strategy_name`) VALUES ('1','asia');
 
-        $strategyID = $this->createStratID($name, $con);
+        $strategyID = $this->createStratID($stratName, $con);
         //echo "last auto increment value" . $con->insert_id;
 
 

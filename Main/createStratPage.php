@@ -24,7 +24,7 @@ and open the template in the editor.
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-        <!--<script src='js/saveStrategy.js'></script> -->
+        <script src='js/saveStrategy.js'></script>
         <script src="js/jquery.ui.touch-punch.min.js"></script>
         <script src="js/scroll.js"></script>
         <script src="js/strategyMenu.js"></script>
@@ -143,7 +143,7 @@ and open the template in the editor.
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>   <i id="menuButton" class="fa fa-bars fa-2x fa-fw" style="  margin-right: 16px;padding-top: 10px;"></i> </li>
-                    <li class="active"><a href="#">CSB312</a></li>
+                    <li class="active"><a href="#">CSB312   </a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                     

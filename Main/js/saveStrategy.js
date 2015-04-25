@@ -13,8 +13,8 @@
 
 $(document).ready(function() {
     
-   
-    
+$("#stratSubmit").on("click",function(){   
+    console.log("yo clicked");
 var array=[];
 var counter=0;
 
@@ -22,6 +22,7 @@ var counter=0;
 var tree=$('.tree');
 var strategy=$('.tree').children('ul').children('li'); // a singular strategy
 //strategy=$('#Asia');
+var strategyID=$(strategy).attr("id");
 
 recursiveStore("",strategy);
 
@@ -40,7 +41,7 @@ node_id=$(object).attr('id');
 var nodeHolder= new Object();
 nodeHolder.node_id=node_id;
 nodeHolder.asset_type="";
-nodeHolder.strategy_id="2";//$(strategy).attr("id");
+nodeHolder.strategy_id=strategyID;
 nodeHolder.asset_id="";
 nodeHolder.target_pct=target;
 nodeHolder.drift=drift;
@@ -85,7 +86,7 @@ console.log("Length of array "+ array.length);
 $.ajax({
             url: 'saveStrategy.php',
             type: 'post',
-            data: {'tree' : array, 'name': $(strategy).attr("id") },
+            data: {'tree' : array, 'Stratname': $(strategy).attr("id") },
             success: function(data, status) {
 
                 //console.log("Successful ajax call data . Status : " + status);
@@ -102,4 +103,9 @@ $.ajax({
 
 
 
-});
+}); // end of button handler.
+
+
+
+
+}); // end of document ready

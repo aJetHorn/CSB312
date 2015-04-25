@@ -21,7 +21,7 @@ $(document).ready(function() {
         $("#red").slider({
             orientation: "horizontal",
             range: "min",
-            max: 100,
+            max: 101,
             value: 50,
             step: 1,
             slide: function(event, ui) {
@@ -30,6 +30,11 @@ $(document).ready(function() {
             }
         });
         $("#red").slider("value", 255);
+    });
+    
+    $('#currentName').on('input', function() {
+        console.log($(this).val());  
+        $(nodeSelected).children('.name').text($(this).val());
     });
 
 
