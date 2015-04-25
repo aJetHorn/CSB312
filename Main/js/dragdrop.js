@@ -65,10 +65,11 @@ $(document).ready(function() {
                 //console.log("new node selected "+ nodeSelected );
             });
             //console.log(ui.draggable.text());
+            refreshHandlers();
         }
     });
 
-
+/*
     setInterval(function() {
         
             $(".node").on("click", function() {
@@ -120,7 +121,10 @@ $(document).ready(function() {
                 //console.log(ui.draggable.text());
             }
         });
+        
+        
+        
     }, 1000);
-
+*/
 
 });

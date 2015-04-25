@@ -13,4 +13,21 @@ $(document).ready(function() {
    $('#leftmenu').on('mouseleave',function(){
        $(this).css("opacity",".2");
    });*/ 
+  
+    $("#quickEditDiv").toggle();
+    $("#quickNodeDiv").toggle(); 
+    
+    $("#menuButton").on("click",function(){
+       $("#leftmenu").toggle(); 
+    });
+    $("#quickEdit").on("click",function(){
+       $("#quickEditDiv").toggle(); 
+    });
+    
+    $("#quickNode").on("click",function(){
+       $("#quickNodeDiv").toggle(); 
+    });
+    
+    
+    
 });

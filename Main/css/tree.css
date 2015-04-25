@@ -4,8 +4,7 @@
 	padding: 0;
 }
 .tree{
- width: 120%;
-  padding-left: 500px;
+   width: 1600px;
 }
 .tree ul {
 	padding-top: 20px; 
@@ -117,15 +116,18 @@ right connector from last child*/
 
 #treeDiv{
    
-    overflow: scroll; 
-    position: absolute;
+  overflow: scroll;
+  position: relative;
+  width:100%;
+  height:100%;
 }
 
 #main{
   
-  width: 79%;
-  float: left;
-  padding-left: 20px;
+    float: left;
+  width: 77%;
+  margin-left: 23%;
+  margin-right: 10%;
 }
 
 .colored{

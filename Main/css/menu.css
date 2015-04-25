@@ -18,4 +18,6 @@ and open the template in the editor.
     margin-left: 6px;
     //opacity:.3;
     float:left; 
+   
+    position: fixed;
 }

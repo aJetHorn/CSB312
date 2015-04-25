@@ -36,7 +36,7 @@ $(document).ready(function() {
         
             // update parentList.
             $("#parentList").append("<option value='"+$("#inputName").val()+"' nodeID='"+id+"'>"+$("#inputName").val()+"</option>");
-
+            refreshHandlers();
 
     });
 

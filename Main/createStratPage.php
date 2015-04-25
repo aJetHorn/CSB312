@@ -14,32 +14,99 @@ and open the template in the editor.
         <!-- JS -->
 
         <!--http://stackoverflow.com/questions/21024681/javascript-how-can-you-pass-global-variables-between-js-files -->
-        <script type='text/javascript' > 
+        <script type='text/javascript' >
             var nodeSelected = "";
 
         </script>
 
-        
+
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
         <!--<script src='js/saveStrategy.js'></script> -->
         <script src="js/jquery.ui.touch-punch.min.js"></script>
-         <script src="js/scroll.js"></script>
-         <script src="js/strategyMenu.js"></script>
-         <script src="js/tree.js"></script>
-         <script src="js/dragdrop.js"></script>
-         <script src="js/customAdd.js"></script>
-         
+        <script src="js/scroll.js"></script>
+        <script src="js/strategyMenu.js"></script>
+        <script src="js/tree.js"></script>
+        <script>
+            function refreshHandlers() {
+
+                console.log("refresh");
+
+                $(".node").on("click", function() {
+
+                    if (nodeSelected !== "") {
+                        $(nodeSelected).removeClass('colored');
+                    }
+                    nodeSelected = $(this);
+                    $(nodeSelected).addClass('colored');
+                    console.log("new node selected " + nodeSelected);
+                });
 
 
-         <script src="js/slider.js"> </script>
-        
+                $(".drop").droppable({
+                    drop: function(event, ui) {
+                        console.log("YAY");
+                        //ui.draggable.children("dragtext").text().appendTo( $(this). parent().children("ul")) ;
+                        var time = Math.floor(new Date().getMilliseconds());
+                        var id = ui.draggable.children(".dragtext").text().replace(/\s+/g, '') + time; // remove white space
+                        var htmltext = "<li id='" +
+                                id +
+                                "'>" +
+                                "<a href='#' class='node drop ui-droppable'>" +
+                                "<div class='name'>" +
+                                ui.draggable.children(".dragtext").text() +
+                                "</div>" +
+                                "<div class = 'allocation showVal' >" + "0" + "</div>" +
+                                "<div class = 'percent showVal' > % </div>" +
+                                "</a>" +
+                                "<ul class='showParent'>" +
+                                "</ul>" +
+                                "</li>";
+
+
+
+                        $(this).parent().children("ul").append(htmltext);
+
+                        $("#parentList").append("<option value='" + ui.draggable.children(".dragtext").text() + "' nodeID='" + id + "'>" + ui.draggable.children(".dragtext").text() + "</option>");
+
+                        //console.log(event);
+                        //console.log("id"+ "#"+id);
+
+                        // set the handler to change the currently selected node.
+                        $("#" + id).on("click", function() {
+                            //console.log("clickity click");
+                            nodeSelected = $(this).children('.node');
+                            //console.log("new node selected "+ nodeSelected );
+                        });
+                        //console.log(ui.draggable.text());
+                        refreshHandlers();
+                    }
+                });
+
+            }
+        </script>
+
+        <script src="js/dragdrop.js"></script>
+        <script src="js/customAdd.js"></script>
+        <script src='js/checkTree.js'></script>
+        <script src='js/deleteButton.js'></script>
+
+
+        <script src="js/slider.js"></script>
+
+        <script>
+            $(function() {
+                $("#resizable").resizable();
+            });
+
+        </script>
+
         <style>
             #red .ui-slider-range { background: #ef2929; }
-  #red .ui-slider-handle { border-color: #ef2929; }
-            </style>
+            #red .ui-slider-handle { border-color: #ef2929; }
+        </style>
 
         <!-- CSS -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
@@ -56,110 +123,144 @@ and open the template in the editor.
            <!-- <i class="fa fa-plus-circle fa-3x fa-fw margin-bottom"></i>
             <i class="fa fa-cog fa-spin fa-3x fa-fw margin-bottom"></i>
             <i class="fa fa-refresh fa-spin fa-3x fa-fw margin-bottom"></i> -->
+            <!--<i id="menuButton" class="fa fa-bars fa-3x fa-fw"></i>-->
 
-               
         </div>
-        
-         <div id="leftmenu">
-             <button type="button" class="btn btn-primary"><i class="fa fa-arrow-left fa-2x fa-fw margin-bottom"></i> Back to Main Menu </button> 
-            <br/>
-            <br/>
-            
-            <div id="red"></div>
-            <br/>
-            <br/>
-            
-            <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle fa-2x fa-fw margin-bottom"></i> Add Quick Node</button> 
-            <br/>
-            <br/>
-            <div class='drag'>
-                <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>Equity</span>
-            </div>
-            
-            <div class='drag'>
-                <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>Cash</span>
-            </div>
 
-            <div class='drag'>
-                <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>Fixed Income</span>
-            </div>
-            
-            <div class='drag'>
-                <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>IBM</span>
-            </div>
-            
-            <div class='drag'>
-                <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>TSLA</span>
-            </div>
-            
-            <div class='drag'>
-                <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>JPM</span>
-            </div>
+        <nav class="navbar navbar-default ">
 
-            <br/>
-            <br/>
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>   <i id="menuButton" class="fa fa-bars fa-2x fa-fw" style="  margin-right: 16px;padding-top: 10px;"></i> </li>
+                    <li class="active"><a href="#">CSB312</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                </ul>
+            </div><!--/.nav-collapse -->
+
+        </nav>
+
+
+
+
+
+
+        <div id="leftmenu">
             
-            <button type="button" id="customAdd" class="btn btn-info"><i class="fa fa-plus-circle fa-2x fa-fw margin-bottom"></i> Add Custom Node</button>
-            <br/>
-            <br/>
+            
+        <button type="button" id="customAdd" class="btn btn-info"><i class="fa fa-plus-circle fa-1x fa-fw margin-bottom"></i> Add Custom Node</button>
+        <div id="customAddDiv">
             Parent : 
             <select id="parentList">
-           
-          </select>
+
+            </select>
             <input type="text" id="inputName" value="name">
             <input type="text" id="inputAlloc" value="0">%
-            <br/>
-            <br/>
-            <button type="button" class="btn btn-success"><i class="fa fa-minus-circle fa-2x fa-fw margin-bottom"></i> Delete Node </button>
-            <br/>
-            <br/>
-            <button type="button" class="btn btn-warning"><i class="fa fa-search-plus fa-2x fa-fw margin-bottom"></i> Zoom In/Out </button>
-            <br/>
-            <br/>
-            <button type="button" class="btn btn-danger"><i class="fa fa-check-circle fa-2x fa-fw margin-bottom"></i> Check Balance </button>
-           
+        </div>
             
+            
+            <button id='quickEdit' type="button" class="btn btn-primary"><i class="fa fa-wrench fa-1x fa-fw margin-bottom"></i> Quick Edit </button> 
+            <div id="quickEditDiv">
+                <input type="text" id="currentName" value="name">
+
+                <div id="red" style='margin-right:10px'></div>
+            </div>
+
+
+            <button id="quickNode" type="button" class="btn btn-primary"><i class="fa fa-plus-circle fa-1x fa-fw margin-bottom"></i> Add Quick Node</button> 
+            <div id="quickNodeDiv">
+                <div class='drag'>
+                    <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>Equity</span>
+                </div>
+
+                <div class='drag'>
+                    <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>Cash</span>
+                </div>
+
+                <div class='drag'>
+                    <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>Fixed Income</span>
+                </div>
+
+                <div class='drag'>
+                    <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>IBM</span>
+                </div>
+
+                <div class='drag'>
+                    <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>TSLA</span>
+                </div>
+
+                <div class='drag'>
+                    <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>JPM</span>
+                </div>
+
+            </div>
+
+
+
+            <button id='deleteOn' type="button" class="btn btn-success"><i class="fa fa-minus-circle fa-1x fa-fw margin-bottom"></i> Delete Node </button>
+
+            <button type="button" class="btn btn-warning"><i class="fa fa-search-plus fa-1x fa-fw margin-bottom"></i> Zoom In/Out </button>
+
+            <button type="button" id="stratCheck" class="btn btn-danger"><i class="fa fa-check-circle fa-1x fa-fw margin-bottom"></i> Check Balance </button>
+            <br/>
+            <button type="button" id="stratSubmit" class="btn btn-danger"><i class="fa fa-check-circle fa-1x fa-fw margin-bottom"></i> Submit </button>
+
+
 
         </div>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
+
         <div id='main' style="">
 
+            <div id="resizable" class="ui-widget-content" style="height:1000px;">
 
-            
                 <div id="treeDiv">
-                    
-                    
-                    
+
+
+
                     <!-- Tree -->
 
                     <div class="tree">
-                                <ul class="showParent"> <!-- Unordered List of Strategy -->
+                        <ul class="showParent"> <!-- Unordered List of Strategy -->
 
-                                    <!-- C -->
-                                    <li id="Asia123" class="root" >
+                            <!-- C -->
+                            <li id="Asia123" class="root" >
 
-                                        <a href="#" class="node drop" id='3'>
-                                            <div class="name">Strategy Name</div>
-                                            <div class="current hideVal"></div>
-                                            <div class="drift hideVal"></div>
-                                            <div class="allocation showVal"></div>
-                                            <div class="percent showVal" ></div>
-                                        </a>
+                                <a href="#" class="node drop" id='3'>
+                                  <!--  <button class='deleteButton'><i class="fa fa-times fa-1x fa-fw"></i></button> -->
+                                    <div class="name">Strategy Name</div>
+                                    <div class="current hideVal"></div>
+                                    <div class="drift hideVal"></div>
+                                    <div class="allocation hideVal"></div>
+                                    <div class="percent hideVal" ></div>
+                                </a>
 
 
-                                        <ul class="showParent">
+                                <ul class="showParent">
 
-                                  
 
 
 
@@ -167,13 +268,11 @@ and open the template in the editor.
 
                                 </ul>
 
-                    </div>  <!-- END OF TREE -->
-                </div>
-            </div>
+                                </div>  <!-- END OF TREE -->
+                                </div>
+                                </div>
 
+                                </div>
 
-
-        
-
-    </body>
-</html>
+                                </body>
+                                </html>
