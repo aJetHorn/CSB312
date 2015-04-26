@@ -67,7 +67,7 @@
                             Hi, Wellesley Arreza
                         </a>
                     </li>
-                    <li><a class="navbar-a" href="/SEI/Main/login.html">Logout</a></li>
+                    <li><a class="navbar-a" href="../Main/login.html">Logout</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
 
