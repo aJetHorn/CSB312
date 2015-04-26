@@ -54,10 +54,10 @@
                 <ul class="nav navbar-nav">
                     <li>   <i id="menuButton" class="fa fa-bars fa-2x fa-fw" style="  margin-right: 16px;padding-top: 10px;"></i> </li>
 
-                    <li><a class="navbar-a" href="/SEI/Main/hub.php">Home</a></li>
-                    <li><a class="navbar-a" href="/SEI/Main/createStratPage.php">Create New Strategy</a></li>
-                    <li><a class="navbar-a" href="/SEI/Main/hub.php">Modify Strategy</a></li>
-                    <li><a class="navbar-a" href="/SEI/Main/hub.php">Delete Strategy</a></li>
+                    <li><a class="navbar-a" href="../Main/hub.php">Home</a></li>
+                    <li><a class="navbar-a" href="../Main/createStratPage.php">Create New Strategy</a></li>
+                    <li><a class="navbar-a" href="../Main/hub.php">Modify Strategy</a></li>
+                    <li><a class="navbar-a" href="../Main/hub.php">Delete Strategy</a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

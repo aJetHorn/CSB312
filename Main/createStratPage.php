@@ -149,9 +149,9 @@ and open the template in the editor.
                 <ul class="nav navbar-nav">
                     <li>   <i id="menuButton" class="fa fa-bars fa-2x fa-fw" style="  margin-right: 16px;padding-top: 10px;"></i> </li>
                     
-                    <li><a class="navbar-a" href="/SEI/Main/hub.php">Home</a></li>
-                    <li><a class="navbar-a" href="/SEI/Main/hub.php">My Strategies</a></li>
-                    <li><a class="navbar-a" href="/SEI/Main/hub.php">My Portfolios</a></li>
+                    <li><a class="navbar-a" href="../Main/hub.php">Home</a></li>
+                    <li><a class="navbar-a" href="../Main/hub.php">My Strategies</a></li>
+                    <li><a class="navbar-a" href="../Main/hub.php">My Portfolios</a></li>
                     
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
