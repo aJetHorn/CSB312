@@ -48,10 +48,12 @@
         
         
         <?php
+        session_start();
 // Set session variables
  //echo $_SESSION["favcolor"];
  //echo       $_SESSION["favanimal"];
  $var= $_POST['list'];
+ $_SESSION['listid']=$_POST['list'];
  echo "<input type='hidden' id='selection' value='" . $var ."'>";
  
 ?>

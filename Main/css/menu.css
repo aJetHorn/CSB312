@@ -21,3 +21,11 @@ and open the template in the editor.
    
     position: fixed;
 }
+
+.btn-primary {
+   width:100%;
+}
+
+.fa{
+    float:left;
+}

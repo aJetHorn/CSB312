@@ -51,7 +51,10 @@ $(document).ready(function() {
                     "</li>";
 
 
-
+            // change css
+            var width=Math.ceil(parseInt($(".tree").width()))+50;
+            $(".tree").css("width",""+width);
+            console.log(""+width+"px");
             $(this).parent().children("ul").append(htmltext);
             console.log("parentList");
             $("#parentList").append("<option value='"+ui.draggable.children(".dragtext").text()+"' nodeID='"+id+"'>"+ui.draggable.children(".dragtext").text()+"</option>");

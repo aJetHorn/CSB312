@@ -34,6 +34,12 @@ $(document).ready(function() {
                 "</li>";
         $("#" + parentId).children("ul").append(htext);
         
+        
+        // change css
+            var width=Math.ceil(parseInt($(".tree").width()))+50;
+            $(".tree").css("width",""+width);
+            console.log(""+width+"px");
+            
             // update parentList.
             $("#parentList").append("<option value='"+$("#inputName").val()+"' nodeID='"+id+"'>"+$("#inputName").val()+"</option>");
             refreshHandlers();

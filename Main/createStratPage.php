@@ -95,6 +95,7 @@ and open the template in the editor.
 
 
         <script src="js/slider.js"></script>
+        
 
         <script>
             $(function() {
@@ -113,7 +114,8 @@ and open the template in the editor.
         <link href="css/tree.css" rel="stylesheet">
         <link rel="stylesheet" href="./css/menu.css">
         <!-- Bootstrap Core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!--<link href="./css/bootstrap.min.css" rel="stylesheet">-->
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     </head>
@@ -156,13 +158,10 @@ and open the template in the editor.
 
 
 
-
-
-
         <div id="leftmenu">
             
             
-        <button type="button" id="customAdd" class="btn btn-info"><i class="fa fa-plus-circle fa-1x fa-fw margin-bottom"></i> Add Custom Node</button>
+        <button type="button" id="customAdd" class="btn btn-primary"><i class="fa fa-plus-circle fa-1x fa-fw margin-bottom"></i> Add Custom Node</button>
         <div id="customAddDiv">
             Parent : 
             <select id="parentList">
@@ -211,13 +210,13 @@ and open the template in the editor.
 
 
 
-            <button id='deleteOn' type="button" class="btn btn-success"><i class="fa fa-minus-circle fa-1x fa-fw margin-bottom"></i> Delete Node </button>
+            <button id='deleteOn' type="button" class="btn btn-primary"><i class="fa fa-minus-circle fa-1x fa-fw margin-bottom"></i> Delete Node </button>
 
-            <button type="button" class="btn btn-warning"><i class="fa fa-search-plus fa-1x fa-fw margin-bottom"></i> Zoom In/Out </button>
+            <button type="button" class="btn btn-primary"><i class="fa fa-search-plus fa-1x fa-fw margin-bottom"></i> Zoom In/Out </button>
 
-            <button type="button" id="stratCheck" class="btn btn-danger"><i class="fa fa-check-circle fa-1x fa-fw margin-bottom"></i> Check Balance </button>
+            <button type="button" id="stratCheck" class="btn btn-primary"><i class="fa fa-check-circle fa-1x fa-fw margin-bottom"></i> Check Balance </button>
             <br/>
-            <button type="button" id="stratSubmit" class="btn btn-danger"><i class="fa fa-check-circle fa-1x fa-fw margin-bottom"></i> Submit </button>
+            <button type="button" id="stratSubmit" class="btn btn-primary"><i class="fa fa-arrow-right fa-1x fa-fw margin-bottom"></i> Submit </button>
 
 
 

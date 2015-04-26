@@ -133,3 +133,10 @@ right connector from last child*/
 .colored{
     background:yellow;
 }
+
+
+.ui-widget-content {
+   border: none !important;
+  background: #ffffff  50% 50% repeat-x;
+  color: #222222;
+}
