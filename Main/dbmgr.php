@@ -156,6 +156,10 @@ class Dbmgr {
         $con = $this->getDBConnection();
         $result = $con->query("SELECT ItemID,Title,Quantity,Description FROM item ORDER BY ItemID");
     }
+    
+    public function deleteNodeByStratID(){
+        
+    }
 
     /*
      *  

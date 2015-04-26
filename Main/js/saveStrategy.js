@@ -82,7 +82,7 @@ return;
 
 console.log("Length of array "+ array.length);
 
-
+/*
 $.ajax({
             url: 'saveStrategy.php',
             type: 'post',
@@ -99,7 +99,7 @@ $.ajax({
 
         });
 
-
+*/
 
 
 

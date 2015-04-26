@@ -18,32 +18,62 @@
           <script src="js/renderStrategy.js"></script>
           
                   <!-- CSS -->
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
         <link href="css/tree.css" rel="stylesheet">
-         <link rel="stylesheet" href="./css/style.css">
-         <link rel="stylesheet" href="./css/portfolio.css">
+         
+         
+ 
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+
+        <!-- <link rel="stylesheet" href="./css/style.css"> -->
         <!-- Bootstrap Core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!--<link href="./css/bootstrap.min.css" rel="stylesheet">-->
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="./css/customNavbar.css">
+        <link rel="stylesheet" href="./css/viewStrategy.css">
+        
     </head>
     
     <body>
         
-        <div id="topHeader">
-    <!--h1-->
-    <span class="h1">View Strategy</span><!--/h1-->
-    <div id="leftLinks">
-      <a href="/">Hello, Yifei Gao</a> | <a href="/">Log Out</a>
-    </div>
-  </div>
-  <div id="secondaryHeader">
-    <div id ="links"> 
-        <a href="hub.html">Hub</a> 
-        <a href="newstrategy.html">Strategy</a> 
-        <a href="portfolio.html">Portfolio</a> 
-        <a href="https://github.com/aJetHorn/CSB312/blob/master/README.md">Help</a>
-    </div>
-    <!--div id="links"> <a href="/">Wednesday</a> | <a href="/">April 1st 2015</a> | <a href="/"> 3:12PM </a> | <a href="/"> 32°F </a-->
-    </div>
+        <nav class="navbar navbar-custom">
+
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>   <i id="menuButton" class="fa fa-bars fa-2x fa-fw" style="  margin-right: 16px;padding-top: 10px;"></i> </li>
+
+                    <li><a class="navbar-a" href="/SEI/Main/hub.php">Home</a></li>
+                    <li><a class="navbar-a" href="/SEI/Main/createStratPage.php">Create New Strategy</a></li>
+                    <li><a class="navbar-a" href="/SEI/Main/hub.php">Modify Strategy</a></li>
+                    <li><a class="navbar-a" href="/SEI/Main/hub.php">Delete Strategy</a></li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="navbar-a" href="#contact">
+                            <i class="fa fa-user fa-2x fa-fw"></i>
+                            Hi, Wellesley Arreza
+                        </a>
+                    </li>
+                    <li><a class="navbar-a" href="/SEI/Main/login.html">Logout</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+
+        </nav>
+    <center class="pageTitle">Strategy</center>
+    <hr>
         
         
         
@@ -75,6 +105,8 @@
                     </div>
                 </div>
             </div>
+            
+
         </div>
     </body>
 </html>

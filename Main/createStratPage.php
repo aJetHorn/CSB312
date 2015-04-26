@@ -117,6 +117,9 @@ and open the template in the editor.
         <!--<link href="./css/bootstrap.min.css" rel="stylesheet">-->
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        
+        <link rel="stylesheet" href="./css/customNavbar.css">
+        
 
     </head>
     <body>
@@ -129,7 +132,7 @@ and open the template in the editor.
 
         </div>
 
-        <nav class="navbar navbar-default ">
+        <nav class="navbar navbar-custom">
 
 
             <div class="navbar-header">
@@ -145,23 +148,34 @@ and open the template in the editor.
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>   <i id="menuButton" class="fa fa-bars fa-2x fa-fw" style="  margin-right: 16px;padding-top: 10px;"></i> </li>
-                    <li class="active"><a href="#">CSB312   </a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    
+                    <li><a class="navbar-a" href="/SEI/Main/hub.php">Home</a></li>
+                    <li><a class="navbar-a" href="/SEI/Main/hub.php">My Strategies</a></li>
+                    <li><a class="navbar-a" href="/SEI/Main/hub.php">My Portfolios</a></li>
                     
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="navbar-a" href="#contact">
+                            <i class="fa fa-user fa-2x fa-fw"></i>
+                            Hi, Wellesley Arreza
+                        </a>
+                    </li>
+                    <li><a class="navbar-a" href="/SEI/Main/login.html">Logout</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
 
         </nav>
-
+    <center class="pageTitle">Create Strategies</center>
+        <hr>
 
 
         <div id="leftmenu">
             
             
-        <button type="button" id="customAdd" class="btn btn-primary"><i class="fa fa-plus-circle fa-1x fa-fw margin-bottom"></i> Add Custom Node</button>
+        <button type="button" id="customAdd" class="btn btn-primary">
+            <i class="fa fa-plus-circle fa-1x fa-fw margin-bottom"></i> Add Custom Node
+        </button>
         <div id="customAddDiv">
             Parent : 
             <select id="parentList">
@@ -172,7 +186,9 @@ and open the template in the editor.
         </div>
             
             
-            <button id='quickEdit' type="button" class="btn btn-primary"><i class="fa fa-wrench fa-1x fa-fw margin-bottom"></i> Quick Edit </button> 
+            <button id='quickEdit' type="button" class="btn btn-primary">
+                <i class="fa fa-wrench fa-1x fa-fw margin-bottom"></i> Quick Edit 
+            </button> 
             <div id="quickEditDiv">
                 <input type="text" id="currentName" value="name">
 
@@ -180,7 +196,9 @@ and open the template in the editor.
             </div>
 
 
-            <button id="quickNode" type="button" class="btn btn-primary"><i class="fa fa-plus-circle fa-1x fa-fw margin-bottom"></i> Add Quick Node</button> 
+            <button id="quickNode" type="button" class="btn btn-primary">
+                <i class="fa fa-plus-circle fa-1x fa-fw margin-bottom"></i> Add Quick Node
+            </button> 
             <div id="quickNodeDiv">
                 <div class='drag'>
                     <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>Equity</span>
@@ -210,13 +228,21 @@ and open the template in the editor.
 
 
 
-            <button id='deleteOn' type="button" class="btn btn-primary"><i class="fa fa-minus-circle fa-1x fa-fw margin-bottom"></i> Delete Node </button>
+            <button id='deleteOn' type="button" class="btn btn-primary">
+                <i class="fa fa-minus-circle fa-1x fa-fw margin-bottom"></i> Delete Node 
+            </button>
 
-            <button type="button" class="btn btn-primary"><i class="fa fa-search-plus fa-1x fa-fw margin-bottom"></i> Zoom In/Out </button>
+            <button type="button" class="btn btn-primary">
+                <i class="fa fa-search-plus fa-1x fa-fw margin-bottom"></i> Zoom In/Out 
+            </button>
 
-            <button type="button" id="stratCheck" class="btn btn-primary"><i class="fa fa-check-circle fa-1x fa-fw margin-bottom"></i> Check Balance </button>
+            <button type="button" id="stratCheck" class="btn btn-primary">
+                <i class="fa fa-check-circle fa-1x fa-fw margin-bottom"></i> Check Balance 
+            </button>
             <br/>
-            <button type="button" id="stratSubmit" class="btn btn-primary"><i class="fa fa-arrow-right fa-1x fa-fw margin-bottom"></i> Submit </button>
+            <button type="button" id="stratSubmit" class="btn btn-primary">
+                <i class="fa fa-arrow-right fa-1x fa-fw margin-bottom"></i> Submit 
+            </button>
 
 
 
