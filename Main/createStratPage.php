@@ -105,7 +105,41 @@ This php file is used for creating strategies in general's
 
             }
         </script>
-
+        
+        <script>
+            $(document).ready(function() {
+            $("#zoomControl").draggable(); 
+            $("#toggleController").on("click", function(){
+        $("#zoomControl").toggle();
+    });
+    //Just refreshes window, should restore "default" position of viewport
+    $("#refreshArrow").on("click", function(){
+        location.reload();
+    });
+    $("#plusButton").on("click", function(){
+        $(".tree .node").each(function( index ){
+            console.log("Test element: " + index);
+            //console.log("Font-size:" + $(this).css("font-size"));
+            $(this).css("width", "+=15%");
+            $(this).css("height", "+=15%");
+            $(this).css("font-size", "+=2%");
+            $(this).css("text-align", "center");
+            $(this).css("margin-top", "auto");
+        })
+    });
+    $("#minusButton").on("click", function(){
+        $(".tree .node").each(function( index ){
+            $(this).css("width", "-=15%");
+            $(this).css("height", "-=15%");
+            $(this).css("font-size", "-=2%");
+            $(this).css("text-align", "center");
+            $(this).css("margin-top", "auto");
+            //$(this).css("padding", "-=10%");
+        })
+    });
+            });
+            </script>
+        
         <script src="js/dragdrop.js"></script>
         <script src="js/customAdd.js"></script>
         <script src='js/checkTree.js'></script>
@@ -123,6 +157,45 @@ This php file is used for creating strategies in general's
         <style>
             #red .ui-slider-range { background: #ef2929; }
             #red .ui-slider-handle { border-color: #ef2929; }
+            #zoomControl{
+    z-index: 9999;
+    position: absolute;
+    top: 60px;
+    left: 280px;
+    width: 300px;
+}
+
+#zoomControl h1{
+    color: #333;
+    font-size: 2.8em;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    opacity: .8;
+}
+
+#zoomButtons ul li{
+    font-size: 3em;
+    float: left;
+    padding: 5px;
+    color: #CCC;
+    background-color: #333;
+    opacity: .8;
+    cursor: pointer;
+}
+
+#zoomButtons ul li:hover{
+    opacity: .7;
+    background-color: #777;
+}
+
+#zoomButtons{
+    width: 100%;
+}
+
+#zoomButtons ul{
+    margin-top: -12px;
+    list-style: none;
+}
         </style>
 
         <!-- CSS -->
@@ -335,5 +408,20 @@ This php file is used for creating strategies in general's
 
         </div>
 <input type='hidden' id='phase' value='new'>;
+<div id="zoomControl" draggable="true">
+                <h1> Zoom </h1>
+                <div id="zoomButtons">
+                    <ul>
+                        <!--li id="leftArrow">&#8592;</li>
+                        <li id="upArrow">&#8593;</li>
+                        <li id="downArrow">&#8595;</li>
+                        <li id="rightArrow">&#8594;</li-->
+                        <!-- snap to default -->
+                        <li id="plusButton">+</li>
+                        <li id="minusButton">-</li>
+                        <li id="refreshArrow">&#8635;</li>
+                    </ul>
+                </div>
+        </div>
 </body>
 </html>
