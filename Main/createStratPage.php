@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+This php file is used for creating strategies in general's
+- Wellesley Arreza
 -->
 <html>
     <head>
@@ -16,7 +15,6 @@ and open the template in the editor.
         <!--http://stackoverflow.com/questions/21024681/javascript-how-can-you-pass-global-variables-between-js-files -->
         <script type='text/javascript' >
             var nodeSelected = "";
-
         </script>
 
 
@@ -30,19 +28,34 @@ and open the template in the editor.
         <script src="js/strategyMenu.js"></script>
         <script src="js/tree.js"></script>
         <script>
+            
             function refreshHandlers() {
 
                 console.log("refresh");
-
+                
+                // first unbind click handlers
+                $(".node").unbind('click');
+                // then update
                 $(".node").on("click", function() {
 
-                    if (nodeSelected !== "") {
+                    //if (nodeSelected !== "") {
                         $(nodeSelected).removeClass('colored');
-                    }
+                    //}
                     nodeSelected = $(this);
                     $(nodeSelected).addClass('colored');
-                    console.log("new node selected " + nodeSelected);
+                    console.log("new node selected " + $(nodeSelected).children('.name').text());
+                    console.log(nodeSelected);
+                    console.log("hi");
                 });
+                
+                   $("a").on("click",function(){
+        
+                        if(collapseTrue){
+                            $(this).parent().children("ul").toggle();
+                            console.log("collapse");
+                        }
+                        console.log("finish collapse");
+                    });
 
 
                 $(".drop").droppable({
@@ -73,15 +86,20 @@ and open the template in the editor.
 
                         //console.log(event);
                         //console.log("id"+ "#"+id);
-
+                        /*
                         // set the handler to change the currently selected node.
                         $("#" + id).on("click", function() {
                             //console.log("clickity click");
                             nodeSelected = $(this).children('.node');
                             //console.log("new node selected "+ nodeSelected );
                         });
+                        */
                         //console.log(ui.draggable.text());
+                        
+                        console.log("called refresh");
                         refreshHandlers();
+                        console.log("called refresh");
+                      
                     }
                 });
 
@@ -92,8 +110,6 @@ and open the template in the editor.
         <script src="js/customAdd.js"></script>
         <script src='js/checkTree.js'></script>
         <script src='js/deleteButton.js'></script>
-
-
         <script src="js/slider.js"></script>
         
 
@@ -174,53 +190,66 @@ and open the template in the editor.
             
             
         <button type="button" id="customAdd" class="btn btn-primary">
-            <i class="fa fa-plus-circle fa-1x fa-fw margin-bottom"></i> Add Custom Node
+            <i class=" fa fa-plus-circle fa-1x fa-fw margin-bottom"></i> Add Custom Node
         </button>
-        <div id="customAddDiv">
+            
+        <div id="customAddDiv" class="popupdiv">
             Parent : 
             <select id="parentList">
 
             </select>
-            <input type="text" id="inputName" value="name">
-            <input type="text" id="inputAlloc" value="0">%
+            <br/>
+            <br/>
+            Node Name:
+            <input type="text" id="inputName" value="name" size="10">
+             <br/>
+             <br/>
+            Allocation:
+            
+            <input type="text" id="inputAlloc" value="0" size="4">
         </div>
             
             
             <button id='quickEdit' type="button" class="btn btn-primary">
                 <i class="fa fa-wrench fa-1x fa-fw margin-bottom"></i> Quick Edit 
             </button> 
-            <div id="quickEditDiv">
+            <div id="quickEditDiv" class="popupdiv">
+                Edit Name:
+                <br/>
+                <br/>
                 <input type="text" id="currentName" value="name">
-
-                <div id="red" style='margin-right:10px'></div>
+                <br/>
+                <br/>
+                Edit Allocation:
+                <div id="red" style='margin-right:10px; margin-top: 20px; margin-bottom: 20px;'></div>
             </div>
 
 
             <button id="quickNode" type="button" class="btn btn-primary">
                 <i class="fa fa-plus-circle fa-1x fa-fw margin-bottom"></i> Add Quick Node
             </button> 
-            <div id="quickNodeDiv">
-                <div class='drag'>
+            <div id="quickNodeDiv" class="popupdiv">
+                <div class='drag' style="padding-bottom: 10px;">
                     <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>Equity</span>
                 </div>
 
-                <div class='drag'>
+                <div class='drag' style="padding-bottom: 10px;">
                     <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>Cash</span>
                 </div>
 
-                <div class='drag'>
+                <div class='drag' style="padding-bottom: 10px;">
                     <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>Fixed Income</span>
                 </div>
 
-                <div class='drag'>
+                <div class='drag' style="padding-bottom: 10px;">
                     <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>IBM</span>
                 </div>
 
-                <div class='drag'>
+                <div class='drag' style="padding-bottom: 10px;">
                     <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>TSLA</span>
                 </div>
 
-                <div class='drag'>
+                <div class='drag' style="padding-bottom: 10px;">
                     <i class=" fa fa-circle fa-1x fa-fw margin-bottom"></i> <span class ='dragtext'>JPM</span>
                 </div>
 
@@ -230,6 +259,10 @@ and open the template in the editor.
 
             <button id='deleteOn' type="button" class="btn btn-primary">
                 <i class="fa fa-minus-circle fa-1x fa-fw margin-bottom"></i> Delete Node 
+            </button>
+            
+            <button id="collapseBtn" type="button" class="btn btn-primary">
+                <i class="fa fa-search-plus fa-1x fa-fw margin-bottom"></i> Collapse 
             </button>
 
             <button type="button" class="btn btn-primary">
@@ -272,9 +305,9 @@ and open the template in the editor.
                         <ul class="showParent"> <!-- Unordered List of Strategy -->
 
                             <!-- C -->
-                            <li id="Asia123" class="root" >
+                            <li id="" class="root" >
 
-                                <a href="#" class="node drop" id='3'>
+                                <a href="#" class="node drop" id=''>
                                   <!--  <button class='deleteButton'><i class="fa fa-times fa-1x fa-fw"></i></button> -->
                                     <div class="name">Strategy Name</div>
                                     <div class="current hideVal"></div>
@@ -293,11 +326,14 @@ and open the template in the editor.
 
                                 </ul>
 
-                                </div>  <!-- END OF TREE -->
-                                </div>
-                                </div>
+                            </li>
+                        </ul>
 
-                                </div>
+                    </div>  <!-- END OF TREE -->
+                </div>
+            </div>
 
-                                </body>
-                                </html>
+        </div>
+<input type='hidden' id='phase' value='new'>;
+</body>
+</html>

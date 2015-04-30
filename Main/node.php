@@ -4,6 +4,8 @@
 <?php
 // class for Node
 // Node_ID,Node_Name,Parent_Node_ID,Strategy_ID,Target_Pct
+// used for the dbmgr.
+// Wellesley Arreza
 class Node implements JsonSerializable {
     public $id;
     public $name;

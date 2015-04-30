@@ -5,6 +5,14 @@
  * and open the template in the editor.
  */
 
+/*
+ * This is basically the home page. Users can view strategies and portfolios.
+ * // to view a strategy just click on the list item on the list.
+ * // there is the option to allow the user to delete strategies.
+ * - Wellesley Arreza
+ */ 
+
+
 // get strategies
 // get id
 // get name
@@ -57,6 +65,15 @@ $lst = $db->getStrategyIDs();
                         tabs.tabs("refresh");
                     }
                 });
+                
+                
+                $('.links').on('click',function(){
+                    $('#selectedStrategy').attr("value",$(this).parent().children(".linkID").text());
+                    
+                    document.getElementById("form1").submit();
+                });
+                
+                
             });
         </script>
 
@@ -82,7 +99,7 @@ $lst = $db->getStrategyIDs();
 
                     <li><a class="navbar-a" href="../Main/hub.php">Home</a></li>
                     <li><a class="navbar-a" href="../Main/createStratPage.php">Create New Strategy</a></li>
-                    <li><a class="navbar-a" href="../Main/hub.php">My Portfolios</a></li>
+                    <li><a class="navbar-a" href="../Main/hub.php">Detailed Summary</a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -105,33 +122,49 @@ $lst = $db->getStrategyIDs();
     <div id="main">
         <div id="tabs">
             <ul>
-                <li><a href="#tabs-1">Strategies</a></li>
-                <li><a href="#tabs-2">Portfolios</a></li>
-                <li><a href="#tabs-3">Apply Strategies</a></li>
+                <li><a href="#tabs-1">My Strategies</a></li>
+                <li><a href="#tabs-2">Delete Strategies</a></li>
+                <li><a href="#tabs-3">My Portfolios</a></li>
+                <li><a href="#tabs-4">Apply Strategies</a></li>
             </ul>
             <div id="tabs-1">
+                <form id="form1" action="viewStrategy.php" method="post">
+                    
                 <table class="table table-striped table-responsive table-hover">
                     <thead>
                         <tr>
-                            <th data-field="id">View Strategy</th>    
+                            <th data-field="id">View/Modify Strategy</th>    
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-// php code to print out the list of strategies.
-
+                        // php code to print out the list of strategies.
+                        //echo '';
+                        
                         for ($i = 0; $i < sizeof($lst); $i++) {
-                            echo "<tr><td>";
+                            echo "<tr><td class='links'><a href='#'>";
                             echo $lst[$i]->name;
-                            echo "</td></tr>";
+                            echo "</a></td> <td class='linkID' style='display:none;'>";
+                            echo $lst[$i]->id;
+                            echo " </td> </tr>";
                         }
+                       
+                        echo '<input type="hidden" id="selectedStrategy" value="" name="selectedStrategy">';
+                        
+                        
                         ?>
-
-
+                         
+                        
                     </tbody>   
                 </table>
+                </form>
+                
+            </div>
+            
+            <div id="tabs-2">
+                <h3>Delete Strategy </h3>
                 <?php
-                echo '<form action="viewStrategy.php" method="post">';
+                echo '<form action="deleteStrategy.php" method="post">';
                 echo "<select name='list'>";
                 for ($i = 0; $i < sizeof($lst); $i++) {
                     echo "<option value='" . $lst[$i]->id . "'>" . $lst[$i]->name . "</option>";
@@ -141,8 +174,8 @@ $lst = $db->getStrategyIDs();
                 echo '</form>';
                 ?>
             </div>
-
-            <div id="tabs-2">
+            
+            <div id="tabs-3">
                 <table class="table table-striped table-responsive table-hover">
                     <thead>
                         <tr>
@@ -159,7 +192,7 @@ $lst = $db->getStrategyIDs();
                 </table>
             </div>
 
-            <div id="tabs-3">
+            <div id="tabs-4">
                 <h2>Strategy</h2>
                 <select>
                     <option value="Tech Strat">Tech Strat</option>

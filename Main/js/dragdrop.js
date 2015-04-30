@@ -6,21 +6,19 @@
 
 $(document).ready(function() {
 
-            var time = Math.floor( new Date().getMilliseconds());
-            var id = "StrategyName" + time;
-            $(".root").attr("id",id);
-
-
-
+          
+refreshHandlers();
+/*
+ 
     $(".node").on("click", function() {
         
-        if(nodeSelected!== ""){
+       // if(nodeSelected!== ""){
                 $(nodeSelected).removeClass('colored');
-            }
+       //     }
         nodeSelected = $(this);
         $(nodeSelected).addClass('colored');
-        console.log("new node selected " + nodeSelected);
-    });
+        console.log("new node selected " +  $(nodeSelected).children('name').text());
+    });*/
 
 
     $(".drag").draggable({
@@ -62,13 +60,15 @@ $(document).ready(function() {
             //console.log("id"+ "#"+id);
 
             // set the handler to change the currently selected node.
-            $("#" + id).on("click", function() {
+            /*$("#" + id).on("click", function() {
                 //console.log("clickity click");
                 nodeSelected = $(this).children('.node');
                 //console.log("new node selected "+ nodeSelected );
-            });
+            });*/
             //console.log(ui.draggable.text());
+            console.log("called refresh");
             refreshHandlers();
+            console.log("called refresh");
         }
     });
 

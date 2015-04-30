@@ -22,6 +22,25 @@ and open the template in the editor.
     position: fixed;
 }
 
+.listicon{
+    padding-right: 35px;
+}
+
+.hoverMenuItem{
+  background-color: rgb(51, 122, 183);
+  color: white;
+}
+
+.hoverMenuItem{
+  background-color: white;
+  color: white;
+}
+
+.popupdiv{
+      padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .btn-primary {
    width:100%;
 }

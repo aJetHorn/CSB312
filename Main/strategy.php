@@ -2,8 +2,9 @@
 
 
 <?php
-// class for Node
-// Node_ID,Node_Name,Parent_Node_ID,Strategy_ID,Target_Pct
+// this is the strategy class that models a simple strategy
+// for strategy creation
+// - Wellesley Arreza
 class Strategy {
     public $id;
     public $name;

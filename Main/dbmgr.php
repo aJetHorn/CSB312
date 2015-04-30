@@ -1,5 +1,17 @@
 
+
+
+
+
 <?php
+
+/*
+ * This class handles all of the database connection and interactions - Wellesley Arreza
+ * 
+ * 
+ * 
+ */
+
 
 require 'node.php';
 include 'strategy.php';
@@ -48,6 +60,57 @@ class Dbmgr {
         }
         
         return $lst;
+    }
+    
+    public function editStrategy($id){
+        
+        $array = $_POST['tree'];
+        //echo var_dump($array);
+        $stratName = $_POST['Stratname']; // strategy name
+        // query for creating strategy
+        // node_id, asset_type, strategy_id, asset_id, target_pct
+        // for each object
+        //INSERT INTO `strategy`(`strategy_owner`, `strategy_name`) VALUES ('1','asia');
+        
+        // delete the nodes related to the old strategy.
+        $this->deleteNodeByStratID($id);
+        // also delete the old strategy.
+        $this->deleteStrategyByID($id);
+        
+        $con = $this->getDBConnection();
+        $strategyID = $this->createStratID($stratName, $con);
+        //echo "last auto increment value" . $con->insert_id;
+
+
+        $i = 0;
+        // iteration 0 is the tree root.
+        for ($i = 0; $i < sizeof($array); $i++) {
+       
+            $nodeID = $array[$i]['node_id'];
+            $assetID = $array[$i]['asset_id'];
+            $target = $array[$i]['target_pct'];
+            $name = $array[$i]['name'];
+            $parent = $array[$i]['parent']; // parent id.
+            echo "\r\n";
+            echo $parent;
+            echo $nodeID;
+            echo "\r\n";
+            echo "iteration : " . $i;
+            $insertNode = "INSERT INTO Node(Node_ID,Node_Name,Strategy_ID,Target_Pct, Parent_Node_ID) VALUES("
+                    . "'" . $nodeID . "',"
+                    . "'" . $name . "',"
+                    . "'" . $strategyID . "',"
+                    . "'" . $target . "',"
+                    . "'" . $parent . "'" // last value
+                    . ");";
+
+
+            $con->query($insertNode);
+
+            sleep(.1); // provide some extra time for query to run.
+        }
+
+        $con->close();
     }
 
     public function getAllNodes() {
@@ -157,9 +220,24 @@ class Dbmgr {
         $result = $con->query("SELECT ItemID,Title,Quantity,Description FROM item ORDER BY ItemID");
     }
     
-    public function deleteNodeByStratID(){
+    public function deleteNodeByStratID($id){
+        // delete from Node where Strategy_ID = id
+        
+        $con = $this->getDBConnection();
+        $queryString = "delete from Node where Strategy_ID='". $id ."';";
+        $result = $con->query($queryString);
+        echo "result from delete all strategy nodes : ".$result;
+        $con->close();
         
     }
+    
+   public function deleteStrategyByID($id){
+       $con = $this->getDBConnection();
+        $queryString = "delete from Strategy where Strategy_ID='". $id ."';";
+        $result = $con->query($queryString);
+        echo "result from delete strategy : ".$result;
+        $con->close();
+   }
 
     /*
      *  

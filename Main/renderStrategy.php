@@ -1,5 +1,10 @@
 <?php
-
+/*
+ * This php file is used for actually getting the nodes.
+ * Then we store the nodes in a json array
+ * echo it out.
+ * - Wellesley Arreza
+ */
 include 'dbmgr.php';
 
 $db= new Dbmgr();
