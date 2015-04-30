@@ -16,10 +16,12 @@ $(document).ready(function() {
         if(collapseTrue){
             collapseTrue=false;
             console.log("toggle collapsefalse");
+            console.log(collapseTrue);
         }
         else{
             collapseTrue=true;
             console.log("toggle collapseTrue");
+            console.log(collapseTrue);
         }
         
     });

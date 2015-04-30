@@ -38,19 +38,34 @@ This is the page that allows users to view and edit current strategies.
         <script src='js/checkTree.js'></script>
         <script src="js/renderStrategy.js"></script>
         <script>
+            
             function refreshHandlers() {
 
                 console.log("refresh");
-
+                
+                // first unbind click handlers
+                $(".node").unbind('click');
+                // then update
                 $(".node").on("click", function() {
 
-                    if (nodeSelected !== "") {
+                    //if (nodeSelected !== "") {
                         $(nodeSelected).removeClass('colored');
-                    }
+                    //}
                     nodeSelected = $(this);
                     $(nodeSelected).addClass('colored');
-                    console.log("new node selected " + nodeSelected);
+                    console.log("new node selected " + $(nodeSelected).children('.name').text());
+                    console.log(nodeSelected);
+                    console.log("hi");
                 });
+                
+                   $("a").on("click",function(){
+        
+                        if(collapseTrue){
+                            $(this).parent().children("ul").toggle();
+                            console.log("collapse");
+                        }
+                        console.log("finish collapse");
+                    });
 
 
                 $(".drop").droppable({
@@ -81,15 +96,20 @@ This is the page that allows users to view and edit current strategies.
 
                         //console.log(event);
                         //console.log("id"+ "#"+id);
-
+                        /*
                         // set the handler to change the currently selected node.
                         $("#" + id).on("click", function() {
                             //console.log("clickity click");
                             nodeSelected = $(this).children('.node');
                             //console.log("new node selected "+ nodeSelected );
                         });
+                        */
                         //console.log(ui.draggable.text());
+                        
+                        console.log("called refresh");
                         refreshHandlers();
+                        console.log("called refresh");
+                      
                     }
                 });
 
@@ -121,6 +141,12 @@ This is the page that allows users to view and edit current strategies.
         <link rel="stylesheet" href="./css/menu.css">
         <link rel="stylesheet" href="./css/customNavbar.css">
         <link rel="stylesheet" href="./css/viewStrategy.css">
+        
+        <style>
+            #red .ui-slider-range { background: #ef2929; }
+            #red .ui-slider-handle { border-color: #ef2929; }
+        </style>
+        
         <!-- End of CSS   -->
         
         

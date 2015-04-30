@@ -9,7 +9,7 @@ $(document).ready(function() {
 
         console.log("refresh");
         
-                    $(".node").on("click", function() {
+     $(".node").on("click", function() {
         
         if(nodeSelected!== ""){
                 $(nodeSelected).removeClass('colored');
@@ -17,6 +17,15 @@ $(document).ready(function() {
         nodeSelected = $(this);
         $(nodeSelected).addClass('colored');
         console.log("new node selected " + nodeSelected);
+    });
+    
+    $("a").on("click",function(){
+        
+        if(collapseTrue){
+         $(this).parent().children("ul").toggle();
+         console.log("collapse");
+     }
+      console.log("finish collapse");
     });
         
         

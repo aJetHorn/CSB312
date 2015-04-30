@@ -18,14 +18,8 @@ function initialize(){
  strategyID=$(strategy).attr("id");
 }
 
-
-$(document).ready(function() {
-
-
-initialize();
-
     
-function recursiveStore(parent,object){
+function recursiveCheck(parent,object){
     
     
 var current,drift,target,name,parent,node_id, allocationSum;
@@ -61,7 +55,7 @@ return parseInt(target); // there is no children. This is the base case.
 
 $(object).children("ul").children().each( function(){
 // we recursively call for each child of the object.    
-allocationSum+=recursiveStore(object, this); // sum the children allocations together.
+allocationSum+=recursiveCheck(object, this); // sum the children allocations together.
 
 });
 
@@ -74,6 +68,15 @@ allocationSum+=recursiveStore(object, this); // sum the children allocations tog
 return parseInt(target); // return node's allocation.
 
 }
+
+
+
+$(document).ready(function() {
+
+
+initialize();
+
+
 
 
 
@@ -136,7 +139,7 @@ return parseInt(target); // return node's allocation.
          }
     */
    checkflag=true;
-   recursiveStore("",strategy);
+   recursiveCheck("",strategy);
 if(checkflag){
     console.log("good balance");
     alert("good balance");

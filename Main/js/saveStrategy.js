@@ -24,6 +24,22 @@ $(document).ready(function() {
     
 $("#stratSubmit").on("click",function(){ 
     
+    $("#stratCheck").click();
+    console.log(checkflag);
+    
+if(!checkflag){
+    console.log("bad balance");
+    alert("Tree is not balanced. Check again.");
+    
+}
+else{
+    console.log("good balance");
+    alert("Strategy Saved.");
+    
+    
+    
+
+
 
  var time = Math.floor( new Date().getMilliseconds());
             var id = $(".root").children(".node").children(".name").text() + time;
@@ -147,6 +163,8 @@ $.ajax({
 
 }
 
+
+} // end of else statement
 
 }); // end of button handler.
 

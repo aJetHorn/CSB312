@@ -27,6 +27,7 @@ $(document).ready(function() {
             // sample json access. data[0].id;
             printTree(data, Object.keys(data).length);
             initialize();
+            refreshHandlers();  
         },
         error: function(xhr, desc, err) {
             console.log("Not Successful ajax call");
