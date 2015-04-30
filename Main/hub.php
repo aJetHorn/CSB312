@@ -99,7 +99,7 @@ $lst = $db->getStrategyIDs();
 
                     <li><a class="navbar-a" href="../Main/hub.php">Home</a></li>
                     <li><a class="navbar-a" href="../Main/createStratPage.php">Create New Strategy</a></li>
-                    <li><a class="navbar-a" href="../Main/hub.php">Detailed Summary</a></li>
+                    <li><a class="navbar-a" href="../Main/summary.html">Detailed Summary</a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
