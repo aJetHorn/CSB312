@@ -106,11 +106,16 @@ This php file is used for creating strategies in general's
             }
         </script>
         
+        
+        
+        <!--TJ's zoom functionality -->
+        
         <script>
             $(document).ready(function() {
             $("#zoomControl").draggable(); 
+            $("#zoomControl").toggle();
             $("#toggleController").on("click", function(){
-        $("#zoomControl").toggle();
+            $("#zoomControl").toggle();
     });
     //Just refreshes window, should restore "default" position of viewport
     $("#refreshArrow").on("click", function(){
@@ -250,7 +255,8 @@ This php file is used for creating strategies in general's
                             Hi, Wellesley Arreza
                         </a>
                     </li>
-                    <li><a class="navbar-a" href="../Main/login.html">Logout</a></li>
+                    <!--<li><a class="navbar-a" href="../Main/login.html">Logout</a></li>-->
+                    <li><a class="navbar-a" href="#">Logout</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
 
@@ -261,8 +267,24 @@ This php file is used for creating strategies in general's
 
         <div id="leftmenu">
             
+            <button id='quickEdit' type="button" class="btn btn-primary">
+                <i class="fa fa-wrench fa-1x fa-fw margin-bottom"></i> Quick Edit 
+            </button> 
+            <div id="quickEditDiv" class="popupdiv">
+                Edit Name:
+                <br/>
+                <br/>
+                <input type="text" id="currentName" value="name">
+                <br/>
+                <br/>
+                Edit Allocation:
+                <div id="red" style='margin-right:10px; margin-top: 20px; margin-bottom: 20px;'></div>
+            </div>
             
-        <button type="button" id="customAdd" class="btn btn-primary">
+            
+            
+            
+        <button type="button" id="customAddShow" class="btn btn-primary">
             <i class=" fa fa-plus-circle fa-1x fa-fw margin-bottom"></i> Add Custom Node
         </button>
             
@@ -280,22 +302,15 @@ This php file is used for creating strategies in general's
             Allocation:
             
             <input type="text" id="inputAlloc" value="0" size="4">
+            <br/>
+            <br/>
+             <button type="button" id="customAdd" class="btn btn-success">
+            Add Custom Node
+            </button>
         </div>
             
             
-            <button id='quickEdit' type="button" class="btn btn-primary">
-                <i class="fa fa-wrench fa-1x fa-fw margin-bottom"></i> Quick Edit 
-            </button> 
-            <div id="quickEditDiv" class="popupdiv">
-                Edit Name:
-                <br/>
-                <br/>
-                <input type="text" id="currentName" value="name">
-                <br/>
-                <br/>
-                Edit Allocation:
-                <div id="red" style='margin-right:10px; margin-top: 20px; margin-bottom: 20px;'></div>
-            </div>
+
 
 
             <button id="quickNode" type="button" class="btn btn-primary">
@@ -338,7 +353,7 @@ This php file is used for creating strategies in general's
                 <i class="fa fa-search-plus fa-1x fa-fw margin-bottom"></i> Collapse 
             </button>
 
-            <button type="button" class="btn btn-primary">
+            <button id='toggleController' type="button" class="btn btn-primary">
                 <i class="fa fa-search-plus fa-1x fa-fw margin-bottom"></i> Zoom In/Out 
             </button>
 

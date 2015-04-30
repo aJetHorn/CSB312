@@ -120,6 +120,45 @@ This is the page that allows users to view and edit current strategies.
         
         <script src='js/deleteButton.js'></script>
         <script src="js/slider.js"></script>
+        
+                <!--TJ's zoom functionality -->
+        
+        <script>
+            $(document).ready(function() {
+            $("#zoomControl").draggable(); 
+            $("#zoomControl").toggle();
+            $("#toggleController").on("click", function(){
+            $("#zoomControl").toggle();
+    });
+    //Just refreshes window, should restore "default" position of viewport
+    $("#refreshArrow").on("click", function(){
+        location.reload();
+    });
+    $("#plusButton").on("click", function(){
+        $(".tree .node").each(function( index ){
+            console.log("Test element: " + index);
+            //console.log("Font-size:" + $(this).css("font-size"));
+            $(this).css("width", "+=15%");
+            $(this).css("height", "+=15%");
+            $(this).css("font-size", "+=2%");
+            $(this).css("text-align", "center");
+            $(this).css("margin-top", "auto");
+        })
+    });
+    $("#minusButton").on("click", function(){
+        $(".tree .node").each(function( index ){
+            $(this).css("width", "-=15%");
+            $(this).css("height", "-=15%");
+            $(this).css("font-size", "-=2%");
+            $(this).css("text-align", "center");
+            $(this).css("margin-top", "auto");
+            //$(this).css("padding", "-=10%");
+        })
+    });
+            });
+            </script>
+        
+        
         <script>
             $(function() {
                 $("#resizable").resizable();
@@ -145,6 +184,46 @@ This is the page that allows users to view and edit current strategies.
         <style>
             #red .ui-slider-range { background: #ef2929; }
             #red .ui-slider-handle { border-color: #ef2929; }
+            
+                        #zoomControl{
+    z-index: 9999;
+    position: absolute;
+    top: 60px;
+    left: 280px;
+    width: 300px;
+}
+
+#zoomControl h1{
+    color: #333;
+    font-size: 2.8em;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    opacity: .8;
+}
+
+#zoomButtons ul li{
+    font-size: 3em;
+    float: left;
+    padding: 5px;
+    color: #CCC;
+    background-color: #333;
+    opacity: .8;
+    cursor: pointer;
+}
+
+#zoomButtons ul li:hover{
+    opacity: .7;
+    background-color: #777;
+}
+
+#zoomButtons{
+    width: 100%;
+}
+
+#zoomButtons ul{
+    margin-top: -12px;
+    list-style: none;
+}
         </style>
         
         <!-- End of CSS   -->
@@ -183,7 +262,8 @@ This is the page that allows users to view and edit current strategies.
                             Hi, Wellesley Arreza
                         </a>
                     </li>
-                    <li><a class="navbar-a" href="../Main/login.html">Logout</a></li>
+                    <!--<li><a class="navbar-a" href="../Main/login.html">Logout</a></li>-->
+                    <li><a class="navbar-a" href="#">Logout</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
 
@@ -194,8 +274,23 @@ This is the page that allows users to view and edit current strategies.
     
  <div id="leftmenu">
             
+                    <button id='quickEdit' type="button" class="btn btn-primary">
+                <i class="fa fa-wrench fa-1x fa-fw margin-bottom"></i> Quick Edit 
+            </button> 
+            <div id="quickEditDiv" class="popupdiv">
+                Edit Name:
+                <br/>
+                <br/>
+                <input type="text" id="currentName" value="name">
+                <br/>
+                <br/>
+                Edit Allocation:
+                <div id="red" style='margin-right:10px; margin-top: 20px; margin-bottom: 20px;'></div>
+            </div>
+     
             
-        <button type="button" id="customAdd" class="btn btn-primary">
+     
+        <button type="button" id="customAddShow" class="btn btn-primary">
             <i class=" fa fa-plus-circle fa-1x fa-fw margin-bottom"></i> Add Custom Node
         </button>
             
@@ -213,22 +308,12 @@ This is the page that allows users to view and edit current strategies.
             Allocation:
             
             <input type="text" id="inputAlloc" value="0" size="4">
+            <br/>
+            <br/>
+             <button type="button" id="customAdd" class="btn btn-success">
+            Add Custom Node
+            </button>
         </div>
-            
-            
-            <button id='quickEdit' type="button" class="btn btn-primary">
-                <i class="fa fa-wrench fa-1x fa-fw margin-bottom"></i> Quick Edit 
-            </button> 
-            <div id="quickEditDiv" class="popupdiv">
-                Edit Name:
-                <br/>
-                <br/>
-                <input type="text" id="currentName" value="name">
-                <br/>
-                <br/>
-                Edit Allocation:
-                <div id="red" style='margin-right:10px; margin-top: 20px; margin-bottom: 20px;'></div>
-            </div>
 
 
             <button id="quickNode" type="button" class="btn btn-primary">
@@ -271,7 +356,7 @@ This is the page that allows users to view and edit current strategies.
                 <i class="fa fa-search-plus fa-1x fa-fw margin-bottom"></i> Collapse 
             </button>
 
-            <button type="button" class="btn btn-primary">
+            <button id='toggleController' type="button" class="btn btn-primary">
                 <i class="fa fa-search-plus fa-1x fa-fw margin-bottom"></i> Zoom In/Out 
             </button>
 
@@ -326,6 +411,25 @@ This is the page that allows users to view and edit current strategies.
 
     </div>
     
-    <input type='hidden' id='phase' value='edit'>;
+    <input type='hidden' id='phase' value='edit'>
+    
+    <div id="zoomControl" draggable="true">
+                <h1> Zoom </h1>
+                <div id="zoomButtons">
+                    <ul>
+                        <!--li id="leftArrow">&#8592;</li>
+                        <li id="upArrow">&#8593;</li>
+                        <li id="downArrow">&#8595;</li>
+                        <li id="rightArrow">&#8594;</li-->
+                        <!-- snap to default -->
+                        <li id="plusButton">+</li>
+                        <li id="minusButton">-</li>
+                        <li id="refreshArrow">&#8635;</li>
+                    </ul>
+                </div>
+        </div>
+    
+    
+    
 </body>
 </html>

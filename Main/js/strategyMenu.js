@@ -16,7 +16,7 @@ $(document).ready(function() {
   
     $("#quickEditDiv").toggle();
     $("#quickNodeDiv").toggle(); 
-    
+    $("#customAddDiv").toggle();
     $("#menuButton").on("click",function(){
        $("#leftmenu").toggle(); 
     });
@@ -26,6 +26,10 @@ $(document).ready(function() {
     
     $("#quickNode").on("click",function(){
        $("#quickNodeDiv").toggle(); 
+    });
+    
+    $("#customAddShow").on("click",function(){
+       $("#customAddDiv").toggle(); 
     });
     
     
