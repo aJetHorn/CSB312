@@ -1,7 +1,7 @@
 
 
         <?php
-        header( 'Location: ./Main/login.html' ) ;
+        header( 'Location: ./Main/hub.php' ) ;
         echo "test";
         ?>
 
