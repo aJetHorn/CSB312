@@ -63,4 +63,4 @@
 <a name="1.0.0"></a>
 # 1.0.0 UI Login Page (2015-02-18)
 
--Added in login page. -wes
+- Added in login page. -wes
