@@ -262,8 +262,8 @@ This is the page that allows users to view and edit current strategies.
                             Hi, Wellesley Arreza
                         </a>
                     </li>
-                    <!--<li><a class="navbar-a" href="../Main/login.html">Logout</a></li>-->
-                    <li><a class="navbar-a" href="#">Logout</a></li>
+                   <li><a class="navbar-a" href="../Main/login.html">Logout</a></li>
+                    <!--<li><a class="navbar-a" href="#">Logout</a></li>-->
                 </ul>
             </div><!--/.nav-collapse -->
 
