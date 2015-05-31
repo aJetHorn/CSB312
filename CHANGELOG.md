@@ -1,12 +1,24 @@
+<a name="1.1.2"></a>
+# 1.1.2 PHP Strategy Page  (2015-04-30)
+
+- Merged TJ's zoom feature into my strategy page. -wes
+- Added a summary page.
+
+<a name="1.1.1"></a>
+# 1.1.1 PHP Strategy Page  (2015-04-26)
+
+- users can now add/edit/delete strategies -wes
+
 <a name="1.1.0"></a>
 # 1.1.0 PHP Strategy Page  (2015-04-26)
 
-- users can now delete nodes -wes
+- fixed delete nodes issue. users can now delete nodes -wes
 
 <a name="1.0.9"></a>
 # 1.0.9 PHP Strategy Page  (2015-04-25)
 
-- users can now save their strategies -wes
+- finished DFS algorithm to traverse the strategy tree. Users can now save their strategies -wes
+- balance check algorithm is finished. invalid strategies are now prevented.
 
 <a name="1.0.8"></a>
 # 1.0.8 PHP Strategy Page  (2015-04-24)
