@@ -1,0 +1,75 @@
+  {
+            "name": "Strategy A",
+            "parent": "null",
+            "allocation": 100,
+            "status": "1",
+            "children": [
+                {
+                    "name": "Sub-Strategy A1",
+                    "parent": "Top Level",
+                    "allocation": 100,
+                    "status": "1",
+                    "children": [
+                        {
+                            "name": "Custom strategy",
+                            "parent": "Sub-Strategy A1",
+                            "allocation": 100,
+                            "status": "null",
+                            "children": [{
+                                    "name": "BAC",
+                                    "parent": "Custom strategy",
+                                    "allocation": 100,
+                                    "status": "1"
+                                }, {
+                                    "name": "TWTR",
+                                    "parent": "Custom strategy",
+                                    "allocation": 100,
+                                    "status": "1"
+                                }, {
+                                    "name": "FB",
+                                    "parent": "Custom strategy",
+                                    "allocation": 100,
+                                    "status": "1"
+                                }, {
+                                    "name": "CFG",
+                                    "parent": "Custom strategy",
+                                    "allocation": 100,
+                                    "status": "1"
+                                }]
+
+                        },
+                        {
+                            "name": "T",
+                            "parent": "Sub-Strategy A1",
+                            "allocation": 100,
+                            "status": "1"
+                        },
+                        {
+                            "name": "MS",
+                            "parent": "Sub-Strategy A1",
+                            "allocation": 100,
+                            "status": "1"
+                        },
+                        {
+                            "name": "TSLA",
+                            "parent": "Sub-Strategy A1",
+                            "allocation": 100,
+                            "status": "1"
+                        },
+                        {
+                            "name": "YHOO",
+                            "parent": "Sub-Strategy A1",
+                            "allocation": 100,
+                            "status": "1"
+                        },
+                        {
+                            "name": "RE",
+                            "parent": "Sub-Strategy A1",
+                            "allocation": 100,
+                            "status": "1"
+                        }
+                    ]
+                }
+
+            ]
+        }
