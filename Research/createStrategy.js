@@ -11,8 +11,33 @@
 
 var counter = 0;
 
-// Get JSON data
-treeJSON = d3.json("flare.json", function (error, treeData) {
+
+
+/*
+ * 
+ * Some tips
+ * 
+ * You may notice "d" as an argument in some of these functions.
+ * 
+ * "d" is a JSON object. It contains data about each node.
+ * Do a console.log or debug to check the "d" attributes.
+ * 
+ *
+ *
+ *
+ *
+ */
+
+
+
+var treeJSON = d3.json("new.json", function (error, treeData) {
+
+
+    // set the start node's id.
+    treeData.id = "node" + Math.floor(new Date().getTime() / 1000);
+
+
+
 
     // Calculate total nodes, max label length
     var totalNodes = 0;
@@ -27,6 +52,8 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
     var i = 0;
     var duration = 750;
     var root;
+
+
 
     var dragStarted;
     var clicked = false;
@@ -65,7 +92,7 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
     // Call visit function to establish maxLabelLength
     visit(treeData, function (d) {
         totalNodes++;
-        maxLabelLength = Math.max(d.name.length, maxLabelLength);
+        maxLabelLength = 12;// Math.max(d.name.length, maxLabelLength);  // max length for connector
 
     }, function (d) {
         return d.children && d.children.length > 0 ? d.children : null;
@@ -364,8 +391,7 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
         // console.log("suppressed");
         // }
         //return; // click suppressed
-        console.log(d);
-        console.log("name");
+        //console.log(d);
         console.log($(source).attr("id"));
         addNode(root, $(source).attr("id"));
 
@@ -389,9 +415,65 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
 
 
 
-    function editClick() {
 
+
+    function deleteClick(d, source) {
+        console.log($(source).attr("id"));
+        deleteNode(root, $(source).attr("id"));
+        d3.selectAll(".custom-tooltip").remove();
+        clicked = false;
     }
+
+    function deleteNode(d, id) {
+        console.log(d);
+
+        /*if (d.id === id) {
+         if (!d.parent) {
+         //d.children = [{"name": "New Item", "id": newid, "allocation": 0}];
+         }
+         else {
+         delete d.parent.children[d.id];
+         }
+         update(root);
+         centerNode(d);
+         return;
+         }*/
+
+        if (!d.children) {
+            return;
+        }
+        else {
+            d.children = d.children.filter(function (elem) {
+                console.log(elem.id);
+                console.log(id);
+                return elem.id !== id;
+            });
+            //update(root);
+        }
+        //console.log(root.children);
+        if (!d.children) {
+            return;
+        }
+        else {
+            d.children.forEach(function (d) {
+                deleteNode(d, id);
+            });
+        }
+
+        update(root);
+        centerNode(d);
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     function print(d) {
         console.log(d);
@@ -406,13 +488,14 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
     }
 
     function addNode(d, id) {
-        console.log(d.name);
-        if (d.name === id) {
+        //console.log(d.name);
+        var newid = "node" + Math.floor(new Date().getTime() / 1000);
+        if (d.id === id) {
             if (!d.children) {
-                d.children = [{"name": "New Item", "status": "pending"}];
+                d.children = [{"name": "Node", "id": newid, "allocation": 0}];
             }
             else {
-                d.children.push({"name": "New Item", "status": "pending"});
+                d.children.push({"name": "Node", "id": newid, "allocation": 0});
             }
             update(root);
             centerNode(d);
@@ -480,14 +563,16 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
                 .attr("class", "node")
                 .attr("id", function (d) {
                     counter++;
-                    return "" + d.name;
+                    //console.log("id"+d.id);
+                    // console.log("id"+d.name);
+                    return "" + d.id;
                 })
                 .attr("transform", function (d) {
                     return "translate(" + source.x0 + "," + source.y0 + ")";
                 });
 
 
-
+        var currentData;
         nodeEnter.append("circle")
                 .attr('class', 'node circle')
                 .attr("r", 30)
@@ -502,16 +587,21 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
                     var html = '<table width="100%">';
 
 
-                    html += '<tr><td>Symbol</td><td><div class="ui-widget"><input id="f" type="text" name="" value="' + d.name + '"></div></td></tr>';
-                    html += '<tr><td>Allocation</td><td><input id="' + d.name + '" type="text" name="" value="' + d.allocation + '"></td></tr>';
 
+
+                    html += '<tr><td>Allocation</td><td><input id="alloc" type="text" name="" value="' + d.allocation + '"></td></tr>';
+                    html += '<tr><td>Symbol</td><td>'
+
+                            + '<div id="the-basics"><input id="inputTitle" class="typeahead" type="text" value="' + d.name + '"></div>'
+                            + '</td></tr>';
 
                     html += '</table>';
+                    currentData = d;
 
                     d3.select(this.parentNode.parentNode).append("foreignObject")
                             .attr({
                                 'x': d3.select(this.parentNode)[0][0].__data__.x0 + 60,
-                                'y': d3.select(this.parentNode)[0][0].__data__.y0 - 40,
+                                'y': d3.select(this.parentNode)[0][0].__data__.y0 - 20,
                                 'width': 50,
                                 'height': 50,
                                 'class': 'custom-tooltip'
@@ -526,40 +616,39 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
                     })
                             .html(html);
 
+
+                    // TWITTER'S AUTOCOMPLETE
                     $(function () {
-                        $('#f').typeahead({
-                            hint: true,
+                        $('#the-basics .typeahead').typeahead({
+                            hint: false,
                             highlight: true,
                             minLength: 1
                         },
                         {
                             name: 'states',
-                            source: substringMatcher(["SEI","MS","GS"])
+                            source: substringMatcher(["SEI", "MS", "GS", "IBM"])
                         });
+
+
+                        $(".typeahead").css("position", "inherit").removeClass("typeahead tt-input");
+                        $(".twitter-typeahead").css("position", "");
+                        $(".tt-menu").css("position", "");
+
+                        $("#inputTitle").on("input", function () {
+                            d3.select("#title_" + currentData.id).text(function () {
+                                return $("#inputTitle").val();
+                            });
+                            currentData.name = $("#inputTitle").val();
+                        });
+                        $("#alloc").on("input", function () {
+                            d3.select("#title_alloc_" +currentData.id).text(function () {
+                                return $("#alloc").val();
+                            });
+                            currentData.allocation = $("#alloc").val();
+                        });
+
+
                     });
-
-
-
-                    // EDIT Function
-
-                    d3.select(this.parentNode.parentNode).append("foreignObject")
-                            .attr({
-                                'x': d3.select(this.parentNode)[0][0].__data__.x0 - 15,
-                                'y': d3.select(this.parentNode)[0][0].__data__.y0 - 80,
-                                'width': 10,
-                                'height': 10,
-                                'class': 'custom-tooltip'
-                            })
-                            .append("xhtml:html")
-                            .append("xhtml:body").attr({
-                        "class": "blueDiv"
-                    })
-                            .append("xhtml:div")
-                            .append("xhtml:div").attr({
-                        "class": "ptext"
-                    })
-                            .html("EDIT").on('click', click);
-
 
 
                     d3.select(this.parentNode.parentNode).append("foreignObject")
@@ -578,25 +667,10 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
                             .append("xhtml:div").attr({
                         "class": "ptext"
                     })
-                            .html("DELETE");
-
-                    /*d3.select(this.parentNode.parentNode).append("foreignObject")
-                     .attr({
-                     'x': d3.select(this.parentNode)[0][0].__data__.x0 - 10,
-                     'y': d3.select(this.parentNode)[0][0].__data__.y0 + 65,
-                     'width': 10,
-                     'height': 10,
-                     'class': 'custom-tooltip'
-                     })
-                     .append("xhtml:html")
-                     .append("xhtml:body").attr({
-                     "class": "blueDiv"
-                     })
-                     .append("xhtml:div")
-                     .append("xhtml:div").attr({
-                     "class": "ptext"
-                     })
-                     .html("ADD");*/
+                            .html("<img src='less.png' class='my-icon-sm'></img>").on('click', function (d) {
+                        console.log("yo");
+                        deleteClick(d, original);
+                    });
 
 
                     var data = [source];
@@ -607,8 +681,8 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
                         click(d, original);
                     })
                             .attr({
-                                'x': d3.select(this.parentNode)[0][0].__data__.x0 - 10,
-                                'y': d3.select(this.parentNode)[0][0].__data__.y0 + 65,
+                                'x': d3.select(this.parentNode)[0][0].__data__.x0 -25,
+                                'y': d3.select(this.parentNode)[0][0].__data__.y0 + 50,
                                 'width': 10,
                                 'height': 10,
                                 'class': 'custom-tooltip'
@@ -621,7 +695,7 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
                             .append("xhtml:div").attr({
                         "class": "ptext"
                     })
-                            .html("ADD");
+                            .html("<img src='plus.png' class='my-icon-sm'></img>");
 
                     // console.log(d3.selectAll("q"));
 
@@ -629,9 +703,19 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
 
                 });
 
+
+
+
+        // append Title
         nodeEnter.append("text")
                 .attr("y", function (d) {
-                    return d.children || d._children ? -30 : -15;
+                    return d.children || d._children ? -10 : -10;
+                })
+                .attr("x", function (d) {
+                    return d.children || d._children ? -10 : -10;
+                })
+                .attr("id", function (d) {
+                    return "title_" + d.id;
                 })
                 .attr("dy", ".35em")
                 .attr('class', 'nodeText')
@@ -642,6 +726,30 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
                     return d.name;
                 })
                 .style("fill-opacity", 0);
+
+        // append Allocation Amount Title
+        nodeEnter.append("text")
+                .attr("y", function (d) {
+                    return d.children || d._children ? 10 : 10;
+                })
+                .attr("x", function (d) {
+                    return d.children || d._children ? -10 : -10;
+                })
+                .attr("id", function (d) {
+                    return "title_alloc_" + d.id;
+                })
+                .attr("dy", ".55em")
+                .attr('class', 'nodeText')
+                .attr("text-anchor", function (d) {
+                    return d.children || d._children ? "end" : "start";
+                })
+                .text(function (d) {
+                    return d.allocation;
+                })
+                .style("fill-opacity", 1);
+        
+
+
 
         // phantom node to give us mouseover in a radius around it
         nodeEnter.append("circle")
@@ -657,22 +765,22 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
                     outCircle(node);
                 });
 
-
-
-        // Node Ticker
-
-        // Update the text to reflect whether node has children or not.
-        node.select('text')
-                .attr("x", function (d) {
-                    return d.children || d._children ? -20 : -12;
-                })
-                .attr("text-anchor", function (d) {
-                    return d.children || d._children ? "end" : "start";
-                })
-                .text(function (d) {
-                    return d.name;
-                });
-
+        /*
+         
+         // Node Ticker
+         
+         // Update the text to reflect whether node has children or not.
+         node.select('text')
+         .attr("x", function (d) {
+         return d.children || d._children ? -10 : -10;
+         })
+         .attr("text-anchor", function (d) {
+         //return d.children || d._children ? "end" : "start";
+         })
+         .text(function (d) {
+         return d.name;
+         });
+         */
         // Change the circle fill depending on whether it has children and is collapsed
         node.select("circle.nodeCircle")
                 .attr("r", 4.5)
@@ -768,7 +876,7 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
     root = treeData;
     root.x0 = viewerHeight / 2;
     root.y0 = 0;
-
+    root.id = "node" + Math.floor(new Date().getTime() / 1000);
     // print out JSON
     //console.log(root.children);
     // Layout the tree initially and center on the root node.
@@ -781,7 +889,7 @@ treeJSON = d3.json("flare.json", function (error, treeData) {
 
 
     $("#addBtn").on("click", function () {
-        root.children.push({"name": "New Item", "status": "pending"});
+        root.children.push({"name": "Node", "status": "pending"});
         update(root);
     });
 
