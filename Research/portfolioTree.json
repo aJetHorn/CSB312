@@ -1,0 +1,38 @@
+  {
+            "name": "My Portfolio",
+            "parent": "null",
+            "allocation": 100,
+            "status": "1",
+            "children": [
+                        {
+                            "name": "T",
+                            "parent": "Top Level",
+                            "allocation": 100,
+                            "status": "1"
+                        },
+                        {
+                            "name": "MS",
+                            "parent": "Top Level",
+                            "allocation": 100,
+                            "status": "1"
+                        },
+                        {
+                            "name": "TSLA",
+                            "parent": "Top Level",
+                            "allocation": 100,
+                            "status": "1"
+                        },
+                        {
+                            "name": "YHOO",
+                            "parent": "Top Level",
+                            "allocation": 100,
+                            "status": "1"
+                        },
+                        {
+                            "name": "F",
+                            "parent": "Top Level",
+                            "allocation": 100,
+                            "status": "1"
+                        }
+                    ]
+        }
