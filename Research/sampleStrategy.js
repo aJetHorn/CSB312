@@ -30,7 +30,7 @@ var counter = 0;
 
 
 
-var treeJSON = d3.json("new.json", function (error, treeData) {
+var treeJSON = d3.json("flare.json", function (error, treeData) {
 
 
     // set the start node's id.
@@ -733,7 +733,7 @@ var treeJSON = d3.json("new.json", function (error, treeData) {
                     return d.children || d._children ? -10 : -10;
                 })
                 .attr("x", function (d) {
-                    return d.children || d._children ? -10 : -10;
+                    return d.children || d._children ? -50 : -10;
                 })
                 .attr("id", function (d) {
                     return "title_" + d.id;
@@ -760,10 +760,11 @@ var treeJSON = d3.json("new.json", function (error, treeData) {
                     return "title_alloc_" + d.id;
                 })
                 .attr("dy", ".55em")
+                
                 .attr('class', 'nodeText')
-                .attr("text-anchor", function (d) {
+               /* .attr("text-anchor", function (d) {
                     return d.children || d._children ? "end" : "start";
-                })
+                })*/
                 .text(function (d) {
                     return d.allocation;
                 })

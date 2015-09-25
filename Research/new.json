@@ -1,7 +1,7 @@
 {
     "name": "start",
     "parent": "null",
-    "allocation": "100%",
+    "allocation": "100",
     "status": "1",
     "children": [
     ]
