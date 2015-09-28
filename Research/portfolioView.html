@@ -22,13 +22,16 @@ Wellesley Arreza
             }
 
             #rightpanel{
-
                 position: absolute;
                 left: 80%;
                 top: 60px;
                 z-index: 3;
-                height:300px;
+                /*height:200px;*/
                 background-color: rgba(7, 7, 223, 0);
+                border: 1px solid #000;
+                width: 220px;
+                padding: 8px;
+                border-radius: 2px;
             }
             #bottompanel{
                 position: absolute;
@@ -47,6 +50,15 @@ Wellesley Arreza
                 color: white;
                 background-color: rgb(0, 74, 255);
                 width: 56px;
+            }
+            #resetBtn{
+                /*border-radius: 10px;*/
+                background-color: #3498db;
+                border: none;
+                border-radius: 2px;
+            }
+            #resetBtn:hover{
+                opacity: .8;
             }
 
             .node {
@@ -136,21 +148,21 @@ Wellesley Arreza
                 <div id="rightpanel">
 
 
-                    <h2>Visualization</h2>
-                    <div style="overflow-y: scroll; height:250px;">
+                    <h2 style="text-align: center;">Stock Price</h2>
+                    <div style="overflow-y: scroll; height:135px;">
 
                         <div id="TickerData">
 
                         </div>
 
                     </div>
-                    <button id="addBtn">Add New</button>
+                    <button id="resetBtn">Reset</button>
 
                 </div>
 
-            <div id="bottompanel">
+            <!-- <div id="bottompanel">
                 <h2>Tables / Options</h2>
-            </div>
+            </div> -->
             </div>
         </div>
 

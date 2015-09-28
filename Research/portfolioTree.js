@@ -508,23 +508,24 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
 
                     html += '</table>';
 
-                    d3.select(this.parentNode.parentNode).append("foreignObject")
-                            .attr({
-                                'x': d3.select(this.parentNode)[0][0].__data__.x0 + 60,
-                                'y': d3.select(this.parentNode)[0][0].__data__.y0 - 40,
-                                'width': 50,
-                                'height': 50,
-                                'class': 'custom-tooltip'
-                            })
-                            .append("xhtml:html")
-                            .append("xhtml:body").attr({
-                        "class": "opblkDiv"
-                    })
-                            .append("xhtml:div")
-                            .append("xhtml:div").attr({
-                        "class": "ptext"
-                    })
-                            .html(html);
+                    //This code didn't work for me, it was removed for portfolio view- TJ
+                    // d3.select(this.parentNode.parentNode).append("foreignObject")
+                    //         .attr({
+                    //             'x': d3.select(this.parentNode)[0][0].__data__.x0 + 60,
+                    //             'y': d3.select(this.parentNode)[0][0].__data__.y0 - 40,
+                    //             'width': 50,
+                    //             'height': 50,
+                    //             'class': 'custom-tooltip'
+                    //         })
+                    //         .append("xhtml:html")
+                    //         .append("xhtml:body").attr({
+                    //     "class": "opblkDiv"
+                    // })
+                    //         .append("xhtml:div")
+                    //         .append("xhtml:div").attr({
+                    //     "class": "ptext"
+                    // })
+                        //    .html(html);
 
                     $(function () {
                         $('#f').typeahead({
@@ -542,43 +543,43 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
 
                     // EDIT Function
 
-                    d3.select(this.parentNode.parentNode).append("foreignObject")
-                            .attr({
-                                'x': d3.select(this.parentNode)[0][0].__data__.x0 - 15,
-                                'y': d3.select(this.parentNode)[0][0].__data__.y0 - 80,
-                                'width': 10,
-                                'height': 10,
-                                'class': 'custom-tooltip'
-                            })
-                            .append("xhtml:html")
-                            .append("xhtml:body").attr({
-                        "class": "blueDiv"
-                    })
-                            .append("xhtml:div")
-                            .append("xhtml:div").attr({
-                        "class": "ptext"
-                    })
-                            .html("EDIT").on('click', click);
+                    // d3.select(this.parentNode.parentNode).append("foreignObject")
+                    //         .attr({
+                    //             'x': d3.select(this.parentNode)[0][0].__data__.x0 - 15,
+                    //             'y': d3.select(this.parentNode)[0][0].__data__.y0 - 80,
+                    //             'width': 10,
+                    //             'height': 10,
+                    //             'class': 'custom-tooltip'
+                    //         })
+                    //         .append("xhtml:html")
+                    //         .append("xhtml:body").attr({
+                    //     "class": "blueDiv"
+                    // })
+                    //         .append("xhtml:div")
+                    //         .append("xhtml:div").attr({
+                    //     "class": "ptext"
+                    // })
+                    //         .html("EDIT").on('click', click);
 
 
 
-                    d3.select(this.parentNode.parentNode).append("foreignObject")
-                            .attr({
-                                'x': d3.select(this.parentNode)[0][0].__data__.x0 - 105,
-                                'y': d3.select(this.parentNode)[0][0].__data__.y0 - 10,
-                                'width': 10,
-                                'height': 10,
-                                'class': 'custom-tooltip'
-                            })
-                            .append("xhtml:html")
-                            .append("xhtml:body").attr({
-                        "class": "blueDiv"
-                    })
-                            .append("xhtml:div")
-                            .append("xhtml:div").attr({
-                        "class": "ptext"
-                    })
-                            .html("DELETE");
+                    // d3.select(this.parentNode.parentNode).append("foreignObject")
+                    //         .attr({
+                    //             'x': d3.select(this.parentNode)[0][0].__data__.x0 - 105,
+                    //             'y': d3.select(this.parentNode)[0][0].__data__.y0 - 10,
+                    //             'width': 10,
+                    //             'height': 10,
+                    //             'class': 'custom-tooltip'
+                    //         })
+                    //         .append("xhtml:html")
+                    //         .append("xhtml:body").attr({
+                    //     "class": "blueDiv"
+                    // })
+                    //         .append("xhtml:div")
+                    //         .append("xhtml:div").attr({
+                    //     "class": "ptext"
+                    // })
+                    //         .html("DELETE");
 
                     /*d3.select(this.parentNode.parentNode).append("foreignObject")
                      .attr({
@@ -602,26 +603,26 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                     var data = [source];
                     var original = d3.select(this.parentNode)[0][0];
 
-                    d3.select(this.parentNode.parentNode).append("foreignObject").on('click', function (d) {
+                    // d3.select(this.parentNode.parentNode).append("foreignObject").on('click', function (d) {
 
-                        click(d, original);
-                    })
-                            .attr({
-                                'x': d3.select(this.parentNode)[0][0].__data__.x0 - 10,
-                                'y': d3.select(this.parentNode)[0][0].__data__.y0 + 65,
-                                'width': 10,
-                                'height': 10,
-                                'class': 'custom-tooltip'
-                            })
-                            .append("xhtml:html")
-                            .append("xhtml:body").attr({
-                        "class": "blueDiv only"
-                    })
-                            .append("xhtml:div")
-                            .append("xhtml:div").attr({
-                        "class": "ptext"
-                    })
-                            .html("ADD");
+                    //     click(d, original);
+                    // })
+                    //         .attr({
+                    //             'x': d3.select(this.parentNode)[0][0].__data__.x0 - 10,
+                    //             'y': d3.select(this.parentNode)[0][0].__data__.y0 + 65,
+                    //             'width': 10,
+                    //             'height': 10,
+                    //             'class': 'custom-tooltip'
+                    //         })
+                    //         .append("xhtml:html")
+                    //         .append("xhtml:body").attr({
+                    //     "class": "blueDiv only"
+                    // })
+                    //         .append("xhtml:div")
+                    //         .append("xhtml:div").attr({
+                    //     "class": "ptext"
+                    // })
+                    //         .html("ADD");
 
                     // console.log(d3.selectAll("q"));
 
@@ -798,11 +799,8 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
         centerNode(d3.selectAll("#a9")[0][0].__data__);
     });
 
-
-    $(".nodeItem").on("click", function () {
-        alert("Hey");
-        centerNode(d3.selectAll("#" + $(this).attr("name"))[0][0].__data__);
-        
+    $("#resetBtn").on("click", function(){
+        $("#TickerData").empty();
     });
 
     //need to use "node" to bind click handler to d3 element
@@ -822,12 +820,30 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                 console.log(data);
 
                 //here are some examples of data we can get
-                items.push("<br>Ticker Name: " + obj['t']);
-                items.push("<br>Company Name: " + obj['name']);
-                items.push("<br>Exchange Name: " + obj['e']);
-                items.push("<br>Last Price: " + obj['l']);
-                items.push("<br>$Change: " + obj['c']);
-                items.push("<br>%Change: " + obj['cp']);
+                items.push("<br><b>" + obj['name'] + "</b>");
+                items.push("<br>Ticker Name: " + obj['t']);   
+                /*items.push("<br>Exchange Name: " + obj['e']);*/
+                items.push("<br>Most Recent Price: $" + obj['l']);
+                
+                var dollar_change = obj['c'];
+                var percent_change = obj['cp'];
+                var negative = dollar_change < 0;
+                var node_percent_display;
+                //no change
+                if (dollar_change === 0.00){
+                    node_percent_display = "<br>&#8210; " + dollar_change + "(" + percent_change + "%)";
+                }
+                else if (negative){
+                    node_percent_display = "<br><span style=\"color: red;\">&darr; " + dollar_change + " (" + percent_change + "%)</span>";
+                }
+                else if (!negative){
+                    node_percent_display = "<br><span style=\"color: green;\">&uarr; " + dollar_change + " (" + percent_change + "%)</span>";
+                }
+                console.log(node_percent_display);
+                //console.log(dollar_change < 0);
+                //items.push("<br>$Change: " + obj['c']);
+                //items.push("<br>%Change: " + obj['cp']);
+                /*
                 //These will be completed when everything is connected
                 items.push("<br>Quantity Owned: " + "X.XX");
                 items.push("<br>Value of Holding: " + "$X.XX");
@@ -838,7 +854,8 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                 items.push("<br>Purchased Value " + "$X.XX");
                 items.push("<br>Current Value: " + "$X.XX");
                 items.push("<br>Profit (Loss) " + "$X.XX");
-
+                */
+                items.push(node_percent_display);
                 $("#TickerData").append(items);
             },
             error: function (data) {
@@ -847,8 +864,6 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
             }
         });
     });
-
-
 });
 
 var substringMatcher = function (strs) {
