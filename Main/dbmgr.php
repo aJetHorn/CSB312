@@ -1,4 +1,4 @@
-
+    
 
 
 
@@ -86,13 +86,14 @@ class Dbmgr {
         // iteration 0 is the tree root.
         for ($i = 0; $i < sizeof($array); $i++) {
        
-            $nodeID = $array[$i]['node_id'];
-            $assetID = $array[$i]['asset_id'];
-            $target = $array[$i]['target_pct'];
+            $nodeID = $array[$i]['id'];
+            //$assetID = $array[$i]['asset_id'];
+            $target = $array[$i]['targetpct'];
             $name = $array[$i]['name'];
             $parent = $array[$i]['parent']; // parent id.
             echo "\r\n";
             echo $parent;
+            echo "\r\n";
             echo $nodeID;
             echo "\r\n";
             echo "iteration : " . $i;
@@ -188,9 +189,9 @@ class Dbmgr {
               echo "\r\n";
               echo $array[$i]['current'];
               echo "\r\n"; */
-            $nodeID = $array[$i]['node_id'];
-            $assetID = $array[$i]['asset_id'];
-            $target = $array[$i]['target_pct'];
+            $nodeID = $array[$i]['id'];
+            //$assetID = $array[$i]['name'];
+            $target = $array[$i]['targetpct'];
             $name = $array[$i]['name'];
             $parent = $array[$i]['parent']; // parent id.
             echo "\r\n";

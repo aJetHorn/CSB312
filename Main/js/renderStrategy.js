@@ -10,7 +10,7 @@
  * and outputs them into the page in correct order.
  */
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     console.log($("#selection").val());
     $.ajax({
@@ -18,27 +18,110 @@ $(document).ready(function() {
         url: 'renderStrategy.php',
         type: 'get',
         data: {'strategyID': $("#selection").val()},
-        success: function(data, status) {
+        success: function (data, status) {
 
             //console.log("Successful ajax call data . Status : " + status);
             console.log("Successful ajax call data . Status : ");
-            console.log(data);
-            console.log("length " + Object.keys(data).length);
+            // console.log(data[0].parent);
+            //console.log("length " + Object.keys(data).length);
             // sample json access. data[0].id;
-            printTree(data, Object.keys(data).length);
+            //console.log(data[0]);
+            
+            main(data);
+            //printTree(data, Object.keys(data).length);
+            
             initialize();
-            refreshHandlers();  
+            refreshHandlers();
         },
-        error: function(xhr, desc, err) {
+        error: function (xhr, desc, err) {
             console.log("Not Successful ajax call");
             console.log(err);
         }
 
     });
 
-    function printTree(data, length) {
-        var array = data; // temp JSON array
 
+
+
+    var childrenList;
+    var parentList=[];
+    var c=0;
+    function main(data) {
+        childrenList = data;
+        console.log(childrenList.length);
+        console.log(childrenList);
+        var i;
+        var parent;
+        for(i=0; i<data.length; i++){
+            parentList[i]=data[i].id;
+        }
+        
+        
+        for (i = 0; i < childrenList.length; i++) {
+            if (childrenList[i].parent === "") {
+                parent = childrenList[i];
+                childrenList.splice(i, 1);
+                console.log(childrenList);
+            }
+        }
+
+        var finalNode = getChild(parent);
+        console.log(finalNode);
+        
+
+    }
+
+
+    // remember to make a list of children
+    // every time I delete a member, the ordering gets messed up after I return from previous recursions.
+    // fix this
+
+    function getChild(node) {
+        console.log("current node: "+ node.id);
+        var i;
+        /*if (node === null) {
+            return;
+        }*/
+        if (node.children === undefined) {
+            console.log("new");
+            node.children = [];
+        }
+
+        for (i = childrenList.length-1; i>-1 ; i--) {
+            // for each node
+            console.log("Next child "+childrenList[i].id+" for current node "+ node.id);
+            if (node.id === childrenList[i].parent) {
+                var node2 = getChild(childrenList[i]);
+                //console.log(node);
+                //console.log(node.children);
+                //console.log(node2);
+                node.children.push(node2);
+                childrenList.splice(i, 1);
+                console.log(childrenList[1]);
+                i=childrenList.length-1;
+                // remove child from child list.
+
+            }
+
+        }
+
+        console.log("--------------------------------------");
+        return node;
+
+
+
+    }
+
+
+
+
+    function printTree(data, length) {
+
+        //main(data);
+        //root.children.push({"name": "Node", "status": "pending"});
+        var jsonObject = [];
+        var array = data; // temp JSON array
+        // console.log(array);
         // first find the tree "root"
         for (var i = 0; i < length; i++) {
             // if parent is "" or empty.
@@ -64,14 +147,15 @@ $(document).ready(function() {
 
 
                 $(".tree").children("ul").append(htmltext);
+                jsonObject = array[i];
                 array.splice(i, 1);
                 break;
 
             }
         }
-        console.log(array);
+        console.log(jsonObject);
 
-
+        var currentObject = jsonObject;
         // if tree root does exist. continue to printing children.
         var x = 0;
 
@@ -110,6 +194,12 @@ $(document).ready(function() {
                     // update parentList.
                     $("#parentList").append("<option value='" + array[x].name + "' nodeID='" + array[x].id + "'>" + array[x].name + "</option>");
                     refreshHandlers();
+
+
+                    // check if children field exists
+                    // jsonObject['children'] returns false if DNE.
+                    // if so, do this object1.children=[];
+                    // then append
 
                     // dequeue array of node.
                     //array.splice(index,howmany,item1,.....,itemX)

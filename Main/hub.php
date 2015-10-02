@@ -10,7 +10,7 @@
  * // to view a strategy just click on the list item on the list.
  * // there is the option to allow the user to delete strategies.
  * - Wellesley Arreza
- */ 
+ */
 
 
 // get strategies
@@ -57,62 +57,45 @@ $lst = $db->getStrategyIDs();
 
 
         <script>
-            $(function() {
+            $(function () {
                 var tabs = $("#tabs").tabs();
                 tabs.find(".ui-tabs-nav").sortable({
                     axis: "x",
-                    stop: function() {
+                    stop: function () {
                         tabs.tabs("refresh");
                     }
                 });
-                
-                
-                $('.links').on('click',function(){
-                    $('#selectedStrategy').attr("value",$(this).parent().children(".linkID").text());
-                    
+
+
+                $('.links').on('click', function () {
+                    $('#selectedStrategy').attr("value", $(this).parent().children(".linkID").text());
+                   
+                    $('#selectedName').attr("value", $(this).parent().children(".links").children().text());
                     document.getElementById("form1").submit();
                 });
-                
-                
+
+
             });
         </script>
 
     </head>
     <body>
 
-        <nav class="navbar navbar-custom">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Portfolio App 2.0 </a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="../Main/hub.php">Home</a></li>
+                        <li class=""><a href="../Main/createStratPage.php">Create Strategy</a></li>
 
-
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-
+                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="#">Account</a></li>
+                    </ul>
+                </div>
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>   <i id="menuButton" class="fa fa-bars fa-2x fa-fw" style="  margin-right: 16px;padding-top: 10px;"></i> </li>
-
-                    <li><a class="navbar-a" href="../Main/hub.php">Home</a></li>
-                    <li><a class="navbar-a" href="../Main/createStratPage.php">Create New Strategy</a></li>
-                    <li><a class="navbar-a" href="../Main/summary.html">Detailed Summary</a></li>
-
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="navbar-a" href="#contact">
-                            <i class="fa fa-user fa-2x fa-fw"></i>
-                            Hi, Wellesley Arreza
-                        </a>
-                    </li>
-                    <li><a class="navbar-a" href="../Main/login.html">Logout</a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
-
         </nav>
     <center class="pageTitle">Home</center>
     <hr>
@@ -129,52 +112,50 @@ $lst = $db->getStrategyIDs();
             </ul>
             <div id="tabs-1">
                 <form id="form1" action="viewStrategy.php" method="post">
-                    
-                <table class="table table-striped table-responsive table-hover">
-                    <thead>
-                        <tr>
-                            <th data-field="id">View/Modify Strategy</th>    
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // php code to print out the list of strategies.
-                        //echo '';
-                        
-                        for ($i = 0; $i < sizeof($lst); $i++) {
-                            echo "<tr><td class='links'><a href='#'>";
-                            echo $lst[$i]->name;
-                            echo "</a></td> <td class='linkID' style='display:none;'>";
-                            echo $lst[$i]->id;
-                            echo " </td> </tr>";
-                        }
-                       
-                        echo '<input type="hidden" id="selectedStrategy" value="" name="selectedStrategy">';
-                        
-                        
-                        ?>
-                         
-                        
-                    </tbody>   
-                </table>
+
+                    <table class="table table-striped table-responsive table-hover">
+                        <thead>
+                            <tr>
+                                <th data-field="id">View/Modify Strategy</th>    
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // php code to print out the list of strategies.
+                            //echo '';
+
+                            for ($i = 0; $i < sizeof($lst); $i++) {
+                                echo "<tr><td class='links'><a href='#'>";
+                                echo $lst[$i]->name;
+                                echo "</a></td> <td class='linkID' style='display:none;'>";
+                                echo $lst[$i]->id;
+                                echo "</td> </tr>";
+                            }
+                            echo '<input type="hidden" id="selectedName" value="" name="selectedName">';
+                            echo '<input type="hidden" id="selectedStrategy" value="" name="selectedStrategy">';
+                            ?>
+
+
+                        </tbody>   
+                    </table>
                 </form>
-                
+
             </div>
-            
+
             <div id="tabs-2">
                 <h3>Delete Strategy </h3>
-                <?php
-                echo '<form action="deleteStrategy.php" method="post">';
-                echo "<select name='list'>";
-                for ($i = 0; $i < sizeof($lst); $i++) {
-                    echo "<option value='" . $lst[$i]->id . "'>" . $lst[$i]->name . "</option>";
-                }
-                echo "</select>";
-                echo ' <input type="submit" value="Submit">';
-                echo '</form>';
-                ?>
+<?php
+echo '<form action="deleteStrategy.php" method="post">';
+echo "<select name='list'>";
+for ($i = 0; $i < sizeof($lst); $i++) {
+    echo "<option value='" . $lst[$i]->id . "'>" . $lst[$i]->name . "</option>";
+}
+echo "</select>";
+echo ' <input type="submit" value="Submit">';
+echo '</form>';
+?>
             </div>
-            
+
             <div id="tabs-3">
                 <table class="table table-striped table-responsive table-hover">
                     <thead>
