@@ -803,8 +803,89 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
         $("#TickerData").empty();
     });
 
+    var saved_weights = [20, 20, 20, 20, 20];
+    var new_prices = [0, 0, 0, 0, 0];
+    var saved_prices = [2.55, 32, 33.1, 248, 31];
+    var saved_quantities = [784, 62.5, 60.4, 8.06, 64.5];
+    
+    $.ajax({
+        url: "http://www.google.com/finance/info?infotype=infoquoteall&q=HEAR",
+        dataType: 'text',
+        success: function (data) {
+            var obj = JSON.parse(data.substring(5, data.length - 2));
+            new_prices[0] = obj['l'];
+            alert("hear");
+        },
+        error: function (data) {
+                new_prices.push(0);
+        }
+    });
+
+    $.ajax({
+        url: "http://www.google.com/finance/info?infotype=infoquoteall&q=MS",
+        dataType: 'text',
+        success: function (data) {
+            var obj = JSON.parse(data.substring(5, data.length - 2));
+            new_prices[1] = obj['l'];
+            alert("ms");
+        },
+        error: function (data) {
+                new_prices.push(0);
+        }
+    });
+
+    $.ajax({
+        url: "http://www.google.com/finance/info?infotype=infoquoteall&q=T",
+        dataType: 'text',
+        success: function (data) {
+            var obj = JSON.parse(data.substring(5, data.length - 2));
+            new_prices[2] = obj['l'];
+            alert("t");
+        },
+        error: function (data) {
+                new_prices.push(0);
+        }
+    });
+
+    $.ajax({
+        url: "http://www.google.com/finance/info?infotype=infoquoteall&q=TSLA",
+        dataType: 'text',
+        success: function (data) {
+            var obj = JSON.parse(data.substring(5, data.length - 2));
+            new_prices[3] = obj['l'];
+            alert("tsla");
+        },
+        error: function (data) {
+                new_prices.push(0);
+        }
+    });
+
+    $.ajax({
+        url: "http://www.google.com/finance/info?infotype=infoquoteall&q=YHOO",
+        dataType: 'text',
+        success: function (data) {
+            var obj = JSON.parse(data.substring(5, data.length - 2));
+            new_prices[4] = obj['l'];
+            alert("yahoo");
+        },
+        error: function (data) {
+                new_prices.push(0);
+        }
+    });
+
     //need to use "node" to bind click handler to d3 element
     node.on("click",function () {
+        console.log(new_prices);
+        //calculate new weights
+        var total_portfolio_value = new_prices[0] * saved_quantities[0] + new_prices[1] * saved_quantities[1] + new_prices[2] * saved_quantities[2] + new_prices[3] * saved_quantities[3] + new_prices[4] * saved_quantities[4];
+        console.log("total value: " + total_portfolio_value);
+        var i = 0;
+        while (i < 5){
+            saved_weights[i] = ((new_prices[i] * saved_quantities[i]) / total_portfolio_value) * 100;
+            i++;
+        }
+        //console.log(saved_weights);
+        //end new weights
         var ticker = this.id;
         console.log("Loading: " + this.id);
         $("#TickerData").empty();
@@ -817,11 +898,12 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                 var obj = JSON.parse(data.substring(5, data.length - 2));
                 var items = [];
                 //check the console for all data available
-                console.log(data);
+                //console.log(data);
 
+                var ticker_name = obj['t'];
                 //here are some examples of data we can get
                 items.push("<br><b>" + obj['name'] + "</b>");
-                items.push("<br>Ticker Name: " + obj['t']);   
+                items.push("<br>Ticker Name: " + ticker_name);   
                 /*items.push("<br>Exchange Name: " + obj['e']);*/
                 items.push("<br>Most Recent Price: $" + obj['l']);
                 
@@ -856,6 +938,34 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                 items.push("<br>Profit (Loss) " + "$X.XX");
                 */
                 items.push(node_percent_display);
+                //assume $10,000 split 5 ways
+                //this is hard coded right now
+                //
+                var select_num = 0;
+                if (ticker_name === "HEAR"){
+                    select_num = 0;
+                }
+                else if (ticker_name === "MS"){
+                    select_num = 1;
+                }
+                else if (ticker_name === "T"){
+                    select_num = 2;
+                }
+                else if (ticker_name === "TSLA"){
+                    select_num = 3;
+                }
+                else if (ticker_name === "YHOO"){
+                    select_num = 4;
+                }
+
+                var target_weight = 20;
+                var last_weight_percent = 20;
+                items.push("<br><b> Weights </b>");
+                items.push("<br> Target weight: " + target_weight + "%");
+                items.push("<br> Quantity Owned: " + saved_quantities[select_num]);
+                items.push("<br> Purchased Value: " + saved_quantities[select_num] * saved_prices[select_num]);
+                items.push("<br> Current weight: " + saved_weights[select_num] + "%");
+                //items.push("<br> Change in Weight: " + ((percent_change * .01) * last_weight_percent));
                 $("#TickerData").append(items);
             },
             error: function (data) {
