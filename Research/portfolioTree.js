@@ -34,7 +34,7 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
 
     // size of the diagram
     var viewerWidth = $(".row").width();
-    var viewerHeight = 400;
+    var viewerHeight = 800;
 
     var tree = d3.layout.tree()
             .size([viewerHeight, viewerWidth]);
