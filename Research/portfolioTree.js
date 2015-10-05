@@ -814,7 +814,6 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
         success: function (data) {
             var obj = JSON.parse(data.substring(5, data.length - 2));
             new_prices[0] = obj['l'];
-            alert("hear");
         },
         error: function (data) {
                 new_prices.push(0);
@@ -827,7 +826,6 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
         success: function (data) {
             var obj = JSON.parse(data.substring(5, data.length - 2));
             new_prices[1] = obj['l'];
-            alert("ms");
         },
         error: function (data) {
                 new_prices.push(0);
@@ -840,7 +838,6 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
         success: function (data) {
             var obj = JSON.parse(data.substring(5, data.length - 2));
             new_prices[2] = obj['l'];
-            alert("t");
         },
         error: function (data) {
                 new_prices.push(0);
@@ -853,7 +850,6 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
         success: function (data) {
             var obj = JSON.parse(data.substring(5, data.length - 2));
             new_prices[3] = obj['l'];
-            alert("tsla");
         },
         error: function (data) {
                 new_prices.push(0);
@@ -866,7 +862,6 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
         success: function (data) {
             var obj = JSON.parse(data.substring(5, data.length - 2));
             new_prices[4] = obj['l'];
-            alert("yahoo");
         },
         error: function (data) {
                 new_prices.push(0);
@@ -964,7 +959,8 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                 items.push("<br> Target weight: " + target_weight + "%");
                 items.push("<br> Quantity Owned: " + saved_quantities[select_num]);
                 items.push("<br> Purchased Value: " + saved_quantities[select_num] * saved_prices[select_num]);
-                items.push("<br> Current weight: " + saved_weights[select_num] + "%");
+                items.push("<br> Current Value: " + (saved_quantities[select_num] * obj['l']).toFixed(3));
+                items.push("<br> Current weight: " + (saved_weights[select_num]).toFixed(3) + "%");
                 //items.push("<br> Change in Weight: " + ((percent_change * .01) * last_weight_percent));
                 $("#TickerData").append(items);
             },
