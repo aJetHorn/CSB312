@@ -975,6 +975,15 @@ $(function () {
             }
         }
 
+        $("#checkNow").on("click", function () {
+
+            checkFlag = true;
+            check(root);
+            if (checkFlag) {
+                alert("Done Checking. Correct balances");
+            }
+
+        });
 
         $("#submit").on("click", function () {
             checkFlag = true;

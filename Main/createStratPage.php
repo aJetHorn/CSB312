@@ -164,7 +164,7 @@ This php file is used for creating strategies in general's
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-sm-8">
-                            <input type="text" class="form-control" id="stratname" value="" readonly>
+                            <input type="text" class="form-control" id="stratname" value="">
                         </div>
                     </div>
 
@@ -191,7 +191,7 @@ This php file is used for creating strategies in general's
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3">
-                            <i id="check" class="fa fa-check fa-2x"></i>
+                            <i id="checkNow" class="fa fa-check fa-2x"></i>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3">
