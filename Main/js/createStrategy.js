@@ -72,7 +72,7 @@ $(function () {
 
         // size of the diagram
         var viewerWidth = $(".row").width();
-        var viewerHeight = 400;
+        var viewerHeight = $(document).height();
 
         var tree = d3.layout.tree()
                 .size([viewerHeight, viewerWidth]);
@@ -157,7 +157,7 @@ $(function () {
 
 
         // define the zoomListener which calls the zoom function on the "zoom" event constrained within the scaleExtents
-        var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on("zoom", zoom);
+        var zoomListener = d3.behavior.zoom().center([viewerWidth / 2, viewerHeight / 2]).scaleExtent([0.1, 3]).on("zoom", zoom);
 
         function initiateDrag(d, domNode) {
             draggingNode = d;
@@ -478,6 +478,7 @@ $(function () {
         var checkFlag = true;
         function check(d) {
             //console.log(d);
+            $("#" + d.id).children(":first").css("stroke", "steelblue");
             if (!d.children) {
                 return;
             }
@@ -487,14 +488,21 @@ $(function () {
                 //console.log(d);
                 sum += parseInt(d.targetpct);
                 check(d);
+                if (!checkFlag) {
+                    return;
+                }
             });
-            console.log(d.id + " sum:  " + sum);
+            //console.log(d.id + " sum:  " + sum);
             if (sum != 100) {
                 alert("Allocation sum != 100%. Reallocate again");
                 checkFlag = false;
-            }
-            else {
-                //alert('done checking');
+
+                $("#" + d.id).children(":first").css("stroke", "red");
+
+                d.children.forEach(function (d) {
+                    $("#" + d.id).children(":first").css("stroke", "red");
+                });
+
             }
             return;
         }
@@ -1002,13 +1010,45 @@ $(function () {
 
                     });
                 }
-                else{
+                else {
                     alert("fill in strategy name");
                 }
             }
 
 
         });
+
+        d3.selectAll("i[data-zoom]")
+                .on("click", zoomClicked);
+
+        function zoomClicked() {
+            svgGroup.call(zoomListener.event); // https://github.com/mbostock/d3/issues/2387
+
+            // Record the coordinates (in data space) of the center (in screen space).
+            console.log(zoomListener.center());
+            var center0 = zoomListener.center(), translate0 = zoomListener.translate(), coordinates0 = coordinates(center0);
+            zoomListener.scale(zoomListener.scale() * Math.pow(2, +this.getAttribute("data-zoom")));
+
+            // Translate back to the center.
+            var center1 = point(coordinates0);
+            zoomListener.translate([translate0[0] + center0[0] - center1[0], translate0[1] + center0[1] - center1[1]]);
+
+            svgGroup.transition().duration(750).call(zoomListener.event);
+        }
+
+        function coordinates(point) {
+            var scale = zoomListener.scale(), translate = zoomListener.translate();
+            return [(point[0] - translate[0]) / scale, (point[1] - translate[1]) / scale];
+        }
+
+        function point(coordinates) {
+            var scale = zoomListener.scale(), translate = zoomListener.translate();
+            return [coordinates[0] * scale + translate[0], coordinates[1] * scale + translate[1]];
+        }
+
+
+
+
 
         var substringMatcher = function (strs) {
             return function findMatches(q, cb) {

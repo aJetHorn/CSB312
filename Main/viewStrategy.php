@@ -43,6 +43,11 @@ This is the page that allows users to view and edit current strategies.
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
         <style type="text/css">
+
+            .fa{
+                cursor:pointer;
+            }
+
             ul
             {
                 list-style-type: none;
@@ -68,8 +73,8 @@ This is the page that allows users to view and edit current strategies.
                 height:300px;
                 background-color: rgba(7, 7, 223, 0);
             }
-            
-            
+
+
             .opblkDiv{
                 // remember to change d3.js object width and height, for firefox....
                 width: 250px;
@@ -97,6 +102,12 @@ This is the page that allows users to view and edit current strategies.
                 fill: #fff;
                 stroke: steelblue;
                 stroke-width: 1.5px;
+            }
+
+            .node circle fix{
+                fill: #fff;
+                stroke: #FF4000;
+                stroke-width: 2.5px;
             }
 
             .node text {
@@ -162,7 +173,7 @@ This is the page that allows users to view and edit current strategies.
 // Set session variables
         $var2 = $_POST['selectedStrategy'];
         $name = $_POST['selectedName'];
-      
+
         $_SESSION['linkID'] = $var2;
         echo "<input type='hidden' id='selection' value='" . $var2 . "'>";
         echo "<input type='hidden' id='selectionName' value='" . $name . "'>";
@@ -172,16 +183,46 @@ This is the page that allows users to view and edit current strategies.
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
-                    <button type="button" class="btn btn-primary" id="TreeShow">Tree View</button>
-                    <button type="button" class="btn btn-default" id="TableShow">Table View</button>
-                    <button type="button" class="btn btn-default" id="submit">Save</button>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    <div class="form-group">
-                        
-                        <input type="text" class="form-control" id="stratname" value="" readonly>
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <input type="text" class="form-control" id="stratname" value="" readonly>
+                        </div>
                     </div>
+
                 </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-lg-8 col-md-8 col-sm-8">
+                            <button type="button" class="btn btn-primary" id="TreeShow">Tree View</button>
+                            <button type="button" class="btn btn-default" id="TableShow">Table View</button>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <i data-zoom="+1" class="fa fa-search-plus fa-2x"></i>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <i data-zoom="-1" class="fa fa-search-minus fa-2x"></i>
+                        </div>
+                     
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <i id="checkNow" class="fa fa-check fa-2x"></i>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <i id="submit" class="fa fa-floppy-o fa-2x"></i>
+                        </div>
+                        
+                    </div>
+
+                </div>
+
             </div>
             <div class="row" id="treeView" >
 
