@@ -37,10 +37,39 @@ This php file is used for creating strategies in general's
 
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <style type="text/css">
+            #infoBar{
+                width: 200px;
+                position: absolute;
+                left: 10px;
+            }
+            #zoomGroup{
+                position:absolute;
+                right:20px;
+                top:40%;
+            }
+            #finishGroup{
+                position:absolute;
+                right:20px;
+            }
 
+            .twitter-typeahead {
+                display:block !important;    
+            }
+
+
+            #scrollable-dropdown-menu .tt-dropdown-menu {
+                max-height: 150px;
+                overflow-y: auto;
+            }
+            .tt-menu{
+                max-height: 60px;
+                overflow-y: scroll;
+                width:100%;
+            }
 
             .fa{
                 cursor:pointer;
+                display: inline;
             }
 
             ul
@@ -70,12 +99,11 @@ This php file is used for creating strategies in general's
             }
 
 
-
             .opblkDiv{
+                // remember to change d3.js object width and height, for firefox....
                 width: 250px;
                 background-color: rgba(0, 0, 0, 0.45);
                 color: white;
-                // remember to change d3.js object width and height, for firefox....
             }
 
             .blueDiv{
@@ -136,11 +164,12 @@ This php file is used for creating strategies in general's
                 cursor:pointer;
             }
 
-        </style>  
+        </style> 
 
 
     </head>
 
+    
     <body>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -161,49 +190,35 @@ This php file is used for creating strategies in general's
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div class="row">
-                        <div class="col-lg-8 col-md-8 col-sm-8">
-                            <input type="text" class="form-control" id="stratname" value="">
-                        </div>
+
+                <div id="infoBar">
+                    
+                    <button type="button" class="btn btn-primary" id="TreeShow">Tree View</button>
+                    <button type="button" class="btn btn-default" id="TableShow">Table View</button>
+                    <br/>
+                    <br/>
+                    <input type="text" class="form-control" id="stratname" value="">
+                    <br/>
+                    <input id='inputTitle' class="form-control" type="text" placeholder="Allocation">
+                    <br/>
+                    <div id="the-basics">
+                        <input id='alloc'class="form-control typeahead" type="text" placeholder="Node ID">
                     </div>
-
+                    
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
 
-                    <div class="row">
-                        <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-lg-8 col-md-8 col-sm-8">
-                            <button type="button" class="btn btn-primary" id="TreeShow">Tree View</button>
-                            <button type="button" class="btn btn-default" id="TableShow">Table View</button>
-                        </div>
-                    </div>
-
-
+                <div id="zoomGroup">
+                  
+                    <i data-zoom="+1" class="fa fa-search-plus fa-2x" ></i> <br/><br/>
+                    <i data-zoom="-1" class="fa fa-search-minus fa-2x"></i>   <br/><br/>
+                    <i id="checkNow" class="fa fa-check fa-2x"></i> <br/><br/>
+                    <i id="submit" class="fa fa-floppy-o fa-2x"></i>
+                    
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-3">
-                            <i data-zoom="+1" class="fa fa-search-plus fa-2x"></i>
-                        </div>
 
-                        <div class="col-lg-3 col-md-3 col-sm-3">
-                            <i data-zoom="-1" class="fa fa-search-minus fa-2x"></i>
-                        </div>
 
-                        <div class="col-lg-3 col-md-3 col-sm-3">
-                            <i id="checkNow" class="fa fa-check fa-2x"></i>
-                        </div>
-
-                        <div class="col-lg-3 col-md-3 col-sm-3">
-                            <i id="submit" class="fa fa-floppy-o fa-2x"></i>
-                        </div>
-
-                    </div>
-
-                </div>
 
             </div>
-
             <div class="row" id="treeView" >
 
                 <div id="tree-container" class="block-center"></div>
@@ -211,44 +226,15 @@ This php file is used for creating strategies in general's
             </div>
 
             <div id="tableView" class='row' style='padding-top:130px;'>
-                <div class='col-md-offset-3 col-md-2'>
-                    <ul>
-
-                        <li>
-                            Strategy A
-                            <ul>
-                                <li>
-                                    ABC
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            XYZ
-                        </li>
-                        <li>
-                            DAS
-                        </li>
-                    </ul>
-
+                <div id="col1" class='col-md-offset-3 col-md-2'>
                 </div>
-
-                <div class='col-md-offset-2 col-md-2'>
-                    <ul>
-                        <li>
-                            100%
-                        </li>
-                        <li>
-                            30%
-                        </li>
-                        <li>
-                            20%
-                        </li>
-                        <li>
-                            10%
-                        </li>
-                    </ul>
+                <div id="col2" class='col-md-offset-2 col-md-2'>
                 </div>
             </div>
+
+
+
+
         </div>
 
 

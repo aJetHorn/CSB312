@@ -31,15 +31,7 @@ var finalNode;
 
 $(function () {
     $("#tableView").hide();
-    $("#TreeShow").on("click", function () {
-        $("#tableView").hide();
-        $("#treeView").show();
-    });
-    $("#TableShow").on("click", function () {
-        $("#treeView").hide();
-        $("#tableView").show();
 
-    });
 
     //alert($("#selection").val());
     $.ajax({
@@ -581,11 +573,6 @@ $(function () {
 
 
 
-
-
-
-
-
             function print(d) {
                 console.log(d);
                 if (!d.children) {
@@ -602,7 +589,12 @@ $(function () {
 
             var checkFlag = true;
             function check(d) {
-                //console.log(d);
+                console.log(d);
+                console.log(d3.select("#" + d.id));
+                console.log(d3.select("#" + d.id)[0][0].__data__.x0);
+
+
+
                 $("#" + d.id).children(":first").css("stroke", "steelblue");
                 if (!d.children) {
                     return;
@@ -619,13 +611,20 @@ $(function () {
                 });
                 //console.log(d.id + " sum:  " + sum);
                 if (sum != 100) {
-                    alert("Allocation sum != 100%. Reallocate again");
+                    //alert("Allocation sum != 100%. Reallocate again");
                     checkFlag = false;
 
                     $("#" + d.id).children(":first").css("stroke", "red");
 
                     d.children.forEach(function (d) {
                         $("#" + d.id).children(":first").css("stroke", "red");
+                        d3.select("#" + d.id).append("foreignObject").attr({
+                            'x': 30,
+                            'y': -30,
+                            'width': 247,
+                            'height': 100,
+                            'class': 'error-red'
+                        }).html('<i class="fa fa-exclamation-triangle"></i>');
                     });
 
                 }
@@ -658,7 +657,8 @@ $(function () {
                 return;
             }
 
-
+            var currentData;
+            var currentSelectedNode;
 
             function update(source) {
                 // Compute the new height, function counts total children of root node and sets tree height accordingly.
@@ -718,7 +718,7 @@ $(function () {
                         });
 
 
-                var currentData;
+
                 nodeEnter.append("circle")
                         .attr('class', 'node circle')
                         .attr("r", 30)
@@ -730,73 +730,92 @@ $(function () {
                             //clicked=true;
 
                             d3.selectAll(".custom-tooltip").remove();
-                            var html = '<table width="100%">';
 
-
-
-
-
-
-                            html += '<tr><td>Allocation</td><td><input id="alloc" type="text" class="nodeText" name="" value="' + d.targetpct + '"></td></tr>';
-                            html += '<tr><td>Symbol</td><td>'
-
-                                    + '<div id="the-basics"><input id="inputTitle" class="typeahead nodeText" type="text" value="' + d.name + '"></div>'
-                                    + '</td></tr>';
-
-                            html += '</table>';
+                            currentSelectedNode = d;
                             currentData = d;
+                            $("#alloc").val(d.targetpct);
+                            $("#inputTitle").val(d.name);
+                            $("#inputTitle").on("input", function () {
+                                d3.select("#title_" + currentData.id).text(function () {
+                                    return $("#inputTitle").val();
+                                });
+                                currentData.name = $("#inputTitle").val();
+                            });
+                            $("#alloc").on("input", function () {
+                                d3.select("#title_alloc_" + currentData.id).text(function () {
+                                    return $("#alloc").val();
+                                });
+                                currentData.targetpct = $("#alloc").val();
 
-                            d3.select(this.parentNode.parentNode).append("foreignObject")
-                                    .attr({
-                                        'x': d3.select(this.parentNode)[0][0].__data__.x0 + 60,
-                                        'y': d3.select(this.parentNode)[0][0].__data__.y0 - 20,
-                                        'width': 247,
-                                        'height': 100,
-                                        'class': 'custom-tooltip'
-                                    })
-                                    .append("xhtml:html")
-                                    .append("xhtml:body").attr({
-                                "class": "opblkDiv"
-                            })
-                                    .append("xhtml:div")
-                                    .append("xhtml:div").attr({
-                                "class": "ptext"
-                            })
-                                    .html(html);
 
+
+                                d3.selectAll(".error-red").remove();
+                                checkFlag = true;
+                                check(root);
+                            });
+
+
+
+                            //html += '<tr><td>Allocation</td><td><input id="alloc" type="text" class="nodeText" name="" value="' + d.targetpct + '"></td></tr>';
+                            //html += '<tr><td>Symbol</td><td>'
+
+                            //+ '<div id="the-basics"><input id="inputTitle" class="typeahead nodeText" type="text" value="' + d.name + '"></div>'
+                            //+ '</td></tr>';
+
+                            //html += '</table>';
+
+                            /*
+                             d3.select(this.parentNode.parentNode).append("foreignObject")
+                             .attr({
+                             'x': d3.select(this.parentNode)[0][0].__data__.x0 + 60,
+                             'y': d3.select(this.parentNode)[0][0].__data__.y0 - 20,
+                             'width': 247,
+                             'height': 100,
+                             'class': 'custom-tooltip'
+                             })
+                             .append("xhtml:html")
+                             .append("xhtml:body").attr({
+                             "class": "opblkDiv"
+                             })
+                             .append("xhtml:div")
+                             .append("xhtml:div").attr({
+                             "class": "ptext"
+                             })
+                             .html(html);
+                             */
 
                             // TWITTER'S AUTOCOMPLETE
-                            $(function () {
-                                $('#the-basics .typeahead').typeahead({
-                                    hint: false,
-                                    highlight: true,
-                                    minLength: 1
-                                },
-                                {
-                                    name: 'states',
-                                    source: substringMatcher(["SEI", "MS", "GS", "IBM"])
-                                });
-
-
-                                $(".typeahead").css("position", "inherit").removeClass("typeahead tt-input");
-                                $(".twitter-typeahead").css("position", "");
-                                $(".tt-menu").css("position", "");
-
-                                $("#inputTitle").on("input", function () {
-                                    d3.select("#title_" + currentData.id).text(function () {
-                                        return $("#inputTitle").val();
-                                    });
-                                    currentData.name = $("#inputTitle").val();
-                                });
-                                $("#alloc").on("input", function () {
-                                    d3.select("#title_alloc_" + currentData.id).text(function () {
-                                        return $("#alloc").val();
-                                    });
-                                    currentData.targetpct = $("#alloc").val();
-                                });
-
-
-                            });
+                            /*$(function () {
+                             $('#the-basics .typeahead').typeahead({
+                             hint: false,
+                             highlight: true,
+                             minLength: 1
+                             },
+                             {
+                             name: 'states',
+                             source: substringMatcher(["SEI", "MS", "GS", "IBM"])
+                             });
+                             
+                             
+                             $(".typeahead").css("position", "inherit").removeClass("typeahead tt-input");
+                             $(".twitter-typeahead").css("position", "");
+                             $(".tt-menu").css("position", "");
+                             
+                             $("#inputTitle").on("input", function () {
+                             d3.select("#title_" + currentData.id).text(function () {
+                             return $("#inputTitle").val();
+                             });
+                             currentData.name = $("#inputTitle").val();
+                             });
+                             $("#alloc").on("input", function () {
+                             d3.select("#title_alloc_" + currentData.id).text(function () {
+                             return $("#alloc").val();
+                             });
+                             currentData.targetpct = $("#alloc").val();
+                             });
+                             
+                             
+                             });*/
 
                             d3.select(this.parentNode.parentNode).append("image")
                                     .on('click', function (d) {
@@ -805,7 +824,7 @@ $(function () {
                                     })
                                     .attr({
                                         "xlink:href": "./img/less.png",
-                                        'x': d3.select(this.parentNode)[0][0].__data__.x0 - 105,
+                                        'x': d3.select(this.parentNode)[0][0].__data__.x0 - 85,
                                         'y': d3.select(this.parentNode)[0][0].__data__.y0 - 10,
                                         'width': 25,
                                         'height': 25,
@@ -1105,17 +1124,19 @@ $(function () {
                 }
             }
 
-            $("#checkNow").on("click",function(){
-                
+            $("#checkNow").on("click", function () {
+
+                d3.selectAll(".error-red").remove();
                 checkFlag = true;
                 check(root);
-                if(checkFlag){
+                if (checkFlag) {
                     alert("Done Checking. Correct balances");
                 }
-                
+
             });
 
             $("#submit").on("click", function () {
+                d3.selectAll(".error-red").remove();
                 checkFlag = true;
 
                 check(root);
@@ -1184,6 +1205,62 @@ $(function () {
                 var scale = zoomListener.scale(), translate = zoomListener.translate();
                 return [coordinates[0] * scale + translate[0], coordinates[1] * scale + translate[1]];
             }
+
+            var tableStr = 0;
+
+            function tablePrint(d, indent) {
+
+                //tableStr += "<p>" + d.name + "\t " + d.targetpct + "</p>";
+                var total = 0;
+                if (!d.children) {
+                    total = 0;
+                }
+                else {
+                    d.children.forEach(function (d) {
+                        total += parseInt(d.targetpct);
+                    });
+                }
+
+                if (total < 100 && total > 0) {
+                    $("#col1").append('<div class="bg-danger" style="padding-left:' + indent + 'em;">' + d.name + " " + d.targetpct + "%" + "</div>");
+                    $("#col2").append("<div class='bg-danger' >" + total + "% <i class='fa fa-exclamation-triangle'></i></div>");
+                }
+                else {
+                    $("#col1").append('<div style="padding-left:' + indent + 'em;">' + d.name + " " + d.targetpct + "%" + "</div>");
+                    if (total > 0) {
+                        $("#col2").append("<div>" + total + "%</div>");
+                    }
+                    else {
+                        $("#col2").append("</br>");
+                    }
+                }
+                if (!d.children) {
+                    return;
+                }
+
+                //console.log(root.children);
+                indent += 5;
+                d.children.forEach(function (d) {
+                    tablePrint(d, indent);
+                });
+                return;
+            }
+
+            $("#TreeShow").on("click", function () {
+                $("#tableView").hide();
+                $("#treeView").show();
+            });
+            $("#TableShow").on("click", function () {
+
+                tableStr = "";
+                $("#col1").empty();
+                $("#col2").empty();
+                tablePrint(root, 0);
+                //$("#tableView").append("<div class='col-md-offset-5 col-md-2'>").append(tableStr).append("</div>");
+                $("#treeView").hide();
+                $("#tableView").show();
+
+            });
 
 
 
