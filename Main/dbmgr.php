@@ -39,6 +39,21 @@ class Dbmgr {
         }
         return $_mysqli;
     }
+    
+    public function addStrat2Port(){
+        
+    }
+    public function remStratFromPort(){
+        
+    }
+    
+    public function insertPortfolio(){
+        
+    }
+    
+    public function delPortfolio(){
+        
+    }
 
     /*
      * 

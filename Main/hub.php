@@ -69,7 +69,7 @@ $lst = $db->getStrategyIDs();
 
                 $('.links').on('click', function () {
                     $('#selectedStrategy').attr("value", $(this).parent().children(".linkID").text());
-                   
+
                     $('#selectedName').attr("value", $(this).parent().children(".links").children().text());
                     document.getElementById("form1").submit();
                 });
@@ -144,16 +144,16 @@ $lst = $db->getStrategyIDs();
 
             <div id="tabs-2">
                 <h3>Delete Strategy </h3>
-<?php
-echo '<form action="deleteStrategy.php" method="post">';
-echo "<select name='list'>";
-for ($i = 0; $i < sizeof($lst); $i++) {
-    echo "<option value='" . $lst[$i]->id . "'>" . $lst[$i]->name . "</option>";
-}
-echo "</select>";
-echo ' <input type="submit" value="Submit">';
-echo '</form>';
-?>
+                <?php
+                echo '<form action="deleteStrategy.php" method="post">';
+                echo "<select name='list'>";
+                for ($i = 0; $i < sizeof($lst); $i++) {
+                    echo "<option value='" . $lst[$i]->id . "'>" . $lst[$i]->name . "</option>";
+                }
+                echo "</select>";
+                echo ' <input type="submit" value="Submit">';
+                echo '</form>';
+                ?>
             </div>
 
             <div id="tabs-3">
