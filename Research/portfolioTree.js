@@ -871,6 +871,7 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
     //need to use "node" to bind click handler to d3 element
     node.on("click",function () {
         console.log(new_prices);
+        //console.log(this);
         //calculate new weights
         var total_portfolio_value = new_prices[0] * saved_quantities[0] + new_prices[1] * saved_quantities[1] + new_prices[2] * saved_quantities[2] + new_prices[3] * saved_quantities[3] + new_prices[4] * saved_quantities[4];
         console.log("total value: " + total_portfolio_value);
@@ -957,12 +958,78 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                 var last_weight_percent = 20;
                 items.push("<br><b> Weights </b>");
                 items.push("<br> Target weight: " + target_weight + "%");
-                items.push("<br> Quantity Owned: " + saved_quantities[select_num]);
-                items.push("<br> Purchased Value: " + saved_quantities[select_num] * saved_prices[select_num]);
-                items.push("<br> Current Value: " + (saved_quantities[select_num] * obj['l']).toFixed(3));
+                items.push("<br> Quantity Owned: " + saved_quantities[select_num]).toFixed(3);
+                items.push("<br> Purchased Value: $" + (saved_quantities[select_num] * saved_prices[select_num]).toFixed(3));
+                items.push("<br> Current Value: $" + (saved_quantities[select_num] * obj['l']).toFixed(3));
                 items.push("<br> Current weight: " + (saved_weights[select_num]).toFixed(3) + "%");
+
+                var weight_change_indicator;
+                //selects clicked node
+                console.log(node);
+                console.log(node[0][0].id);
+                var currentNode;
+                for (var i = 0; i < node[0].length; i++){
+                    if (node[0][i].id === ticker_name){
+                        currentNode = node[0][i].children[0];
+                    }
+                }
+
+                // = node[0][select_num].children[0];
+                //node[0][select_num].children[0].fillStyle="red";
+                //node[0][select_num].children[0].fill();
+
+                //.attributes[2] = "fill: rgb(0,0,0)";
+                //currentNode.style("fill", 0,0,0);
+                console.log(currentNode);
+                $(currentNode).css({
+                    fill: "rgba(46,204,113)"
+                });
+                //rgb(46, 204, 113)
+                // style("fill", function (d) {
+                //     return d._children ? "lightsteelblue" : "#fff";
+                // })
+                if (saved_weights[select_num] == target_weight){
+                    weight_change_indicator = "<br>&rarr; " + (saved_weights[select_num] - target_weight).toFixed(3) + "%";
+
+                }
+                else if (saved_weights[select_num] < target_weight){
+                    weight_change_indicator = "<br><span style=\"color: red;\">&darr; " + (saved_weights[select_num] - target_weight).toFixed(3) + "%</span>";
+                    color_strength = .1 - (2 * ((saved_weights[select_num] - target_weight).toFixed(3) * .05));
+                    $(currentNode).css({
+                        fill: "rgba(231,76,60," + color_strength + ")"
+                    });
+                }
+                else if (saved_weights[select_num] > target_weight){
+                    weight_change_indicator = "<br><span style=\"color: green;\">&uarr; " + (saved_weights[select_num] - target_weight).toFixed(3) + "%</span>";
+                    color_strength = .1 +  (2 * ((saved_weights[select_num] - target_weight).toFixed(3) * .05));
+                    $(currentNode).css({
+                        fill: "rgba(46,204,113," + color_strength + ")"
+                    });
+                }
+                items.push(weight_change_indicator);
+
+                // if (dollar_change === 0.00){
+                //     node_percent_display = "<br>&#8210; " + dollar_change + "(" + percent_change + "%)";
+                // }
+                // else if (negative){
+                //     node_percent_display = "<br><span style=\"color: red;\">&darr; " + dollar_change + " (" + percent_change + "%)</span>";
+                // }
+                // else if (!negative){
+                //     node_percent_display = "<br><span style=\"color: green;\">&uarr; " + dollar_change + " (" + percent_change + "%)</span>";
+                // }
                 //items.push("<br> Change in Weight: " + ((percent_change * .01) * last_weight_percent));
                 $("#TickerData").append(items);
+                //document.forEach(function(entry){
+                //    console.log(entry);
+                //});
+                //console.log(this);
+                 // $.each(node, function(key, value){
+                 //     console.log(node + " lala");
+                 // });
+                 //console.log(node);
+                // document.selectAll("node").each(function(d, i){
+                //     console.log(d);
+                // });
             },
             error: function (data) {
                 alert("Error: Ticker '" + ticker + "' not found.");
@@ -971,6 +1038,8 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
         });
     });
 });
+
+
 
 var substringMatcher = function (strs) {
     return function findMatches(q, cb) {
