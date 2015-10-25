@@ -519,7 +519,17 @@ $(function () {
 
 
             function deleteClick(d, source) {
-                console.log($(source).attr("id"));
+
+
+
+                //console.log($(source).attr("id"));
+                var cid = $(source).attr("id");
+                var pa = d3.select("#" + cid)[0][0].__data__.parent;
+
+                if (pa === null || pa === "null" || pa === "") {
+                    return;
+                }
+
                 deleteNode(root, $(source).attr("id"));
                 d3.selectAll(".custom-tooltip").remove();
                 clicked = false;
@@ -527,8 +537,9 @@ $(function () {
             }
 
             function deleteNode(d, id) {
-                console.log(d);
-
+                //console.log(d);
+                //console.log(d3.select("#"+id));
+                //d3.select("#node1444059764")[0][0].parentNode
                 /*if (d.id === id) {
                  if (!d.parent) {
                  //d.children = [{"name": "New Item", "id": newid, "allocation": 0}];
@@ -735,13 +746,30 @@ $(function () {
                             currentData = d;
                             $("#alloc").val(d.targetpct);
                             $("#inputTitle").val(d.name);
-                            $("#inputTitle").on("input", function () {
+                            $("#inputTitle").on("input change paste", function () {
                                 d3.select("#title_" + currentData.id).text(function () {
                                     return $("#inputTitle").val();
                                 });
                                 currentData.name = $("#inputTitle").val();
                             });
+                            
+                            $(".tt-menu").on("click", function () {
+                                d3.select("#title_" + currentData.id).text(function () {
+                                    return $("#inputTitle").val();
+                                });
+                                currentData.name = $("#inputTitle").val();
+                            });
+
+
+
                             $("#alloc").on("input", function () {
+
+                                var pa = d3.select("#" + d.id)[0][0].__data__.parent;
+                                console.log(pa);
+                                if (pa === null || pa === "null" || pa === "") {
+                                    return;
+                                }
+
                                 d3.select("#title_alloc_" + currentData.id).text(function () {
                                     return $("#alloc").val();
                                 });

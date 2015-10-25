@@ -407,6 +407,14 @@ $(function () {
 
         function deleteClick(d, source) {
             console.log($(source).attr("id"));
+
+            var cid = $(source).attr("id");
+            var pa = d3.select("#" + cid)[0][0].__data__.parent;
+
+            if (pa === null || pa === "null" || pa === "") {
+                return;
+            }
+
             deleteNode(root, $(source).attr("id"));
             d3.selectAll(".custom-tooltip").remove();
             clicked = false;
@@ -617,13 +625,29 @@ $(function () {
                         currentData = d;
                         $("#alloc").val(d.targetpct);
                         $("#inputTitle").val(d.name);
-                        $("#inputTitle").on("input", function () {
+                        $("#inputTitle").on("input change paste", function () {
+                            d3.select("#title_" + currentData.id).text(function () {
+                                return $("#inputTitle").val();
+                            });
+                            currentData.name = $("#inputTitle").val();
+                        });
+
+                        $(".tt-menu").on("click", function () {
                             d3.select("#title_" + currentData.id).text(function () {
                                 return $("#inputTitle").val();
                             });
                             currentData.name = $("#inputTitle").val();
                         });
                         $("#alloc").on("input", function () {
+
+                            var pa = d3.select("#" + d.id)[0][0].__data__.parent;
+                            console.log(pa);
+                            if (pa === null || pa === "null" || pa === "") {
+
+                                return;
+                            }
+
+
                             d3.select("#title_alloc_" + currentData.id).text(function () {
                                 return $("#alloc").val();
                             });
@@ -637,39 +661,6 @@ $(function () {
 
                         });
 
-
-                        // TWITTER'S AUTOCOMPLETE
-                        $(function () {
-                            $('#the-basics .typeahead').typeahead({
-                                hint: false,
-                                highlight: true,
-                                minLength: 1
-                            },
-                            {
-                                name: 'states',
-                                source: substringMatcher(["SEI", "MS", "GS", "IBM"])
-                            });
-
-
-                            $(".typeahead").css("position", "inherit").removeClass("typeahead tt-input");
-                            $(".twitter-typeahead").css("position", "");
-                            $(".tt-menu").css("position", "");
-
-                            $("#inputTitle").on("input", function () {
-                                d3.select("#title_" + currentData.id).text(function () {
-                                    return $("#inputTitle").val();
-                                });
-                                currentData.name = $("#inputTitle").val();
-                            });
-                            $("#alloc").on("input", function () {
-                                d3.select("#title_alloc_" + currentData.id).text(function () {
-                                    return $("#alloc").val();
-                                });
-                                currentData.targetpct = $("#alloc").val();
-                            });
-
-
-                        });
 
                         d3.select(this.parentNode.parentNode).append("image")
                                 .on('click', function (d) {

@@ -17,16 +17,44 @@ This php file is used for creating strategies in general's
 
         <script>
             $(function () {
-                $("#TreeShow").on("click", function () {
-                    $("#tableView").hide();
-                    $("#treeView").show();
-                });
-                $("#TableShow").on("click", function () {
-                    $("#treeView").hide();
-                    $("#tableView").show();
+                var substringMatcher = function (strs) {
+                    return function findMatches(q, cb) {
+                        var matches, substringRegex;
 
+                        // an array that will be populated with substring matches
+                        matches = [];
+
+                        // regex used to determine if a string contains the substring `q`
+                        substrRegex = new RegExp(q, 'i');
+
+                        // iterate through the pool of strings and for any string that
+                        // contains the substring `q`, add it to the `matches` array
+                        $.each(strs, function (i, str) {
+                            if (substrRegex.test(str)) {
+                                matches.push(str);
+                            }
+                        });
+
+                        cb(matches);
+                    };
+                };
+
+                var common = ['Strategy', 'SEI', 'GS', 'MS', 'TSLA', 'IBM', 'GM', 'AL', 'APPL', 'GOOG', 'Equity', 'Stocks', 'Fixed_Income'
+                ];
+
+                $('#the-basics .typeahead').typeahead({
+                    hint: true,
+                    highlight: true,
+                    minLength: 1
+                },
+                {
+                    name: 'states',
+                    source: substringMatcher(common)
                 });
+
             });
+
+
         </script>
 
 
@@ -169,7 +197,7 @@ This php file is used for creating strategies in general's
 
     </head>
 
-    
+
     <body>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -181,7 +209,7 @@ This php file is used for creating strategies in general's
                         <li class=""><a href="../Main/hub.php">Home</a></li>
                         <li class="active"><a href="../Main/createStratPage.php">Create Strategy</a></li>
 
-                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="../Research/portfolioView.html">Portfolio</a></li>
                         <li><a href="#">Account</a></li>
                     </ul>
                 </div>
@@ -192,28 +220,28 @@ This php file is used for creating strategies in general's
             <div class="row">
 
                 <div id="infoBar">
-                    
+
                     <button type="button" class="btn btn-primary" id="TreeShow">Tree View</button>
                     <button type="button" class="btn btn-default" id="TableShow">Table View</button>
                     <br/>
                     <br/>
                     <input type="text" class="form-control" id="stratname" value="">
                     <br/>
-                    <input id='inputTitle' class="form-control" type="text" placeholder="Allocation">
+                    <input id='alloc' class="form-control" type="text" placeholder="Allocation">
                     <br/>
                     <div id="the-basics">
-                        <input id='alloc'class="form-control typeahead" type="text" placeholder="Node ID">
+                        <input id='inputTitle'class="form-control typeahead" type="text" placeholder="Node ID">
                     </div>
-                    
+
                 </div>
 
                 <div id="zoomGroup">
-                  
+
                     <i data-zoom="+1" class="fa fa-search-plus fa-2x" ></i> <br/><br/>
                     <i data-zoom="-1" class="fa fa-search-minus fa-2x"></i>   <br/><br/>
                     <i id="checkNow" class="fa fa-check fa-2x"></i> <br/><br/>
                     <i id="submit" class="fa fa-floppy-o fa-2x"></i>
-                    
+
                 </div>
 
 

@@ -231,7 +231,7 @@ This is the page that allows users to view and edit current strategies.
                         <li class=""><a href="../Main/hub.php">Home</a></li>
                         <li class="active"><a href="../Main/createStratPage.php">Create Strategy</a></li>
 
-                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="../Research/portfolioView.html">Portfolio</a></li>
                         <li><a href="#">Account</a></li>
                     </ul>
                 </div>
@@ -259,10 +259,10 @@ This is the page that allows users to view and edit current strategies.
                     <br/>
                     <input type="text" class="form-control" id="stratname" value="" readonly>
                     <br/>
-                    <input id='inputTitle' class="form-control" type="text" placeholder="Allocation">
+                    <input id='alloc' class="form-control" type="text" placeholder="Allocation">
                     <br/>
                     <div id="the-basics">
-                        <input id='alloc'class="form-control typeahead" type="text" placeholder="Node ID">
+                        <input id='inputTitle'class="form-control typeahead" type="text" placeholder="Node ID">
                     </div>
                     
                 </div>
