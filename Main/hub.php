@@ -196,9 +196,9 @@ $portfolios = $db->getPortfolioIDs();
 
                 <div id="tabs-4">
                     <form action="strat2port.php" method="post">
-                        <h2>Apply </h2>
+                        <h4>Apply </h4>
                         <br/>
-                        <h3>Strategy</h3>
+                        <h5>Strategy</h5>
                         <?php
                         echo "<select name='slist'>";
                         for ($i = 1; $i < sizeof($lst); $i++) {
@@ -208,9 +208,9 @@ $portfolios = $db->getPortfolioIDs();
                         ?>
                         <br/>
                         <br/>
-                        <h2>To </h2>
+                        <h4>To </h4>
                         <br/>
-                        <h3>Portfolio </h3>
+                        <h5>Portfolio </h5>
                         <?php
                         echo "<select name='plist'>";
                         for ($i = 0; $i < sizeof($portfolios); $i++) {
