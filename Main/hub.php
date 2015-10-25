@@ -36,8 +36,6 @@ $portfolios = $db->getPortfolioIDs();
         <meta charset="utf-8">
         <title>Hub Page</title>
 
-
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -45,7 +43,7 @@ $portfolios = $db->getPortfolioIDs();
 
         <!-- CSS -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="./css/menu.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -160,49 +158,71 @@ $portfolios = $db->getPortfolioIDs();
                 </div>
 
                 <div id="tabs-3">
+
+
+                    <form action="createPortfolio.php" method="post">
+                        <h3>Create New Portfolio</h3>                 
+                        <input type="text" class="form-control" id="cpText" name="newPortfolio">
+                        <input type="submit" id="cpSubmit">
+                    </form>
+
+                    <br/>
+
+
+
                     <table class="table table-striped table-responsive table-hover">
                         <thead>
                             <tr>
-                                <th data-field="id">View Portfolio </th>
-                            </tr>     
+                                <th data-field="id">My Portfolios</th>    
+                            </tr>
                         </thead>
                         <tbody>
-                            <tr><td><a href="portfolio.html">Portfolio A</a></td></tr>
-                            <tr><td>Portfolio B</td></tr>
-                            <tr><td>Portfolio C</td></tr>
-                            <tr><td>Portfolio D</td></tr>
-                            <tr><td>Portfolio E</td></tr>  
-                        </tbody>
+                            <?php
+                            for ($i = 0; $i < sizeof($portfolios); $i++) {
+                                echo "<tr><td class='plinks'><a href='#'>";
+                                echo $portfolios[$i]->name;
+                                echo "</a></td> <td class='linkID' style='display:none;'>";
+                                echo $portfolios[$i]->id;
+                                echo "</td> </tr>";
+                            }
+                            echo '<input type="hidden" id="selectedPName" value="" name="selectedPName">';
+                            echo '<input type="hidden" id="selectedP" value="" name="selectedP">';
+                            ?>
+
+
+                        </tbody>   
                     </table>
                 </div>
 
                 <div id="tabs-4">
-                    <h2>Strategy</h2>
-                    <select>
-                        <option value="Tech Strat">Tech Strat</option>
-                        <option value="Strat test">Strat test</option>
-                        <option value="BioStrategies">BioStrategies</option>
-                        <option value="Template1">Template1</option>
-                        <option value="Template2">Template2</option>
-                        <option value="Template3">Template3</option>
-                    </select>
-
-                    <h2 style="margin-top:60px;">Portfolio</h2>
-                    <select>
-                        <option value="Portfolio A">Portfolio A</option>
-                        <option value="Portfolio A">Portfolio B</option>
-                        <option value="Portfolio A">Portfolio C</option>
-                        <option value="Portfolio A">Portfolio D</option>
-                        <option value="Portfolio A">Portfolio E</option>
-                    </select>
-                    <p></p>
-                    <button style="margin-top:60px;">Apply</button>
+                    <form action="strat2port.php" method="post">
+                        <h2>Apply </h2>
+                        <br/>
+                        <h3>Strategy</h3>
+                        <?php
+                        echo "<select name='slist'>";
+                        for ($i = 1; $i < sizeof($lst); $i++) {
+                            echo "<option value='" . $lst[$i]->id . "'>" . $lst[$i]->name . "</option>";
+                        }
+                        echo "</select>";
+                        ?>
+                        <br/>
+                        <br/>
+                        <h2>To </h2>
+                        <br/>
+                        <h3>Portfolio </h3>
+                        <?php
+                        echo "<select name='plist'>";
+                        for ($i = 0; $i < sizeof($portfolios); $i++) {
+                            echo "<option value='" . $portfolios[$i]->id . "'>" . $portfolios[$i]->name . "</option>";
+                        }
+                        echo "</select>";
+                        ?>
+                        <br/>
+                        <input type="submit" style="margin-top:60px;" value="Submit">
+                    </form>
                 </div>
             </div>
-            <!--       <div id="footer">
-                       <div id="footerBorder"> </div>
-                       SEI Investments
-                   </div> -->
         </div>
     </body>
 </html>

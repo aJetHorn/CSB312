@@ -41,7 +41,8 @@ class Dbmgr {
         return $_mysqli;
     }
 
-    public function addStrat2Port() {
+    public function addStrat2Port($strat,$portfolio) {
+        $con = $this->getDBConnection();
         $queryString = "INSERT INTO PortfolioStrategy(strategy_id,portfolio_id) VALUES"
                 . "('"
                 . $strat
@@ -50,9 +51,10 @@ class Dbmgr {
                 . "');"
                 . "";
         $result = $con->query($queryString);
-        $portfolioID = $con->insert_id;
-        echo ($portfolioID);
-        return $portfolioID;
+        $p2sID = $con->insert_id;
+        $con->close();
+        echo ($p2sID);
+        return $p2sID;
     }
 
     // remove
@@ -60,7 +62,12 @@ class Dbmgr {
         
     }
 
-    public function addPortfolio() {
+    public function addPortfolio($name) {
+
+        
+        $con = $this->getDBConnection();
+        
+
         $queryString = "INSERT INTO Portfolio(portfolio_name) VALUES"
                 . "('"
                 . $name
@@ -68,6 +75,7 @@ class Dbmgr {
                 . "";
         $result = $con->query($queryString);
         $portfolioID = $con->insert_id;
+        $con->close();
         echo ($portfolioID);
         return $portfolioID;
     }
