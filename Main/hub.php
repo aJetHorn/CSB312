@@ -160,7 +160,7 @@ $portfolios = $db->getPortfolioIDs();
                 <div id="tabs-3">
 
 
-                    <form action="createPortfolio.php" method="post">
+                    <form action="createPortfolioPage.php" method="post">
                         <h3>Create New Portfolio</h3>                 
                         <input type="text" class="form-control" id="cpText" name="newPortfolio">
                         <input type="submit" id="cpSubmit">
@@ -179,7 +179,7 @@ $portfolios = $db->getPortfolioIDs();
                         <tbody>
                             <?php
                             for ($i = 0; $i < sizeof($portfolios); $i++) {
-                                echo "<tr><td class='plinks'><a href='#'>";
+                                echo "<tr><td class='plinks'><a href='../Research/portfolioView.html'>";
                                 echo $portfolios[$i]->name;
                                 echo "</a></td> <td class='linkID' style='display:none;'>";
                                 echo $portfolios[$i]->id;
