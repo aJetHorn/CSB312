@@ -13,8 +13,21 @@
 include 'dbmgr.php';
 
 $db = new Dbmgr();
-if (!empty($_POST['slist']) && !empty($_POST['plist'])) {
-    $db->addStrat2Port($_POST['slist'], $_POST['plist']);
+$strategy=$_POST['slist'];
+$portfolio=$_POST['plist'];
+$allocation=$_POST['quantity'];
+if (!empty($strategy) && !empty($portfolio)) {
+    
+    // for each strategy add to port
+    
+    $array=$db->getStrategyIDs2($portfolio);
+    if(empty($array)){
+        $db->addStrat2Port($strategy, $portfolio,$allocation);
+    }
+    else{
+        $db->updateStrat2Port($strategy, $portfolio, $allocation);
+    }
+    
     header("Location: ../Main/hub.php");
 } else {
     echo "error";

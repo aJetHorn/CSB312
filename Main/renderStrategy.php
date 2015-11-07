@@ -8,7 +8,7 @@
 include 'dbmgr.php';
 
 $db= new Dbmgr();
-$lst=$db->getAllNodes();
+$lst=$db->getAllNodes($_GET['strategyID']);
 $length= sizeof($lst);
 /*
 for($i=0; $i<$length; $i++){

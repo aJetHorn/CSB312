@@ -16,6 +16,7 @@
 require 'node.php';
 include 'strategy.php';
 include 'Portfolio.php';
+include 'PortStrat.php';
 
 class Dbmgr {
 
@@ -41,13 +42,19 @@ class Dbmgr {
         return $_mysqli;
     }
 
-    public function addStrat2Port($strat,$portfolio) {
+    public function getPortfolioValue($p_id) {
+        
+    }
+
+    public function addStrat2Port($strat, $portfolio, $allocation) {
         $con = $this->getDBConnection();
-        $queryString = "INSERT INTO PortfolioStrategy(strategy_id,portfolio_id) VALUES"
+        $queryString = "INSERT INTO PortfolioStrategy(strategy_id,portfolio_id,pfolio_allocation) VALUES"
                 . "('"
                 . $strat
                 . "','"
                 . $portfolio
+                . "','"
+                . $allocation
                 . "');"
                 . "";
         $result = $con->query($queryString);
@@ -57,6 +64,59 @@ class Dbmgr {
         return $p2sID;
     }
 
+    function getPortStrat($pid) {
+        $con = $this->getDBConnection();
+        $lst = array();
+        $queryString = "select Strategy_ID, Pfolio_Strat_ID, Portfolio_ID, Pfolio_Allocation, Strategy_Name from PortfolioStrategy natural join Strategy where Portfolio_ID = '"
+                . $pid
+                . "';";
+        $result = $con->query($queryString);
+        $i = 0;
+        while ($row = $result->fetch_row()) {
+            $lst[$i++] = new PortStrat($row[0], $row[1], $row[2], $row[3], $row[4]);
+        }
+        
+        $con->close();
+        return $lst;
+    }
+
+    public function updateStrat2Port($strat, $portfolio, $allocation) {
+        /*
+         * update PortfolioStrategy
+          SET Pfolio_Allocation=50
+          WHERE Portfolio_ID=5 AND Strategy_ID=90;
+         * 
+         */
+        $con = $this->getDBConnection();
+        $queryString = "update PortfolioStrategy SET Pfolio_Allocation="
+                . $allocation
+                . " WHERE Portfolio_ID = "
+                . $portfolio
+                . "AND Strategy_ID = "
+                . $strat
+                . ";";
+        $result = $con->query($queryString);
+
+        $con->close();
+        echo ($result);
+    }
+
+    public function getStrategyIDs2($portfolioID) {
+        $con = $this->getDBConnection();
+        $lst = array();
+        $queryString = "select Strategy_ID from PortfolioStrategy where Portfolio_ID="
+                . $portfolioID
+                . "";
+        $result = $con->query($queryString);
+        $i = 0;
+        while ($row = $result->fetch_row()) {
+            $lst[$i++] = $row[0];
+        }
+
+        $con->close();
+        return $lst;
+    }
+
     // remove
     public function remStratFromPort() {
         
@@ -64,9 +124,9 @@ class Dbmgr {
 
     public function addPortfolio($name) {
 
-        
+
         $con = $this->getDBConnection();
-        
+
 
         $queryString = "INSERT INTO Portfolio(portfolio_name) VALUES"
                 . "('"
@@ -173,10 +233,10 @@ class Dbmgr {
         $con->close();
     }
 
-    public function getAllNodes() {
+    public function getAllNodes($strategyID) {
         $lst = array();
         $con = $this->getDBConnection();
-        $queryString = "SELECT Node_ID,Node_Name,Parent_Node_ID,Strategy_ID,Target_Pct FROM Node WHERE Strategy_ID='" . $_GET['strategyID'] . "';";
+        $queryString = "SELECT Node_ID,Node_Name,Parent_Node_ID,Strategy_ID,Target_Pct FROM Node WHERE Strategy_ID='" . $strategyID . "';";
         $result = $con->query($queryString);
         $con->close();
         //echo "\r\n";

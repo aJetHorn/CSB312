@@ -75,6 +75,13 @@ $portfolios = $db->getPortfolioIDs();
                     document.getElementById("form1").submit();
                 });
 
+                $('.plinks').on('click', function () {
+                    $('#selectedP').attr("value", $(this).parent().children(".linkID").text());
+
+                    $('#selectedPName').attr("value", $(this).parent().children(".links").children().text());
+                    document.getElementById("form2").submit();
+                });
+
 
             });
         </script>
@@ -169,29 +176,33 @@ $portfolios = $db->getPortfolioIDs();
                     <br/>
 
 
+                    <form id="form2" action="viewPortfolio.php" method="post">
+                        <table class="table table-striped table-responsive table-hover">
+                            <thead>
+                                <tr>
+                                    <th data-field="id">My Portfolios</th>    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                for ($i = 0; $i < sizeof($portfolios); $i++) {
+                                    echo "<tr><td class='plinks'><a href='#'>";
+                                    echo $portfolios[$i]->name;
+                                    echo "</a></td> <td class='linkID' style='display:none;'>";
+                                    echo $portfolios[$i]->id;
+                                    echo "</td> </tr>";
+                                }
+                                echo '<input type="hidden" id="selectedPName" value="" name="selectedPName">';
+                                echo '<input type="hidden" id="selectedP" value="" name="selectedP">';
+                                ?>
 
-                    <table class="table table-striped table-responsive table-hover">
-                        <thead>
-                            <tr>
-                                <th data-field="id">My Portfolios</th>    
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            for ($i = 0; $i < sizeof($portfolios); $i++) {
-                                echo "<tr><td class='plinks'><a href='../Research/portfolioView.html'>";
-                                echo $portfolios[$i]->name;
-                                echo "</a></td> <td class='linkID' style='display:none;'>";
-                                echo $portfolios[$i]->id;
-                                echo "</td> </tr>";
-                            }
-                            echo '<input type="hidden" id="selectedPName" value="" name="selectedPName">';
-                            echo '<input type="hidden" id="selectedP" value="" name="selectedP">';
-                            ?>
+
+                            </tbody>   
+                        </table>
+                    </form>
 
 
-                        </tbody>   
-                    </table>
+
                 </div>
 
                 <div id="tabs-4">
@@ -219,7 +230,10 @@ $portfolios = $db->getPortfolioIDs();
                         echo "</select>";
                         ?>
                         <br/>
-                        <input type="submit" style="margin-top:60px;" value="Submit">
+                        Allocation amount : <input type="number" style="margin-top:60px;" name="quantity" min="0" max="100">
+                        <br/>
+                        <br/>
+                        <input type="submit" value="Submit">
                     </form>
                 </div>
             </div>
