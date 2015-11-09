@@ -994,16 +994,28 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                 }
                 else if (saved_weights[select_num] < target_weight){
                     weight_change_indicator = "<br><span style=\"color: red;\">&darr; " + (saved_weights[select_num] - target_weight).toFixed(3) + "%</span>";
-                    color_strength = .1 - (2 * ((saved_weights[select_num] - target_weight).toFixed(3) * .05));
+                    //color_strength = .1 - (2 * ((saved_weights[select_num] - target_weight).toFixed(3) * .05));
+                    color_strength = ((saved_weights[select_num]) / target_weight) / 2;
+                    var red_strength = Math.floor(255*1);
+                    var green_strength = Math.floor(255* color_strength);
+                    var blue_strength = Math.floor(255* color_strength);
+                    console.log("Color strength: " + color_strength);
+                    //231, 76, 70
+                    console.log("red: " + red_strength + "blue:" + blue_strength + "green:" + green_strength);
                     $(currentNode).css({
-                        fill: "rgba(231,76,60," + color_strength + ")"
+                        fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
                     });
                 }
                 else if (saved_weights[select_num] > target_weight){
                     weight_change_indicator = "<br><span style=\"color: green;\">&uarr; " + (saved_weights[select_num] - target_weight).toFixed(3) + "%</span>";
-                    color_strength = .1 +  (2 * ((saved_weights[select_num] - target_weight).toFixed(3) * .05));
+                    //color_strength = .1 +  (2 * ((saved_weights[select_num] - target_weight).toFixed(3) * .05));
+                    color_strength = ((saved_weights[select_num]) / target_weight) / 2;
+                    var red_strength = Math.floor(255*color_strength);
+                    var green_strength = Math.floor(255* 1);
+                    var blue_strength = Math.floor(255* color_strength);
                     $(currentNode).css({
-                        fill: "rgba(46,204,113," + color_strength + ")"
+                        fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
+
                     });
                 }
                 items.push(weight_change_indicator);
