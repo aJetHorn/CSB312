@@ -964,12 +964,15 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                 items.push("<br> Current weight: " + (saved_weights[select_num]).toFixed(3) + "%");
 
                 var weight_change_indicator;
+                var currentNodeSource;
                 //selects clicked node
+                console.log("clicked node");
                 console.log(node);
                 console.log(node[0][0].id);
                 var currentNode;
                 for (var i = 0; i < node[0].length; i++){
                     if (node[0][i].id === ticker_name){
+                        currentNodeSource = node[0][i];
                         currentNode = node[0][i].children[0];
                     }
                 }
@@ -981,6 +984,7 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                 //.attributes[2] = "fill: rgb(0,0,0)";
                 //currentNode.style("fill", 0,0,0);
                 console.log(currentNode);
+                console.log(currentNodeSource);
                 $(currentNode).css({
                     fill: "rgba(46,204,113)"
                 });
@@ -1005,6 +1009,16 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                     $(currentNode).css({
                         fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
                     });
+                    //console.log(currentNode);
+                    // node.select('text')
+                    //     .text(function(d){
+                    //         return d.name + " &darr;";
+                    //     });
+                    //currentNode.textContent = "hello";
+                    $(currentNodeSource)[0].childNodes[1].innerHTML += " &darr;";
+                    //console.log($(currentNodeSource)[0].childNodes[1].innerHTML);
+                    //console.log($(currentNodeSource));
+                    //$(currentNodeSource).append("<text y=\"-15\" text-anchor=\"start\" class=\"nodeText\" dy=\".35em\" x=\"-14\" style=\"fill-opacity: 1;\">HELLO</text>");
                 }
                 else if (saved_weights[select_num] > target_weight){
                     weight_change_indicator = "<br><span style=\"color: green;\">&uarr; " + (saved_weights[select_num] - target_weight).toFixed(3) + "%</span>";
@@ -1015,8 +1029,8 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                     var blue_strength = Math.floor(255* color_strength);
                     $(currentNode).css({
                         fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
-
                     });
+                    $(currentNodeSource)[0].childNodes[1].innerHTML += " &uarr;";
                 }
                 items.push(weight_change_indicator);
 
