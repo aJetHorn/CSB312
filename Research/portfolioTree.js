@@ -803,12 +803,14 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
         $("#TickerData").empty();
     });
 
+    //fixed values for symbols HEAR, MS, T, TSLA, YHOO
     var saved_weights = [20, 20, 20, 20, 20];
     var new_prices = [0, 0, 0, 0, 0];
     var saved_prices = [2.55, 32, 33.1, 248, 31];
     var saved_quantities = [784, 62.5, 60.4, 8.06, 64.5];
     
-    $.ajax({
+    function ajax1(){
+      return $.ajax({
         url: "http://www.google.com/finance/info?infotype=infoquoteall&q=HEAR",
         dataType: 'text',
         success: function (data) {
@@ -819,8 +821,10 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                 new_prices.push(0);
         }
     });
+    }
 
-    $.ajax({
+    function ajax2(){
+     return $.ajax({
         url: "http://www.google.com/finance/info?infotype=infoquoteall&q=MS",
         dataType: 'text',
         success: function (data) {
@@ -831,8 +835,10 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                 new_prices.push(0);
         }
     });
+    }
 
-    $.ajax({
+    function ajax3(){
+      return $.ajax({
         url: "http://www.google.com/finance/info?infotype=infoquoteall&q=T",
         dataType: 'text',
         success: function (data) {
@@ -843,8 +849,10 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                 new_prices.push(0);
         }
     });
+    }
 
-    $.ajax({
+    function ajax4(){
+        return $.ajax({
         url: "http://www.google.com/finance/info?infotype=infoquoteall&q=TSLA",
         dataType: 'text',
         success: function (data) {
@@ -855,8 +863,10 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                 new_prices.push(0);
         }
     });
+    }
 
-    $.ajax({
+    function ajax5(){
+        return $.ajax({
         url: "http://www.google.com/finance/info?infotype=infoquoteall&q=YHOO",
         dataType: 'text',
         success: function (data) {
@@ -867,6 +877,102 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                 new_prices.push(0);
         }
     });
+    }
+
+    // function prefetch_weights(){
+    //     while (new_prices[0] == 0){
+    //         //console.log("waiting . . .");
+    //     }
+    // }
+
+    $.when(ajax1(), ajax2(), ajax3(), ajax4(), ajax5()).done(function(a1, a2, a3, a4, a5){
+            console.log("All populated");
+            console.log(new_prices);
+            var total_portfolio_value = new_prices[0] * saved_quantities[0] + new_prices[1] * saved_quantities[1] + new_prices[2] * saved_quantities[2] + new_prices[3] * saved_quantities[3] + new_prices[4] * saved_quantities[4];
+            var i = 0;
+            while (i < 5){
+                console.log("saved_weights[i] = " + ((new_prices[i] * saved_quantities[i]) / total_portfolio_value) * 100);
+                saved_weights[i] = ((new_prices[i] * saved_quantities[i]) / total_portfolio_value) * 100;
+                i++;
+            }
+            console.log(node);
+            var select_num;
+
+            var weight_change_indicator;
+            var currentNodeSource;
+            var currentNode;
+            var target_weight = 20;
+            for (var i = 0; i < node[0].length; i++){
+                currentNodeSource = node[0][i];
+                currentNode = node[0][i].children[0];
+                if (currentNodeSource.id === "HEAR" || currentNodeSource.id === "MS" || currentNodeSource.id === "T" || currentNodeSource.id === "TSLA" || currentNodeSource.id === "YHOO"){
+                if (currentNodeSource.id === "HEAR"){
+                    select_num = 0;
+                }
+                else if (currentNodeSource.id === "MS"){
+                    select_num = 1;
+                }
+                else if (currentNodeSource.id === "T"){
+                    select_num = 2;
+                }
+                else if (currentNodeSource.id === "TSLA"){
+                    select_num = 3;
+                }
+                else if (currentNodeSource.id === "YHOO"){
+                    select_num = 4;
+                }
+
+                console.log("Select_num is: " + select_num + "...");
+                if (saved_weights[select_num] == target_weight){
+                    console.log("Weight... " + saved_weights[select_num]);
+                    weight_change_indicator = "<br>&rarr; " + (saved_weights[select_num] - target_weight).toFixed(3) + "%";
+                }
+                else if (saved_weights[select_num] < target_weight){
+                    console.log("Weight... " + saved_weights[select_num]);
+                    weight_change_indicator = "<br><span style=\"color: red;\">&darr; " + (saved_weights[select_num] - target_weight).toFixed(3) + "%</span>";
+                    //color_strength = .1 - (2 * ((saved_weights[select_num] - target_weight).toFixed(3) * .05));
+                    color_strength = ((saved_weights[select_num]) / target_weight) / 2;
+                    var red_strength = Math.floor(255*1);
+                    var green_strength = Math.floor(255* color_strength);
+                    var blue_strength = Math.floor(255* color_strength);
+                    console.log("Color strength: " + color_strength);
+                    //231, 76, 70
+                    console.log("red: " + red_strength + "blue:" + blue_strength + "green:" + green_strength);
+                    $(currentNode).css({
+                        fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
+                    });
+                    //console.log(currentNode);
+                    // node.select('text')
+                    //     .text(function(d){
+                    //         return d.name + " &darr;";
+                    //     });
+                    //currentNode.textContent = "hello";
+                    $(currentNodeSource)[0].childNodes[1].innerHTML += " &darr;";
+                    //console.log($(currentNodeSource)[0].childNodes[1].innerHTML);
+                    //console.log($(currentNodeSource));
+                    //$(currentNodeSource).append("<text y=\"-15\" text-anchor=\"start\" class=\"nodeText\" dy=\".35em\" x=\"-14\" style=\"fill-opacity: 1;\">HELLO</text>");
+                }
+                else if (saved_weights[select_num] > target_weight){
+                    console.log("Weight... " + saved_weights[select_num]);
+                    weight_change_indicator = "<br><span style=\"color: green;\">&uarr; " + (saved_weights[select_num] - target_weight).toFixed(3) + "%</span>";
+                    //color_strength = .1 +  (2 * ((saved_weights[select_num] - target_weight).toFixed(3) * .05));
+                    color_strength = ((saved_weights[select_num]) / target_weight) / 2;
+                    var red_strength = Math.floor(255*color_strength);
+                    var green_strength = Math.floor(255* 1);
+                    var blue_strength = Math.floor(255* color_strength);
+                    $(currentNode).css({
+                        fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
+                    });
+                    $(currentNodeSource)[0].childNodes[1].innerHTML += " &uarr;";
+                }
+            }
+            }
+
+
+            console.log("-----");
+    });
+
+    //prefetch_weights();
 
     //need to use "node" to bind click handler to d3 element
     node.on("click",function () {
@@ -977,60 +1083,40 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                     }
                 }
 
-                // = node[0][select_num].children[0];
-                //node[0][select_num].children[0].fillStyle="red";
-                //node[0][select_num].children[0].fill();
-
-                //.attributes[2] = "fill: rgb(0,0,0)";
-                //currentNode.style("fill", 0,0,0);
                 console.log(currentNode);
                 console.log(currentNodeSource);
-                $(currentNode).css({
-                    fill: "rgba(46,204,113)"
-                });
-                //rgb(46, 204, 113)
-                // style("fill", function (d) {
-                //     return d._children ? "lightsteelblue" : "#fff";
-                // })
+            
                 if (saved_weights[select_num] == target_weight){
                     weight_change_indicator = "<br>&rarr; " + (saved_weights[select_num] - target_weight).toFixed(3) + "%";
 
                 }
                 else if (saved_weights[select_num] < target_weight){
                     weight_change_indicator = "<br><span style=\"color: red;\">&darr; " + (saved_weights[select_num] - target_weight).toFixed(3) + "%</span>";
-                    //color_strength = .1 - (2 * ((saved_weights[select_num] - target_weight).toFixed(3) * .05));
-                    color_strength = ((saved_weights[select_num]) / target_weight) / 2;
-                    var red_strength = Math.floor(255*1);
-                    var green_strength = Math.floor(255* color_strength);
-                    var blue_strength = Math.floor(255* color_strength);
-                    console.log("Color strength: " + color_strength);
-                    //231, 76, 70
-                    console.log("red: " + red_strength + "blue:" + blue_strength + "green:" + green_strength);
-                    $(currentNode).css({
-                        fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
-                    });
-                    //console.log(currentNode);
-                    // node.select('text')
-                    //     .text(function(d){
-                    //         return d.name + " &darr;";
-                    //     });
-                    //currentNode.textContent = "hello";
-                    $(currentNodeSource)[0].childNodes[1].innerHTML += " &darr;";
-                    //console.log($(currentNodeSource)[0].childNodes[1].innerHTML);
-                    //console.log($(currentNodeSource));
-                    //$(currentNodeSource).append("<text y=\"-15\" text-anchor=\"start\" class=\"nodeText\" dy=\".35em\" x=\"-14\" style=\"fill-opacity: 1;\">HELLO</text>");
+                    // //color_strength = .1 - (2 * ((saved_weights[select_num] - target_weight).toFixed(3) * .05));
+                    // color_strength = ((saved_weights[select_num]) / target_weight) / 2;
+                    // var red_strength = Math.floor(255*1);
+                    // var green_strength = Math.floor(255* color_strength);
+                    // var blue_strength = Math.floor(255* color_strength);
+                    // console.log("Color strength: " + color_strength);
+                    // //231, 76, 70
+                    // console.log("red: " + red_strength + "blue:" + blue_strength + "green:" + green_strength);
+                    // $(currentNode).css({
+                    //     fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
+                    // });
+                    // //console.log(currentNode);
+                    // // node.select('text')
+                    // //     .text(function(d){
+                    // //         return d.name + " &darr;";
+                    // //     });
+                    // //currentNode.textContent = "hello";
+                    // $(currentNodeSource)[0].childNodes[1].innerHTML += " &darr;";
+                    // //console.log($(currentNodeSource)[0].childNodes[1].innerHTML);
+                    // //console.log($(currentNodeSource));
+                    // //$(currentNodeSource).append("<text y=\"-15\" text-anchor=\"start\" class=\"nodeText\" dy=\".35em\" x=\"-14\" style=\"fill-opacity: 1;\">HELLO</text>");
                 }
                 else if (saved_weights[select_num] > target_weight){
                     weight_change_indicator = "<br><span style=\"color: green;\">&uarr; " + (saved_weights[select_num] - target_weight).toFixed(3) + "%</span>";
-                    //color_strength = .1 +  (2 * ((saved_weights[select_num] - target_weight).toFixed(3) * .05));
-                    color_strength = ((saved_weights[select_num]) / target_weight) / 2;
-                    var red_strength = Math.floor(255*color_strength);
-                    var green_strength = Math.floor(255* 1);
-                    var blue_strength = Math.floor(255* color_strength);
-                    $(currentNode).css({
-                        fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
-                    });
-                    $(currentNodeSource)[0].childNodes[1].innerHTML += " &uarr;";
+     
                 }
                 items.push(weight_change_indicator);
 
