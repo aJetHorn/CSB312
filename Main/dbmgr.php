@@ -17,7 +17,7 @@ require 'node.php';
 include 'strategy.php';
 include 'Portfolio.php';
 include 'PortStrat.php';
-
+include 'Trades.php';
 class Dbmgr {
 
     private $_mysqli;
@@ -40,6 +40,41 @@ class Dbmgr {
             }
         }
         return $_mysqli;
+    }
+
+    public function insertTrades($asset,$value,$pid,$action) {
+        // sample SQL query insert INTO Trades(asset_id,value,portfolio_id) VALUES('JPM',100,'1');
+        $con = $this->getDBConnection();
+        $queryString = "insert into Trades(asset_id,value,portfolio_id, action) VALUES"
+                . "('"
+                . $asset
+                . "','"
+                . $value
+                . "','"
+                . $pid
+                . "','"
+                . $action
+                . "');"
+                . "";
+        $result = $con->query($queryString);
+        $tID = $con->insert_id;
+        $con->close();
+        echo ($tID);
+        return $tID;
+    }
+
+    public function getTrades() {
+        // sample SQL query select * from Trades order by date asc;
+        $con = $this->getDBConnection();
+        $queryString = "select asset_id,value,date,action from Trades order by date asc";
+        $result = $con->query($queryString);
+        $i = 0;
+        while ($row = $result->fetch_row()) {
+            $lst[$i++] = new Trades($row[0], $row[1], $row[2], $row[3]);
+        }
+
+        $con->close();
+        return $lst;
     }
 
     public function getPortfolioValue($p_id) {
@@ -75,7 +110,30 @@ class Dbmgr {
         while ($row = $result->fetch_row()) {
             $lst[$i++] = new PortStrat($row[0], $row[1], $row[2], $row[3], $row[4]);
         }
-        
+
+        $con->close();
+        return $lst;
+    }
+
+    /*
+     * 
+     * This function returns the rest of the strategies that were not
+     * applied to the given portfolio
+     */
+
+    public function get_unapplied_strat($p_id) {
+        $con = $this->getDBConnection();
+        $lst = array();
+        $queryString = "select strategy_ID, strategy_Name from Strategy WHERE strategy_ID "
+                . "NOT IN(select strategy_ID from PortfolioStrategy where Portfolio_ID = "
+                . $p_id
+                . "');";
+        $result = $con->query($queryString);
+        $i = 0;
+        while ($row = $result->fetch_row()) {
+            $lst = new Strategy($row[0], $row[1]);
+        }
+
         $con->close();
         return $lst;
     }
@@ -92,7 +150,7 @@ class Dbmgr {
                 . $allocation
                 . " WHERE Portfolio_ID = "
                 . $portfolio
-                . "AND Strategy_ID = "
+                . " AND Strategy_ID = "
                 . $strat
                 . ";";
         $result = $con->query($queryString);
@@ -107,6 +165,24 @@ class Dbmgr {
         $queryString = "select Strategy_ID from PortfolioStrategy where Portfolio_ID="
                 . $portfolioID
                 . "";
+        $result = $con->query($queryString);
+        $i = 0;
+        while ($row = $result->fetch_row()) {
+            $lst[$i++] = $row[0];
+        }
+
+        $con->close();
+        return $lst;
+    }
+
+    public function get_unique_sid_pid($portfolioID, $sid) {
+        $con = $this->getDBConnection();
+        $lst = array();
+        $queryString = "select Strategy_ID from PortfolioStrategy where Portfolio_ID="
+                . $portfolioID
+                . " AND Strategy_ID = "
+                . $sid
+                . ";";
         $result = $con->query($queryString);
         $i = 0;
         while ($row = $result->fetch_row()) {

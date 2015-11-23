@@ -20,7 +20,7 @@ if (!empty($strategy) && !empty($portfolio)) {
     
     // for each strategy add to port
     
-    $array=$db->getStrategyIDs2($portfolio);
+    $array=$db->get_unique_sid_pid($portfolio,$strategy);
     if(empty($array)){
         $db->addStrat2Port($strategy, $portfolio,$allocation);
     }

@@ -100,7 +100,7 @@ $portfolios = $db->getPortfolioIDs();
                         <li class=""><a href="../Main/createStratPage.php">Create Strategy</a></li>
 
                         <li><a href="../Research/portfolioView.html">Portfolio</a></li>
-                        <li><a href="#">Account</a></li>
+                        <li><a href="../Main/account_summary.php">Account</a></li>
                     </ul>
                 </div>
             </div>

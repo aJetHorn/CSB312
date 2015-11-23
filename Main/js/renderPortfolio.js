@@ -25,6 +25,8 @@ var tempNode;
 
 $(function () {
 
+    var portVal = parseInt($("#portfolioVal").val());
+
 
     // AJAX call for calling all strategy Nodes.
     $.ajax({
@@ -94,10 +96,10 @@ $(function () {
             else {
                 i--;
             }
-            console.log("-----------------new length : " + i);
+            //console.log("-----------------new length : " + i);
 
         }
-        console.log("end");
+        //console.log("end");
         return node;
 
 
@@ -470,7 +472,7 @@ $(function () {
                 // }
                 //return; // click suppressed
                 //console.log(d);
-                console.log($(source).attr("id"));
+                //console.log($(source).attr("id"));
                 addNode(root, $(source).attr("id"));
 
 
@@ -494,7 +496,7 @@ $(function () {
 
 
             function print(d) {
-                console.log(d);
+                //console.log(d);
                 if (!d.children) {
                     return;
                 }
@@ -531,7 +533,7 @@ $(function () {
                 };
                 childCount(0, root);
 
-                var newHeight = d3.max(levelWidth) * 200; // 25 pixels per line  
+                var newHeight = d3.max(levelWidth) * 250; // 25 pixels per line  
                 // this line changes the spacing between nodes.
 
                 tree = tree.size([newHeight, viewerWidth]);
@@ -542,7 +544,7 @@ $(function () {
 
                 // Set widths between levels based on maxLabelLength.
                 nodes.forEach(function (d) {
-                    d.y = (d.depth * (maxLabelLength * 10)); //maxLabelLength * 10px
+                    d.y = (d.depth * (maxLabelLength * 20)); //maxLabelLength * 10px
                     // alternatively to keep a fixed scale one can set a fixed depth per level
                     // Normalize for fixed-depth by commenting out below line
                     // d.y = (d.depth * 500); //500px per level.
@@ -570,13 +572,13 @@ $(function () {
                         });
 
 
-                        // fix the css to change the styling of the nodes
-                        // the r attribute is the size of the CIRCLE!!!
-                        // remember to style the connectors of the circles
-                        // if you change the size of circle...
+                // fix the css to change the styling of the nodes
+                // the r attribute is the size of the CIRCLE!!!
+                // remember to style the connectors of the circles
+                // if you change the size of circle...
                 nodeEnter.append("circle")
                         .attr('class', 'node circle')
-                        .attr("r", 30)
+                        .attr("r", 50)
                         .style("fill", function (d) {
                             return d._children ? "lightsteelblue" : "#fff";
                         });
@@ -586,14 +588,21 @@ $(function () {
                  * This section is for appending text to the nodes. This is important 
                  *  for adding in extra information about these nodes.
                  */
-
+                var titleY = -25;
+                var allocY = titleY + 15;
+                var amountY = allocY + 15;
+                var posY = amountY + 15;
+                var driftY = posY + 15;
+                var align1 = -12;
+                var arrowX = align1 + 60;
+                var arrowY = titleY;
                 // append Title
                 nodeEnter.append("text")
                         .attr("y", function (d) {
-                            return d.children || d._children ? -10 : -10;
+                            return d.children || d._children ? titleY : titleY;
                         })
                         .attr("x", function (d) {
-                            return d.children || d._children ? -10 : -10;
+                            return d.children || d._children ? align1 : align1;
                         })
                         .attr("id", function (d) {
                             return "title_" + d.id;
@@ -611,10 +620,10 @@ $(function () {
                 // append Allocation Amount Title
                 nodeEnter.append("text")
                         .attr("y", function (d) {
-                            return d.children || d._children ? 10 : 10;
+                            return d.children || d._children ? allocY : allocY;
                         })
                         .attr("x", function (d) {
-                            return d.children || d._children ? -10 : -10;
+                            return d.children || d._children ? align1 : align1;
                         })
                         .attr("id", function (d) {
                             return "title_alloc_" + d.id;
@@ -629,11 +638,113 @@ $(function () {
                         })
                         .style("fill-opacity", 1);
 
+                // append % symbol
+                nodeEnter.append("text")
+                        .attr("y", function (d) {
+                            return d.children || d._children ? allocY : allocY;
+                        })
+                        .attr("x", function (d) {
+                            return d.children || d._children ? 10 : 10;
+                        })
+                        .attr("id", function (d) {
+                            return "percent_symbol";
+                        })
+                        .attr("dy", ".55em")
+                        .attr('class', 'nodeText')
+                        /*.attr("text-anchor", function (d) {
+                         return d.children || d._children ? "end" : "start";
+                         })*/
+                        .text(function (d) {
+                            return "%";
+                        })
+                        .style("fill-opacity", 1);
+
+                // append amount
+                nodeEnter.append("text")
+                        .attr("y", function (d) {
+                            return d.children || d._children ? amountY : amountY;
+                        })
+                        .attr("x", function (d) {
+                            return d.children || d._children ? align1 : align1;
+                        })
+                        .attr("id", function (d) {
+                            return "amount_" + d.id;
+                        })
+                        .attr("dy", ".55em")
+                        .attr('class', 'nodeText')
+                        /*.attr("text-anchor", function (d) {
+                         return d.children || d._children ? "end" : "start";
+                         })*/
+                        .text(function (d) {
+                            return d.amount;
+                        })
+                        .style("fill-opacity", 1);
+
+                // append position
+                nodeEnter.append("text")
+                        .attr("y", function (d) {
+                            return d.children || d._children ? posY : posY;
+                        })
+                        .attr("x", function (d) {
+                            return d.children || d._children ? align1 : align1;
+                        })
+                        .attr("id", function (d) {
+                            return "position_" + d.id;
+                        })
+                        .attr("dy", ".55em")
+                        .attr('class', 'nodeText')
+                        /*.attr("text-anchor", function (d) {
+                         return d.children || d._children ? "end" : "start";
+                         })*/
+                        .text(function (d) {
+                            return d.position;
+                        })
+                        .style("fill-opacity", 1);
+
+                // append drift
+                nodeEnter.append("text")
+                        .attr("y", function (d) {
+                            return d.children || d._children ? driftY : driftY;
+                        })
+                        .attr("x", function (d) {
+                            return d.children || d._children ? align1 : align1;
+                        })
+                        .attr("id", function (d) {
+                            return "drift_" + d.id;
+                        })
+                        .attr("dy", ".55em")
+                        .attr('class', 'nodeText')
+                        /*.attr("text-anchor", function (d) {
+                         return d.children || d._children ? "end" : "start";
+                         })*/
+                        .text(function (d) {
+                            return d.drift;
+                        })
+                        .style("fill-opacity", 1);
+
+                // append arrow up/down
+                nodeEnter.append("foreignObject")
+                        .attr("y", function (d) {
+                            return d.children || d._children ? arrowY : arrowY;
+                        })
+                        .attr("x", function (d) {
+                            return d.children || d._children ? arrowX : arrowX;
+                        })
+                        .attr("id", function (d) {
+                            return "arrow_" + d.id;
+                        })
+                        .attr("dy", ".55em")
+                        .attr('class', 'nodeText')
+                        .html(function (d) {
+                            return '<i class="fa fa-3x"></i>';
+                        })
+                        .style("fill-opacity", 1);
+
 
                 // phantom node to give us mouseover in a radius around it
                 nodeEnter.append("circle")
                         .attr('class', 'ghostCircle')
-                        .attr("r", 30)
+                        .attr("r", 50)
                         .attr("opacity", 0.2) // change this to zero to hide the target area
                         .style("fill", "orange")
                         .attr('pointer-events', 'mouseover')
@@ -830,13 +941,13 @@ $(function () {
                         var j = 0;
 
                         for (j = 0; j < root.children.length; j++) {
-                            console.log(root.children[j]);
-                            console.log(data[i]);
+                            //console.log(root.children[j]);
+                            //console.log(data[i]);
                             if (root.children[j].strategyID === data[i].sid) {
                                 obj = d3.select("#" + root.children[j].id).data();
-                                console.log(obj);
+                                //console.log(obj);
                                 obj[0].targetpct = data[i].pallocation;
-                                console.log(obj);
+                                //console.log(obj);
                                 d3.select("#title_alloc_" + root.children[j].id).text(function () {
                                     return data[i].pallocation;
                                 });
@@ -844,9 +955,13 @@ $(function () {
                         }
                     }
 
-                    update(root);
-                    centerNode(d);
 
+                    calc_remaining_cash();
+                    update(root);
+                    aa_traverse(root, portVal);
+                    update(root);
+
+                    centerNode(root);
 
                 },
                 error: function (xhr, desc, err) {
@@ -857,9 +972,174 @@ $(function () {
             });
 
 
+            $("#rebal_btn").on("click", function () {
+                normal_rebalance();
+            });
 
 
-        });
 
-    }
-});
+
+            function aa_traverse(d, balance) {
+                var position_sum = 0;
+                var pct = parseInt(d.targetpct);
+                var amount = parseInt(balance) * pct * .01;
+                var randomnumber = Math.floor(Math.random() * 20) - 10;
+                if (!d.children) {
+                    d.amount = amount;
+                    d.drift = randomnumber;
+                    d.position = amount + (amount * randomnumber * .01);
+                    $("#drift_" + d.id).text(d.drift);
+                    $("#position_" + d.id).text(d.position);
+                    $("#amount_" + d.id).text(amount);
+                    // if drift is negative
+                    // put down arrow and color it red.
+                    if (d.drift < 0) {
+
+
+                        $("#arrow_" + d.id).children().addClass("fa-arrow-down");
+                    }
+                    else if (d.drift > 0) {
+                        $("#arrow_" + d.id).children().addClass("fa-arrow-up");
+                    }
+
+
+
+                    return d.position;
+                }
+                //console.log(root.children);
+
+                d.children.forEach(function (d) {
+                    position_sum += parseInt(aa_traverse(d, amount));
+                });
+
+                d.amount = amount;
+                d.position = position_sum;
+                d.drift = (((d.position - d.amount) / d.amount) * 100).toFixed(2);
+                $("#drift_" + d.id).text(d.drift);
+                $("#position_" + d.id).text(d.position);
+                $("#amount_" + d.id).text(amount);
+                if (d.drift < 0) {
+
+
+                    $("#arrow_" + d.id).children().addClass("fa-arrow-down");
+                }
+                else if (d.drift > 0) {
+                    $("#arrow_" + d.id).children().addClass("fa-arrow-up");
+                }
+                return d.position;
+            }
+
+            function calc_remaining_cash() {
+                var sum = 0;
+                var i = 0;
+                for (i = 0; i < root.children.length; i++) {
+                    sum += parseInt(root.children[i].targetpct);
+                    console.log(sum);
+                }
+                if (sum < 100) {
+                    var rest = 100 - parseInt(sum);
+                    var allocation = parseInt(root.amount) * .01 * rest;
+                    var cashNode = {
+                        "id": "portfolioCash",
+                        "name": "Cash",
+                        "parent": "",
+                        "targetpct": rest,
+                        "amount": allocation,
+                        "drift": 0,
+                        "position": allocation,
+                        "portfolioID": "",
+                        "status": "1",
+                        "children": [
+                        ]
+                    };
+                    root.children.push(cashNode);
+
+
+                }
+            }
+
+
+            // for each child or node with no children
+            // generate position
+            // generate drift
+
+            //rebalance algorithm
+
+            // sell bonds
+            // sell stocks
+
+            function normal_rebalance() {
+                var neg_bal = find_neg(root);
+                console.log("need to rebalance amount: " + neg_bal);
+                var amt = find_buys(root, neg_bal);
+                if (amt < -(neg_bal)) {
+                    console.log("warning need to use remaining portfolio funds");
+                }
+                // send buys_array to save trades.
+                $.ajax({
+                    datatype: 'json',
+                    url: 'saveTrades.php',
+                    type: 'post',
+                    data: {'buys_array': buys_array},
+                    success: function (data, status) {
+                        console.log(data);
+                        //window.location.href = "../Main/hub.php";
+                    },
+                    error: function (xhr, desc, err) {
+                        console.log("Not Successful ajax call");
+                        console.log(err);
+                    }
+
+                });
+
+
+            }
+
+            function find_neg(d) {
+                var sum = 0;
+                if (!d.children) {
+                    // sell
+                    
+                    if (d.drift < 0) {
+                        var amt=parseInt(d.position) - parseInt(d.amount);
+                        buys_array.push({'asset_id': d.name, 'amount': -(amt), 'pid': '1', 'action':'buy'});
+                        return amt;
+                    }
+                    return 0;
+                }
+
+                d.children.forEach(function (d) {
+                    sum += parseInt(find_neg(d));
+                });
+
+                return sum;
+            }
+            var buys_array = [];
+            function find_buys(d, bal) {
+                var sum = 0;
+                if (!d.children) {
+                    // sell
+                    var amt = 0;
+                    if (d.drift > 0) {
+                        amt = parseInt(d.position) - parseInt(d.amount);
+                        console.log("Execute trades for the amount : " + amt);
+                        buys_array.push({'asset_id': d.name, 'amount': amt, 'pid': 1, 'action':'sell'});
+                    }
+                    return amt;
+                }
+
+                d.children.forEach(function (d) {
+                    sum += parseInt(find_buys(d));
+                });
+
+                return sum;
+            }
+
+
+
+        }); // end of d3 json function
+
+
+    }// end of start function;
+
+}); // end of ready function

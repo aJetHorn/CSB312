@@ -126,7 +126,7 @@ This is the page that allows users to view portfolios
             .node circle {
                 fill: #fff;
                 stroke: steelblue;
-                stroke-width: 1.5px;
+                stroke-width: 3.5px;
             }
 
             .node circle fix{
@@ -188,7 +188,7 @@ This is the page that allows users to view portfolios
                         <li class="active"><a href="../Main/createStratPage.php">Create Strategy</a></li>
 
                         <li><a href="../Research/portfolioView.html">Portfolio</a></li>
-                        <li><a href="#">Account</a></li>
+                        <li><a href="../Main/account_summary.php">Account</a></li>
                     </ul>
                 </div>
             </div>
@@ -209,10 +209,10 @@ This is the page that allows users to view portfolios
             <div class="row">
 
                 <div id="infoBar">
-
-                    <input type="text" class="form-control" id="stratname" value="" readonly>
+                    Balance:
+                    <input type="text" class="form-control" id="portfolioVal" value="1000000" readonly>
                     <br/>
-                    <button style="width:100%;" type="button" class="btn btn-default btn-success" id="TableShow">Rebalance</button>
+                    <button style="width:100%;" id="rebal_btn" type="button" class="btn btn-default btn-success" id="TableShow">Rebalance</button>
 
                 </div>
 
