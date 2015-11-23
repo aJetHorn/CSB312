@@ -1083,7 +1083,7 @@ $(function () {
                     data: {'buys_array': buys_array},
                     success: function (data, status) {
                         console.log(data);
-                        //window.location.href = "../Main/hub.php";
+                        window.location.href = "../Main/account_summary.php";
                     },
                     error: function (xhr, desc, err) {
                         console.log("Not Successful ajax call");
