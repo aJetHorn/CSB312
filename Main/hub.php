@@ -132,7 +132,7 @@ $portfolios = $db->getPortfolioIDs();
                                 // php code to print out the list of strategies.
                                 //echo '';
 
-                                for ($i = 1; $i < sizeof($lst); $i++) {
+                                for ($i = 0; $i < sizeof($lst); $i++) {
                                     echo "<tr><td class='links'><a href='#'>";
                                     echo $lst[$i]->name;
                                     echo "</a></td> <td class='linkID' style='display:none;'>";
@@ -212,7 +212,7 @@ $portfolios = $db->getPortfolioIDs();
                         <h5>Strategy</h5>
                         <?php
                         echo "<select name='slist'>";
-                        for ($i = 1; $i < sizeof($lst); $i++) {
+                        for ($i = 0; $i < sizeof($lst); $i++) {
                             echo "<option value='" . $lst[$i]->id . "'>" . $lst[$i]->name . "</option>";
                         }
                         echo "</select>";

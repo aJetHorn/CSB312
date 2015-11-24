@@ -984,7 +984,16 @@ $(function () {
                 var pct = parseInt(d.targetpct);
                 var amount = parseInt(balance) * pct * .01;
                 var randomnumber = Math.floor(Math.random() * 20) - 10;
-                if (!d.children) {
+                if (!d.children && (d.name === 'Cash' || d.name === 'Equity' || d.name === 'Bonds' || d.name === 'Stocks')) {
+                    d.amount = amount;
+                    d.drift = 0;
+                    d.position = amount;
+                    $("#drift_" + d.id).text(d.drift);
+                    $("#position_" + d.id).text(d.position);
+                    $("#amount_" + d.id).text(amount);
+                    return d.position;
+                }
+                else if (!d.children) {
                     d.amount = amount;
                     d.drift = randomnumber;
                     d.position = amount + (amount * randomnumber * .01);
@@ -1099,10 +1108,10 @@ $(function () {
                 var sum = 0;
                 if (!d.children) {
                     // sell
-                    
+
                     if (d.drift < 0) {
-                        var amt=parseInt(d.position) - parseInt(d.amount);
-                        buys_array.push({'asset_id': d.name, 'amount': -(amt), 'pid': '1', 'action':'buy'});
+                        var amt = parseInt(d.position) - parseInt(d.amount);
+                        buys_array.push({'asset_id': d.name, 'amount': -(amt), 'pid': '1', 'action': 'buy'});
                         return amt;
                     }
                     return 0;
@@ -1123,7 +1132,7 @@ $(function () {
                     if (d.drift > 0) {
                         amt = parseInt(d.position) - parseInt(d.amount);
                         console.log("Execute trades for the amount : " + amt);
-                        buys_array.push({'asset_id': d.name, 'amount': amt, 'pid': 1, 'action':'sell'});
+                        buys_array.push({'asset_id': d.name, 'amount': amt, 'pid': 1, 'action': 'sell'});
                     }
                     return amt;
                 }

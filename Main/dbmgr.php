@@ -18,6 +18,7 @@ include 'strategy.php';
 include 'Portfolio.php';
 include 'PortStrat.php';
 include 'Trades.php';
+
 class Dbmgr {
 
     private $_mysqli;
@@ -42,7 +43,7 @@ class Dbmgr {
         return $_mysqli;
     }
 
-    public function insertTrades($asset,$value,$pid,$action) {
+    public function insertTrades($asset, $value, $pid, $action) {
         // sample SQL query insert INTO Trades(asset_id,value,portfolio_id) VALUES('JPM',100,'1');
         $con = $this->getDBConnection();
         $queryString = "insert into Trades(asset_id,value,portfolio_id, action) VALUES"
@@ -67,6 +68,34 @@ class Dbmgr {
         // sample SQL query select * from Trades order by date asc;
         $con = $this->getDBConnection();
         $queryString = "select asset_id,value,date,action from Trades order by date asc";
+        $result = $con->query($queryString);
+        $i = 0;
+        while ($row = $result->fetch_row()) {
+            $lst[$i++] = new Trades($row[0], $row[1], $row[2], $row[3]);
+        }
+
+        $con->close();
+        return $lst;
+    }
+
+    public function getBuys() {
+        // sample SQL query select * from Trades order by date asc;
+        $con = $this->getDBConnection();
+        $queryString = "select asset_id,value,date,action from Trades where action='buy' order by date asc ";
+        $result = $con->query($queryString);
+        $i = 0;
+        while ($row = $result->fetch_row()) {
+            $lst[$i++] = new Trades($row[0], $row[1], $row[2], $row[3]);
+        }
+
+        $con->close();
+        return $lst;
+    }
+
+    public function getSells() {
+        // sample SQL query select * from Trades order by date asc;
+        $con = $this->getDBConnection();
+        $queryString = "select asset_id,value,date,action from Trades where action='sell' order by date asc ";
         $result = $con->query($queryString);
         $i = 0;
         while ($row = $result->fetch_row()) {

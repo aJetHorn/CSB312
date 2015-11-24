@@ -1,7 +1,8 @@
 <?php
 include 'dbmgr.php';
 $db = new Dbmgr();
-$lst = $db->getTrades();
+$buys = $db->getBuys();
+$sells = $db->getSells();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,36 +52,72 @@ $lst = $db->getTrades();
 
 
 
-            <h3>Pending Trades</h3>
+            <h3>Pending Buys</h3>
             <table class="table table-striped table-responsive table-hover">
                 <thead>
                     <tr>
                         <th data-field="id">Asset</th>
                         <th>Amount</th>
-                        <th>Date</th>
+                        <th>Trade Date</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    
-                    for ($i = 0; $i < sizeof($lst); $i++) {
+                    $sum = 0;
+                    for ($i = 0; $i < sizeof($buys); $i++) {
                         echo "<tr><td class='links'><a href='#'>";
-                        echo $lst[$i]->asset_id;
+                        echo $buys[$i]->asset_id;
                         echo "</a></td> <td>";
-                        echo $lst[$i]->value;
+                        echo $buys[$i]->value;
                         echo "</td> <td>";
-                        echo $lst[$i]->date;
+                        echo $buys[$i]->date;
                         echo "</td> <td>";
-                        echo $lst[$i]->action;
+                        echo $buys[$i]->action;
                         echo "</td> </tr>";
+                        $sum+=(double) $sells[$i]->value;
                     }
                     ?>
 
 
                 </tbody>   
             </table>
+            <?php
+            echo "<h4>Total : $" . $sum . "</h4><br/>"
+            ?>
+            <h3>Pending Sells</h3>
+            <table class="table table-striped table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th data-field="id">Asset</th>
+                        <th>Amount</th>
+                        <th>Trade Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $sum = 0;
+                    for ($i = 0; $i < sizeof($sells); $i++) {
+                        echo "<tr><td class='links'><a href='#'>";
+                        echo $sells[$i]->asset_id;
+                        echo "</a></td> <td>";
+                        echo $sells[$i]->value;
+                        echo "</td> <td>";
+                        echo $sells[$i]->date;
+                        echo "</td> <td>";
+                        echo $sells[$i]->action;
+                        echo "</td> </tr>";
+                        $sum+=(double) $sells[$i]->value;
+                    }
+                    ?>
 
+
+                </tbody>   
+            </table>
+            <?php
+            echo "<h4>Total : $" . $sum . "</h4>"
+            ?>
 
         </div>
 
