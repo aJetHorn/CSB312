@@ -44,15 +44,16 @@ $sells = $db->getSells();
             </div>
         </nav>
 
-        <div class="col-md-offset-5 col-md-2" style="text-align:center; color:white;">
-            <h1>Home</h1>
-        </div>
-
-        <div id="main" class="col-md-offset-3 col-md-6">
-
-
+        <div class="col-md-6">
 
             <h3>Pending Buys</h3>
+            <?php
+            $sum = 0;
+            for ($i = 0; $i < sizeof($buys); $i++) {
+                $sum+=(double) $buys[$i]->value;
+            }
+            echo "<h4>Total : $" . $sum . "</h4><br/>";
+            ?>
             <table class="table table-striped table-responsive table-hover">
                 <thead>
                     <tr>
@@ -64,7 +65,6 @@ $sells = $db->getSells();
                 </thead>
                 <tbody>
                     <?php
-                    $sum = 0;
                     for ($i = 0; $i < sizeof($buys); $i++) {
                         echo "<tr><td class='links'><a href='#'>";
                         echo $buys[$i]->asset_id;
@@ -75,17 +75,27 @@ $sells = $db->getSells();
                         echo "</td> <td>";
                         echo $buys[$i]->action;
                         echo "</td> </tr>";
-                        $sum+=(double) $sells[$i]->value;
                     }
                     ?>
 
 
                 </tbody>   
             </table>
-            <?php
-            echo "<h4>Total : $" . $sum . "</h4><br/>"
-            ?>
+
+
+
+        </div>
+        <div class="col-md-6">
             <h3>Pending Sells</h3>
+            <?php
+            $sum = 0;
+            for ($i = 0; $i < sizeof($sells); $i++) {
+                $sum+=(double) $sells[$i]->value;
+            }
+            echo "<h4>Total : $" . $sum . "</h4><br/>";
+            ?>
+            
+            
             <table class="table table-striped table-responsive table-hover">
                 <thead>
                     <tr>
@@ -97,7 +107,6 @@ $sells = $db->getSells();
                 </thead>
                 <tbody>
                     <?php
-                    $sum = 0;
                     for ($i = 0; $i < sizeof($sells); $i++) {
                         echo "<tr><td class='links'><a href='#'>";
                         echo $sells[$i]->asset_id;
@@ -108,16 +117,12 @@ $sells = $db->getSells();
                         echo "</td> <td>";
                         echo $sells[$i]->action;
                         echo "</td> </tr>";
-                        $sum+=(double) $sells[$i]->value;
                     }
                     ?>
 
 
                 </tbody>   
             </table>
-            <?php
-            echo "<h4>Total : $" . $sum . "</h4>"
-            ?>
 
         </div>
 
