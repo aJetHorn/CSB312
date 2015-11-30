@@ -1054,12 +1054,12 @@ $(function () {
                     $("#amount_" + d.id).text(amount);
                     // if drift is negative
                     // put down arrow and color it red.
-                    //return to this.
+                    //return to this. -TJ
                     if (d.drift < 0) {
                         $("#arrow_" + d.id).children().addClass("fa-arrow-down");
                         var currentNodeSource;
                         var currentNode;
-                        console.log(node[0]);
+                        //console.log(node[0]);
                         for (var i = 0; i < node[0].length; i++){
                             currentNodeSource = node[0][i];
                             currentNode = node[0][i].children[0];
@@ -1067,7 +1067,9 @@ $(function () {
                         var red_strength = 255;
                         var green_strength = 0;
                         var blue_strength = 0;
-                        $(this).css({
+                        console.log($("#"+d.id));
+                        console.log($("#"+(d.id))[0].children[0]);
+                        $($("#"+d.id)[0].children[0]).css({
                             fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
                         });
                     }
@@ -1082,7 +1084,7 @@ $(function () {
                         var red_strength = 0;
                         var green_strength = 255;
                         var blue_strength = 0;
-                        $(this).css({
+                        $($("#"+d.id)[0].children[0]).css({
                             fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
                         });
                     }
@@ -1107,9 +1109,23 @@ $(function () {
 
 
                     $("#arrow_" + d.id).children().addClass("fa-arrow-down");
+                    var red_strength = 255;
+                        var green_strength = 0;
+                        var blue_strength = 0;
+                        console.log($("#"+d.id));
+                        console.log($("#"+(d.id))[0].children[0]);
+                        $($("#"+d.id)[0].children[0]).css({
+                            fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
+                        });
                 }
                 else if (d.drift > 0) {
                     $("#arrow_" + d.id).children().addClass("fa-arrow-up");
+                    var red_strength = 0;
+                        var green_strength = 255;
+                        var blue_strength = 0;
+                        $($("#"+d.id)[0].children[0]).css({
+                            fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
+                        });
                 }
                 return d.position;
             }
