@@ -634,7 +634,7 @@ $(function () {
                          return d.children || d._children ? "end" : "start";
                          })*/
                         .text(function (d) {
-                            return d.targetpct;
+                            return "T: " + d.targetpct;
                         })
                         .style("fill-opacity", 1);
 
@@ -718,7 +718,7 @@ $(function () {
                          return d.children || d._children ? "end" : "start";
                          })*/
                         .text(function (d) {
-                            return d.drift;
+                            return "A: " + (d.targetpct + d.drift);
                         })
                         .style("fill-opacity", 1);
 
@@ -1001,7 +1001,7 @@ $(function () {
                                 obj[0].targetpct = data[i].pallocation;
                                 //console.log(obj);
                                 d3.select("#title_alloc_" + root.children[j].id).text(function () {
-                                    return data[i].pallocation;
+                                    return "T: " + data[i].pallocation;
                                 });
                             }
                         }
@@ -1040,7 +1040,7 @@ $(function () {
                     d.amount = amount;
                     d.drift = 0;
                     d.position = amount;
-                    $("#drift_" + d.id).text(d.drift);
+                    $("#drift_" + d.id).text("A: " + (d.targetpct + d.drift));
                     $("#position_" + d.id).text(d.position);
                     $("#amount_" + d.id).text(amount);
                     return d.position;
@@ -1054,13 +1054,37 @@ $(function () {
                     $("#amount_" + d.id).text(amount);
                     // if drift is negative
                     // put down arrow and color it red.
+                    //return to this.
                     if (d.drift < 0) {
-
-
                         $("#arrow_" + d.id).children().addClass("fa-arrow-down");
+                        var currentNodeSource;
+                        var currentNode;
+                        console.log(node[0]);
+                        for (var i = 0; i < node[0].length; i++){
+                            currentNodeSource = node[0][i];
+                            currentNode = node[0][i].children[0];
+                        }
+                        var red_strength = 255;
+                        var green_strength = 0;
+                        var blue_strength = 0;
+                        $(this).css({
+                            fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
+                        });
                     }
                     else if (d.drift > 0) {
                         $("#arrow_" + d.id).children().addClass("fa-arrow-up");
+                        var currentNodeSource;
+                        var currentNode;
+                        for (var i = 0; i < node[0].length; i++){
+                            currentNodeSource = node[0][i];
+                            currentNode = node[0][i].children[0];
+                        }
+                        var red_strength = 0;
+                        var green_strength = 255;
+                        var blue_strength = 0;
+                        $(this).css({
+                            fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
+                        });
                     }
 
 
