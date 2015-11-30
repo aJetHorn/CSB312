@@ -947,7 +947,7 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                     //         return d.name + " &darr;";
                     //     });
                     //currentNode.textContent = "hello";
-                    $(currentNodeSource)[0].childNodes[1].innerHTML += " &darr;";
+                    $(currentNodeSource)[0].childNodes[1].innerHTML += " &darr;" + " <br><br>" + (saved_weights[select_num] - target_weight).toFixed(3) + "";
                     //console.log($(currentNodeSource)[0].childNodes[1].innerHTML);
                     //console.log($(currentNodeSource));
                     //$(currentNodeSource).append("<text y=\"-15\" text-anchor=\"start\" class=\"nodeText\" dy=\".35em\" x=\"-14\" style=\"fill-opacity: 1;\">HELLO</text>");
@@ -963,7 +963,7 @@ treeJSON = d3.json("portfolioTree.json", function (error, treeData) {
                     $(currentNode).css({
                         fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
                     });
-                    $(currentNodeSource)[0].childNodes[1].innerHTML += " &uarr;";
+                    $(currentNodeSource)[0].childNodes[1].innerHTML += " &uarr;" + " <br><br>" + (saved_weights[select_num] - target_weight).toFixed(3) + "";
                 }
             }
             }
