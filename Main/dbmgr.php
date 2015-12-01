@@ -78,10 +78,13 @@ class Dbmgr {
         return $lst;
     }
 
-    public function getBuys() {
+    public function getBuys($pid) {
         // sample SQL query select * from Trades order by date asc;
         $con = $this->getDBConnection();
-        $queryString = "select asset_id,value,date,action from Trades where action='buy' order by date asc ";
+        $queryString = "select asset_id,value,date,action from Trades where action='buy'  AND "
+                . " portfolio_id = "
+                . $pid
+                . " order by date asc ";
         $result = $con->query($queryString);
         $i = 0;
         while ($row = $result->fetch_row()) {
@@ -92,10 +95,14 @@ class Dbmgr {
         return $lst;
     }
 
-    public function getSells() {
+    public function getSells($pid) {
         // sample SQL query select * from Trades order by date asc;
+
         $con = $this->getDBConnection();
-        $queryString = "select asset_id,value,date,action from Trades where action='sell' order by date asc ";
+        $queryString = "select asset_id,value,date,action from Trades where action='sell' AND "
+                . " portfolio_id = "
+                . $pid
+                . " order by date asc ";
         $result = $con->query($queryString);
         $i = 0;
         while ($row = $result->fetch_row()) {
@@ -126,6 +133,24 @@ class Dbmgr {
         $con->close();
         echo ($p2sID);
         return $p2sID;
+    }
+
+    public function removeS2PbySID($sid) {
+        $con = $this->getDBConnection();
+        $queryString = "delete from PortfolioStrategy WHERE Strategy_ID = "
+       
+                . $sid
+                . "";
+        $result = $con->query($queryString);
+        $con->close();
+    }
+    public function removeS2PbyPID($pid) {
+        $con = $this->getDBConnection();
+        $queryString = "delete from PortfolioStrategy WHERE Portfolio_ID = "
+                . $pid
+                . "";
+        $result = $con->query($queryString);
+        $con->close();
     }
 
     function getPortStrat($pid) {
