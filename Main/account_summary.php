@@ -89,11 +89,11 @@ $portfolios = $db->getPortfolioIDs();
                 </div>
                 <div>
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="../Main/hub.php">Home</a></li>
+                        <li class=""><a href="../Main/hub.php">Home</a></li>
                         <li class=""><a href="../Main/createStratPage.php">Create Strategy</a></li>
 
                         <li><a href="../Research/portfolioView.html">Portfolio</a></li>
-                        <li><a href="../Main/account_summary.php">Account</a></li>
+                        <li class="active"><a href="../Main/account_summary.php">Account</a></li>
                     </ul>
                 </div>
             </div>
@@ -115,7 +115,7 @@ $portfolios = $db->getPortfolioIDs();
             </div>
             <div class="row">
                 <div class="col-lg-2">
-                    <button class="btn btn-success" id="submit" style="width:100%;">Submit</button>
+                    <button class="btn btn-success" id="submit" style="width:100%;">View Trades</button>
                 </div>
             </div>
             <div class="row">

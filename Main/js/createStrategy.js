@@ -491,6 +491,17 @@ $(function () {
             var sum = 0;
             d.children.forEach(function (d) {
                 //console.log(d);
+                if (d.targetpct < 0 || d.targetpct > 100) {
+                    checkFlag = false;
+                    $("#" + d.id).children(":first").css("stroke", "red");
+                    d3.select("#" + d.id).append("foreignObject").attr({
+                        'x': 30,
+                        'y': -30,
+                        'width': 247,
+                        'height': 100,
+                        'class': 'error-red'
+                    }).html('<i class="fa fa-exclamation-triangle"></i>');
+                }
                 sum += parseInt(d.targetpct);
                 check(d);
                 if (!checkFlag) {
@@ -649,6 +660,7 @@ $(function () {
 
 
                             d3.select("#title_alloc_" + currentData.id).text(function () {
+
                                 return $("#alloc").val();
                             });
                             currentData.targetpct = $("#alloc").val();

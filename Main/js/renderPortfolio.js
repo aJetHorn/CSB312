@@ -25,8 +25,8 @@ var tempNode;
 
 $(function () {
 
-    var portVal = parseInt($("#selection").val());
-
+    var portID = parseInt($("#selection").val());
+    var portVal=100000;
 
     // AJAX call for calling all strategy Nodes.
     $.ajax({
@@ -1056,7 +1056,7 @@ $(function () {
                         "amount": allocation,
                         "drift": 0,
                         "position": allocation,
-                        "portfolioID": portVal,
+                        "portfolioID": portID,
                         "status": "1",
                         "children": [
                         ]
@@ -1111,7 +1111,7 @@ $(function () {
 
                     if (d.drift < 0) {
                         var amt = parseInt(d.position) - parseInt(d.amount);
-                        buys_array.push({'asset_id': d.name, 'amount': -(amt), 'pid': portVal, 'action': 'buy'});
+                        buys_array.push({'asset_id': d.name, 'amount': -(amt), 'pid': portID, 'action': 'buy'});
                         return amt;
                     }
                     return 0;
@@ -1132,7 +1132,7 @@ $(function () {
                     if (d.drift > 0) {
                         amt = parseInt(d.position) - parseInt(d.amount);
                         console.log("Execute trades for the amount : " + amt);
-                        buys_array.push({'asset_id': d.name, 'amount': amt, 'pid': portVal, 'action': 'sell'});
+                        buys_array.push({'asset_id': d.name, 'amount': amt, 'pid': portID, 'action': 'sell'});
                     }
                     return amt;
                 }

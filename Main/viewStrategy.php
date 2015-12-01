@@ -232,7 +232,7 @@ This is the page that allows users to view and edit current strategies.
                         <li class="active"><a href="../Main/createStratPage.php">Create Strategy</a></li>
 
                         <li><a href="../Research/portfolioView.html">Portfolio</a></li>
-                        <li><a href="#">Account</a></li>
+                        <li><a href="../Main/account_summary.php">Account</a></li>
                     </ul>
                 </div>
             </div>
@@ -253,13 +253,11 @@ This is the page that allows users to view and edit current strategies.
             <div class="row">
 
                 <div id="infoBar">
-                    <button type="button" class="btn btn-primary" id="TreeShow">Tree View</button>
-                    <button type="button" class="btn btn-default" id="TableShow">Table View</button>
                     <br/>
                     <br/>
                     <input type="text" class="form-control" id="stratname" value="" readonly>
                     <br/>
-                    <input id='alloc' class="form-control" type="text" placeholder="Allocation">
+                    <input id='alloc' class="form-control" type="number" placeholder="Allocation" min="0" max="100">
                     <br/>
                     <div id="the-basics">
                         <input id='inputTitle'class="form-control typeahead" type="text" placeholder="Node ID">
