@@ -634,7 +634,7 @@ $(function () {
                          return d.children || d._children ? "end" : "start";
                          })*/
                         .text(function (d) {
-                            return d.targetpct;
+                            return "T: " + d.targetpct;
                         })
                         .style("fill-opacity", 1);
 
@@ -718,7 +718,7 @@ $(function () {
                          return d.children || d._children ? "end" : "start";
                          })*/
                         .text(function (d) {
-                            return d.drift;
+                            return "A: " + (d.targetpct + d.drift);
                         })
                         .style("fill-opacity", 1);
 
@@ -864,10 +864,62 @@ $(function () {
 
 
             $(".nodeItem").on("click", function () {
+                //alert("hey");
                 centerNode(d3.selectAll("#" + $(this).attr("name"))[0][0].__data__);
+
                 return;
             });
 
+            //TJ's UI Merge
+            node.on("click", function(){
+                console.log(this);
+                console.log($("#title_" + this.id));
+                console.log($("#title_" + this.id).html()); //assumes this html is the symbol name for lookup
+                var instrument_name = $("#title_" + this.id).html(); //short name for lookup
+                console.log("Loading: " + instrument_name);
+                $("#TickerData").empty();
+                $.ajax({
+                    url: "http://www.google.com/finance/info?infotype=infoquoteall&q=" + instrument_name,
+                    dataType: 'text',
+                    success: function (data) {
+                        console.log("Successfully loaded symbol");
+                        var obj = JSON.parse(data.substring(5, data.length - 2));
+                        var items = [];
+                        var ticker_name = obj['t'];
+                        items.push("<br><b>" + obj['name'] + "</b>");
+                        items.push("<br>Ticker Name: " + ticker_name);   
+                        items.push("<br>Most Recent Price: $" + obj['l']);
+                        var dollar_change = obj['c'];
+                        var percent_change = obj['cp'];
+                        var negative = dollar_change < 0;
+                        var node_percent_display;
+                        //no change
+                        if (dollar_change === 0.00){
+                            node_percent_display = "<br>&#8210; " + dollar_change + "(" + percent_change + "%)";
+                        }
+                        else if (negative){
+                            node_percent_display = "<br><span style=\"color: red;\">&darr; " + dollar_change + " (" + percent_change + "%)</span>";
+                        }
+                        else if (!negative){
+                            node_percent_display = "<br><span style=\"color: green;\">&uarr; " + dollar_change + " (" + percent_change + "%)</span>";
+                        }
+                        console.log(node_percent_display);
+                        items.push(node_percent_display);
+
+                        //more
+
+                        $("#TickerData").append(items);
+                    },
+                    error: function (data) {
+                        //alert("Ticker '" + instrument_name + " not found or is not a stock.");
+                        $("#TickerData").append("Ticker '" + instrument_name + "'' not found or is not a stock.");
+                    }
+                });
+            });
+            
+            $("#resetBtn").on("click", function(){
+                $("#TickerData").empty();
+            });
 
 
             var saveArray = [];
@@ -949,7 +1001,7 @@ $(function () {
                                 obj[0].targetpct = data[i].pallocation;
                                 //console.log(obj);
                                 d3.select("#title_alloc_" + root.children[j].id).text(function () {
-                                    return data[i].pallocation;
+                                    return "T: " + data[i].pallocation;
                                 });
                             }
                         }
@@ -988,7 +1040,7 @@ $(function () {
                     d.amount = amount;
                     d.drift = 0;
                     d.position = amount;
-                    $("#drift_" + d.id).text(d.drift);
+                    $("#drift_" + d.id).text("A: " + (d.targetpct + d.drift));
                     $("#position_" + d.id).text(d.position);
                     $("#amount_" + d.id).text(amount);
                     return d.position;
@@ -1002,13 +1054,39 @@ $(function () {
                     $("#amount_" + d.id).text(amount);
                     // if drift is negative
                     // put down arrow and color it red.
+                    //return to this. -TJ
                     if (d.drift < 0) {
-
-
                         $("#arrow_" + d.id).children().addClass("fa-arrow-down");
+                        var currentNodeSource;
+                        var currentNode;
+                        //console.log(node[0]);
+                        for (var i = 0; i < node[0].length; i++){
+                            currentNodeSource = node[0][i];
+                            currentNode = node[0][i].children[0];
+                        }
+                        var red_strength = 255;
+                        var green_strength = 0;
+                        var blue_strength = 0;
+                        console.log($("#"+d.id));
+                        console.log($("#"+(d.id))[0].children[0]);
+                        $($("#"+d.id)[0].children[0]).css({
+                            fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
+                        });
                     }
                     else if (d.drift > 0) {
                         $("#arrow_" + d.id).children().addClass("fa-arrow-up");
+                        var currentNodeSource;
+                        var currentNode;
+                        for (var i = 0; i < node[0].length; i++){
+                            currentNodeSource = node[0][i];
+                            currentNode = node[0][i].children[0];
+                        }
+                        var red_strength = 0;
+                        var green_strength = 255;
+                        var blue_strength = 0;
+                        $($("#"+d.id)[0].children[0]).css({
+                            fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
+                        });
                     }
 
 
@@ -1031,9 +1109,23 @@ $(function () {
 
 
                     $("#arrow_" + d.id).children().addClass("fa-arrow-down");
+                    var red_strength = 255;
+                        var green_strength = 0;
+                        var blue_strength = 0;
+                        console.log($("#"+d.id));
+                        console.log($("#"+(d.id))[0].children[0]);
+                        $($("#"+d.id)[0].children[0]).css({
+                            fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
+                        });
                 }
                 else if (d.drift > 0) {
                     $("#arrow_" + d.id).children().addClass("fa-arrow-up");
+                    var red_strength = 0;
+                        var green_strength = 255;
+                        var blue_strength = 0;
+                        $($("#"+d.id)[0].children[0]).css({
+                            fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
+                        });
                 }
                 return d.position;
             }
@@ -1150,5 +1242,7 @@ $(function () {
 
 
     }// end of start function;
+
+
 
 }); // end of ready function

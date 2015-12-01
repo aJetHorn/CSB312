@@ -45,8 +45,8 @@ This is the page that allows users to view portfolios
             }
             #zoomGroup{
                 position:absolute;
-                right:20px;
-                top:40%;
+                left: 20px;
+                top: 40%;
             }
             #finishGroup{
                 position:absolute;
@@ -55,6 +55,32 @@ This is the page that allows users to view portfolios
 
             .twitter-typeahead {
                 display:block !important;    
+            }
+            #rightpanel{
+                position: absolute;
+                left: 80%;
+                top: 60px;
+                z-index: 3;
+                height:270px;
+                background-color: rgba(7, 7, 223, 0);
+                border: 1px solid #000;
+                width: 220px;
+                padding: 8px;
+                border-radius: 2px;
+            }
+            #resetDiv{
+                padding-top: 5px;
+            }
+
+            #resetBtn{
+                /*border-radius: 10px;*/
+                background-color: #3498db;
+                border: none;
+                border-radius: 2px;
+
+            }
+            #resetBtn:hover{
+                opacity: .8;
             }
 
 
@@ -222,6 +248,21 @@ This is the page that allows users to view portfolios
                     <i data-zoom="-1" class="fa fa-search-minus fa-2x"></i>   <br/><br/>
                     <i id="checkNow" class="fa fa-check fa-2x"></i> <br/><br/>
                     <i id="submit" class="fa fa-floppy-o fa-2x"></i>
+                </div>
+                <div id="rightpanel">
+
+
+                    <h2 style="text-align: center; font-size: 2em;" >Instrument Info</h2>
+                    <div style="overflow-y: scroll; height:245px;">
+
+                        <div id="TickerData">
+
+                        </div>
+                        
+                    </div>
+                    <div id="resetDiv">
+                            <button id="resetBtn">Reset</button>
+                        </div>
                 </div>
 
 
