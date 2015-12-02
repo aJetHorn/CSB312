@@ -13,10 +13,15 @@
 include 'dbmgr.php';
 
 $db= new Dbmgr();
-if(!empty($_POST['list'])){
-    $db->deleteNodeByStratID($_POST['list']);
+$sid=$_POST['list'];
+if(!empty($sid)){
+    $db->deleteNodeByStratID($sid);
     
-    $db->deleteStrategyByID($_POST['list']);
+    $db->deleteStrategyByID($sid);
+    
+    //also delete strategy relationship with portfolio
+    $db->removeS2PbySID($sid);
+    
     header("Location: ../Main/hub.php");
 }
 else{
