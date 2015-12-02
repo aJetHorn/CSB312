@@ -592,7 +592,8 @@ $(function () {
                 var allocY = titleY + 15;
                 var amountY = allocY + 15;
                 var posY = amountY + 15;
-                var driftY = posY + 15;
+                var driftY = amountY;
+                //posY + 15;
                 var align1 = -12;
                 var arrowX = align1 + 60;
                 var arrowY = titleY;
@@ -634,7 +635,7 @@ $(function () {
                          return d.children || d._children ? "end" : "start";
                          })*/
                         .text(function (d) {
-                            return "T: " + d.targetpct;
+                            return "T: " + d.targetpct + "%";
                         })
                         .style("fill-opacity", 1);
 
@@ -654,9 +655,9 @@ $(function () {
                         /*.attr("text-anchor", function (d) {
                          return d.children || d._children ? "end" : "start";
                          })*/
-                        .text(function (d) {
-                            return "%";
-                        })
+                        // .text(function (d) {
+                        //     return "%";
+                        // })
                         .style("fill-opacity", 1);
 
                 // append amount
@@ -675,9 +676,10 @@ $(function () {
                         /*.attr("text-anchor", function (d) {
                          return d.children || d._children ? "end" : "start";
                          })*/
-                        .text(function (d) {
-                            return d.amount;
-                        })
+                        //TJ: this was omitted
+                        // .text(function (d) {
+                        //     return d.amount;
+                        // })
                         .style("fill-opacity", 1);
 
                 // append position
@@ -696,9 +698,9 @@ $(function () {
                         /*.attr("text-anchor", function (d) {
                          return d.children || d._children ? "end" : "start";
                          })*/
-                        .text(function (d) {
-                            return d.position;
-                        })
+                        //  .text(function (d) {
+                        //     return d.position;
+                        // })
                         .style("fill-opacity", 1);
 
                 // append drift
@@ -718,7 +720,7 @@ $(function () {
                          return d.children || d._children ? "end" : "start";
                          })*/
                         .text(function (d) {
-                            return "A: " + (d.targetpct + d.drift);
+                            return  d.drift;
                         })
                         .style("fill-opacity", 1);
 
@@ -1040,22 +1042,23 @@ $(function () {
                     d.amount = amount;
                     d.drift = 0;
                     d.position = amount;
-                    $("#drift_" + d.id).text("A: " + (d.targetpct + d.drift));
-                    $("#position_" + d.id).text(d.position);
-                    $("#amount_" + d.id).text(amount);
+                    $("#drift_" + d.id).text(d.drift);
+                    //$("#position_" + d.id).text(d.position); //omit
+                    //TJ's omitted
+                    //$("#amount_" + d.id).text(amount);
                     return d.position;
                 }
                 else if (!d.children) {
                     d.amount = amount;
-                    d.drift = randomnumber;
+                    d.drift = d.targetpct - randomnumber;
                     d.position = amount + (amount * randomnumber * .01);
-                    $("#drift_" + d.id).text(d.drift);
-                    $("#position_" + d.id).text(d.position);
-                    $("#amount_" + d.id).text(amount);
+                    $("#drift_" + d.id).text("A: " + d.drift + "%");
+                    //$("#position_" + d.id).text(d.position); //omit
+                    //TJ removed $("#amount_" + d.id).text(amount);
                     // if drift is negative
                     // put down arrow and color it red.
                     //return to this. -TJ
-                    if (d.drift < 0) {
+                    if (d.drift < d.targetpct) {
                         $("#arrow_" + d.id).children().addClass("fa-arrow-down");
                         var currentNodeSource;
                         var currentNode;
@@ -1073,7 +1076,7 @@ $(function () {
                             fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
                         });
                     }
-                    else if (d.drift > 0) {
+                    else if (d.drift > d.targetpct) {
                         $("#arrow_" + d.id).children().addClass("fa-arrow-up");
                         var currentNodeSource;
                         var currentNode;
@@ -1101,11 +1104,12 @@ $(function () {
 
                 d.amount = amount;
                 d.position = position_sum;
-                d.drift = (((d.position - d.amount) / d.amount) * 100).toFixed(2);
-                $("#drift_" + d.id).text(d.drift);
-                $("#position_" + d.id).text(d.position);
-                $("#amount_" + d.id).text(amount);
-                if (d.drift < 0) {
+                d.drift = d.targetpct - randomnumber;
+                //(((d.position - d.amount) / d.amount) * 100).toFixed(2);
+                $("#drift_" + d.id).text("A: " + d.drift + "%");
+                //TJ Removed$("#position_" + d.id).text(d.position);
+                //TJ Removed $("#amount_" + d.id).text(amount);
+                if (d.drift < d.targetpct) {
 
 
                     $("#arrow_" + d.id).children().addClass("fa-arrow-down");
@@ -1118,7 +1122,7 @@ $(function () {
                             fill: "rgba(" + red_strength + "," + green_strength +"," + blue_strength + "," + 1 + ")"
                         });
                 }
-                else if (d.drift > 0) {
+                else if (d.drift > d.targetpct) {
                     $("#arrow_" + d.id).children().addClass("fa-arrow-up");
                     var red_strength = 0;
                         var green_strength = 255;
